@@ -12,20 +12,15 @@ public class ShotGun : MonoBehaviour, IWeapon
         {
             var bullet = Instantiate(_bulletPref, _bulletStartPosition[i].position, Quaternion.identity);
             var b = bullet.GetComponent<Bullet>();
-            b.Init(2f);
+            b.Init(1f);
         }
 
 
     }
 
-    public void Init()
+    public void ChangePosition(Vector3 newPosition)
     {
-        Debug.Log("Pow");
-    }
-
-    public void ChangePosition(Vector3 position)
-    {
-        transform.Translate(position);
+        transform.Translate(newPosition);
     }
 
     public void DestroyWeapon()
