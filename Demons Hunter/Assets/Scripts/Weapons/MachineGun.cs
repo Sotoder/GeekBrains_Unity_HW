@@ -16,14 +16,9 @@ public class MachineGun : MonoBehaviour, IWeapon
 
     }
 
-    public void Init()
+    public void ChangePosition(Vector3 newPosition)
     {
-        Debug.Log("MachineGun is create");
-    }
-
-    public void ChangePosition(Vector3 position)
-    {
-        transform.Translate(position);
+        transform.Translate(newPosition);
     }
 
     public void DestroyWeapon()
