@@ -60,8 +60,10 @@
     <Compile Include="Assets\Scripts\PlayerActions.cs" />
     <Compile Include="Assets\Scripts\Weapons\Bullet.cs" />
     <Compile Include="Assets\Scripts\Weapons\IWeapon.cs" />
-    <Compile Include="Assets\Scripts\Weapons\MachineGun.cs" />
     <Compile Include="Assets\Scripts\Weapons\ShotGun.cs" />
+    <Compile Include="Assets\Scripts\Weapons\MachineGun.cs" />
+    <Compile Include="Assets\Scripts\SpawnRegularEnemy.cs" />
+    <Compile Include="Assets\Scripts\Weapons\Fractions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
