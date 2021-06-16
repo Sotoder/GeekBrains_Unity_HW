@@ -4,9 +4,7 @@ using UnityEngine;
 
 public interface IWeapon
 {
+    public float FireRate { get; }
     public void Fire();
-
-    public void ChangePosition(Vector3 newPosition);
-
     public void DestroyWeapon();
 }
