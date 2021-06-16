@@ -70,6 +70,8 @@
     <Compile Include="Assets\Scripts\Bonuses\Ammo.cs" />
     <Compile Include="Assets\Scripts\Weapons\ShotGun.cs" />
     <Compile Include="Assets\Scripts\Weapons\MachineGun.cs" />
+    <Compile Include="Assets\Scripts\Doors\Door.cs" />
+    <Compile Include="Assets\Scripts\Doors\DoorButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
