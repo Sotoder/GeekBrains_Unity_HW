@@ -381,17 +381,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1875141811020004324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e73f95b10a709e4f93bf126477756e9, type: 3}
+  m_Script: {fileID: 11500000, guid: f9c76178432df144b81ab1ecb9b94ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3
-  _speedMult: 2
+  _speed: 4
+  _speedMult: 1.5
   _mgPref: {fileID: 8375194175964264421, guid: 195f2a6a0caedd34abfcdbd142a9cc0c, type: 3}
   _sgPref: {fileID: 4128431112001538258, guid: ea10c704943bdd742b8bfe2e48d18f9c, type: 3}
   _weaponPosition: {fileID: 7913410886970990965}
   _minePref: {fileID: 1660735036740002704, guid: 57f9dbcc63e6c424d944e3d36078e4ae, type: 3}
   _mineStartPosition: {fileID: 3026267905315698046}
-  _playerPosition: {fileID: 5066052693690712488}
   sensetivity: 200
   _maxHP: 100
   _maxAmmo: 50
@@ -1214,7 +1213,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7742137911541706824}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 5}
+  m_LocalPosition: {x: 0.281, y: 1.018, z: 0.257}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5066052693690712488}
