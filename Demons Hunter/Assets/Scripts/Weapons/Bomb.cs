@@ -13,12 +13,13 @@ public class Bomb : MonoBehaviour
         Destroy(gameObject, _maxLifeTime);
     }
 
-    private void OnTriggerEnter(Collider other)
+
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            other.GetComponent<RegEnemy>().TakingDamage(_damage);
+            collision.gameObject.GetComponent<RegEnemy>().TakingDamage(_damage);
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 }

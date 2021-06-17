@@ -60,7 +60,8 @@
     <Compile Include="Assets\Scripts\SpawnRegularEnemy.cs" />
     <Compile Include="Assets\Scripts\Weapons\Bomb.cs" />
     <Compile Include="Assets\Scripts\RegEnemy.cs" />
-    <Compile Include="Assets\Scripts\PlayerActions.cs" />
+    <Compile Include="Assets\Scripts\Doors\DoorButton.cs" />
+    <Compile Include="Assets\Scripts\Doors\Door.cs" />
     <Compile Include="Assets\Scripts\Weapons\Fractions.cs" />
     <Compile Include="Assets\Scripts\Traps\Turret.cs" />
     <Compile Include="Assets\Scripts\Traps\Trap.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Assets\Scripts\Bonuses\Ammo.cs" />
     <Compile Include="Assets\Scripts\Weapons\ShotGun.cs" />
     <Compile Include="Assets\Scripts\Weapons\MachineGun.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerActions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
