@@ -384,17 +384,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c76178432df144b81ab1ecb9b94ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 4
+  _maxHP: 100
+  _maxAmmo: 50
+  sensetivity: 200
+  _speed: 100
   _speedMult: 1.5
+  _jumpForce: 300
+  _gravity: 9.18
+  _head: {fileID: 829314521908016774}
   _mgPref: {fileID: 8375194175964264421, guid: 195f2a6a0caedd34abfcdbd142a9cc0c, type: 3}
   _sgPref: {fileID: 4128431112001538258, guid: ea10c704943bdd742b8bfe2e48d18f9c, type: 3}
   _weaponPosition: {fileID: 7913410886970990965}
-  _minePref: {fileID: 1660735036740002704, guid: 57f9dbcc63e6c424d944e3d36078e4ae, type: 3}
-  _mineStartPosition: {fileID: 3026267905315698046}
-  sensetivity: 200
-  _maxHP: 100
-  _maxAmmo: 50
-  _leverCount: 0
+  _bombPref: {fileID: 1660735036740002704, guid: 57f9dbcc63e6c424d944e3d36078e4ae, type: 3}
+  _bombStartPosition: {fileID: 3026267905315698046}
 --- !u!136 &7790448979398668385
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1199,7 +1201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3026267905315698046}
   m_Layer: 0
-  m_Name: MineStartPosition
+  m_Name: BombStartPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1213,7 +1215,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7742137911541706824}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.281, y: 1.018, z: 0.257}
+  m_LocalPosition: {x: -0.202, y: 1.332, z: 0.456}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5066052693690712488}

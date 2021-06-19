@@ -18,7 +18,7 @@ public class LeverAxis : MonoBehaviour
                 other.GetComponent<PlayerActions>().AddLeverCount();
                 _isNotRotate = false;
                 
-                if (other.GetComponent<PlayerActions>()._leverCount >= 4)
+                if (other.GetComponent<PlayerActions>().LeverCount >= 4)
                 {
                     Destroy(_destroibleObject);
                     Debug.Log("Secret Door is open");

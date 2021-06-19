@@ -4,33 +4,41 @@ using UnityEngine;
 
 public class PlayerActions : MonoBehaviour
 {
-    [SerializeField] private float _speed;
-    [SerializeField] private float _speedMult;
-    [SerializeField] private GameObject _mgPref;
-    [SerializeField] private GameObject _sgPref;
-    [SerializeField] private Transform _weaponPosition;
 
-
-    [SerializeField] private GameObject _bombPref;
-    [SerializeField] private Transform _mineStartPosition;
-    [SerializeField] private float sensetivity;
+    //Params
     [SerializeField] private int _maxHP = 100;
     [SerializeField] private int _maxAmmo = 50;
+    private int _hp;
+    private int _ammo;
+    private int _leverCount = 0;
+    public int LeverCount { get => _leverCount; set => _leverCount = value; }
 
-
+    //Move Player
+    [SerializeField] private float sensetivity;
+    [SerializeField] private float _speed;
+    [SerializeField] private float _speedMult;
+    [SerializeField] private float _jumpForce = 300f;
+    [SerializeField] private float _gravity = 9.18f;
+    [SerializeField] private Transform _head;
+    private bool _isGrounded;
+    private Rigidbody _rb;
     private Vector3 _direction;
-    private GameObject _weaponPref;
-    private GameObject weapon;
-    private IWeapon w;
     private float mouseLookX = 0f;
     private float mouseLookY = 0f;
     private float xRotation = 0f;
+
+    //Shoting
+    [SerializeField] private GameObject _mgPref;
+    [SerializeField] private GameObject _sgPref;
+    [SerializeField] private Transform _weaponPosition;
+    [SerializeField] private GameObject _bombPref;
+    [SerializeField] private Transform _bombStartPosition;
+    private GameObject _weaponPref;
+    private GameObject weapon;
+    private IWeapon w;
     private float _shotTime = 0f;
     private float _trowTime = 0f;
-    public int _leverCount = 0;
 
-    private int _hp;
-    private int _ammo;
 
     private void Awake()
     {
@@ -40,6 +48,8 @@ public class PlayerActions : MonoBehaviour
         weapon.transform.parent = _weaponPosition;
         w = weapon.GetComponent<MachineGun>();
         Cursor.lockState = CursorLockMode.Locked;
+
+        _rb = gameObject.GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -51,8 +61,7 @@ public class PlayerActions : MonoBehaviour
         //}
         //f = 0f;
 
-        PlayerMove();
-        PlayerLook();
+        PlayerLook(); 
 
 
         if (Input.GetButton("Weapon1"))
@@ -98,51 +107,98 @@ public class PlayerActions : MonoBehaviour
         else _trowTime = 0;
     }
 
-    private void PlayerMove()
+
+    private void FixedUpdate()
     {
         _direction.x = Input.GetAxis("Horizontal");
         _direction.z = Input.GetAxis("Vertical");
+
+        Vector3 speed;
+        if (Input.GetButton("Sprint"))
+        {
+            speed = _direction * (_speed * _speedMult);
+        }
+        else
+        {
+            speed = _direction * _speed;
+        }
+
+        JumpLogic();
+        MovementLogic(speed);
+
     }
 
     private void PlayerLook()
     {
-
         mouseLookX = Input.GetAxis("Mouse X") * sensetivity * Time.deltaTime;
         mouseLookY = Input.GetAxis("Mouse Y") * sensetivity * Time.deltaTime;
 
-        transform.Rotate(0, mouseLookX * sensetivity * Time.deltaTime, 0);
+        transform.Rotate(0, mouseLookX, 0);
 
-        xRotation -= mouseLookY;
+        //xRotation += mouseLookY; // более правильная реализация, но ловит баг, в случае если продолжать двигать мышку, то xRotation продолжает изменяться
+
+        //if (xRotation <= 45f && xRotation >= -45)
+        //{
+
+        //    _head.Rotate(mouseLookY, 0, 0);
+        //    _weaponPosition.Rotate(mouseLookY, 0, 0);
+        //}
+
+        xRotation += mouseLookY; // Старая, не совсем верная реализация поворота головы и оружия, но без бага поворота
         xRotation = Mathf.Clamp(xRotation, -45f, 45f);
-        transform.Find("Head").localRotation = Quaternion.Euler(xRotation, 0, 0);
+        _head.localRotation = Quaternion.Euler(xRotation, 0, 0);
 
-        transform.Find("WeaponPosition").localRotation = transform.Find("Head").localRotation;
+        _weaponPosition.localRotation = _head.localRotation;
+        _bombStartPosition.localRotation = _head.localRotation;
+    }
 
+    private void MovementLogic(Vector3 speed)
+    {
+        _rb.AddForce(transform.forward * speed.z, ForceMode.Impulse);
+        _rb.AddForce(transform.right * speed.x, ForceMode.Impulse);
+    }
+
+    private void JumpLogic()
+    {
+        if (Input.GetAxis("Jump") > 0)
+        {
+            if (_isGrounded)
+            {
+                _rb.AddForce(Vector3.up * _jumpForce * 100);
+            }
+        }
+
+        if (!_isGrounded)
+        {
+            _rb.AddForce(Vector3.down * _gravity * 200);
+        }
+    }
+
+    void OnCollisionEnter(Collision collision) // Устанавливаем флаг Ground при приземлении
+    {
+        IsGroundedUpate(collision, true);
+    }
+
+    void OnCollisionExit(Collision collision) // Снимаем флаг Ground при прыжке
+    {
+        IsGroundedUpate(collision, false);
+    }
+
+    private void IsGroundedUpate(Collision collision, bool value)
+    {
+        if (collision.gameObject.tag == ("Ground"))
+        {
+            _isGrounded = value;
+        }
     }
 
     private void TrowBomb()
     {
-        var mine = Instantiate(_bombPref, _mineStartPosition.position, transform.rotation);
-        mine.GetComponent<Rigidbody>().AddForce(transform.forward * 20, ForceMode.Impulse);
-        var m = mine.GetComponent<Bomb>(); 
+        var mine = Instantiate(_bombPref, _bombStartPosition.position, transform.rotation);
+        mine.GetComponent<Rigidbody>().AddForce(_bombStartPosition.forward * 20, ForceMode.Impulse);
+        var m = mine.GetComponent<Bomb>();
         m.Init();
     }
-
-    private void FixedUpdate()
-    {
-        Vector3 speed;
-        if (Input.GetButton("Sprint"))
-        {
-            speed = _direction * (_speed * _speedMult) * Time.fixedDeltaTime;
-        }
-        else
-        {
-            speed = _direction * _speed * Time.fixedDeltaTime;
-        }
-
-        transform.Translate(speed);
-    }
-
 
 
     public void TakingDamage(int damage)
@@ -175,7 +231,7 @@ public class PlayerActions : MonoBehaviour
 
     public void AddLeverCount()
     {
-        _leverCount += 1;
-        Debug.Log("Add Lever. Now " + _leverCount);
+        LeverCount += 1;
+        Debug.Log("Add Lever. Now " + LeverCount);
     }
 }

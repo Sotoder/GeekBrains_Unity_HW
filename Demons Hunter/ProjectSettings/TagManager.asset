@@ -8,6 +8,8 @@ TagManager:
   - Bullets
   - Traps
   - Walls
+  - Ground
+  - Weapon
   layers:
   - Default
   - TransparentFX
