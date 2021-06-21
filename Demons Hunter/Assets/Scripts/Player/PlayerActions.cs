@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerActions : MonoBehaviour
+public class PlayerActions : MonoBehaviour, ITakingDamage
 {
 
     //Params
@@ -27,17 +27,21 @@ public class PlayerActions : MonoBehaviour
     private float mouseLookY = 0f;
     private float xRotation = 0f;
 
-    //Shoting
+    //Weapons and Shoting
     [SerializeField] private GameObject _mgPref;
     [SerializeField] private GameObject _sgPref;
     [SerializeField] private Transform _weaponPosition;
     [SerializeField] private GameObject _bombPref;
     [SerializeField] private Transform _bombStartPosition;
+    [SerializeField] private GameObject _minePref;
+    [SerializeField] private Transform _mineStartPosition;
+    [SerializeField] private int _mineCount = 5;
+    [SerializeField] private int _bombCount = 5;
     private GameObject _weaponPref;
     private GameObject weapon;
     private IWeapon w;
-    private float _shotTime = 0f;
     private float _trowTime = 0f;
+    private float _mineTime = 0f;
 
 
     private void Awake()
@@ -68,7 +72,7 @@ public class PlayerActions : MonoBehaviour
         {
             w.DestroyWeapon();
             _weaponPref = _mgPref;
-            weapon = Instantiate(_weaponPref, _weaponPosition.position, transform.rotation);
+            weapon = Instantiate(_weaponPref, _weaponPosition.position, _head.rotation);
             weapon.transform.parent = _weaponPosition;
             w = weapon.GetComponent<MachineGun>();
         }
@@ -76,35 +80,52 @@ public class PlayerActions : MonoBehaviour
         {
             w.DestroyWeapon();
             _weaponPref = _sgPref;
-            weapon = Instantiate(_weaponPref, _weaponPosition.position, transform.rotation);
+            weapon = Instantiate(_weaponPref, _weaponPosition.position, _head.rotation);
             weapon.transform.parent = _weaponPosition;
             w = weapon.GetComponent<ShotGun>();
         }
 
-        if (Input.GetAxis("Fire1") == 1f)
+        if (Input.GetAxis("Fire1") == 1f && w.IsReload)
         {
-            if (_shotTime == 0) w.Fire();  
-
-            _shotTime += Time.deltaTime; 
-            if (_shotTime > w.FireRate)  
-            {
-                _shotTime = 0;
-            }
-        }
-        else _shotTime = 0;     
+            w.Fire();  
+        }  
 
 
         if (Input.GetAxis("Fire2") == 1f)
         {
-            if (_trowTime == 0) TrowBomb();
+            if (_trowTime == 0 && _bombCount > 0)
+            {
+                TrowBomb();
+                _bombCount--;
+            }
 
             _trowTime += Time.deltaTime;
+
+
             if (_trowTime > 1000F)
             {
                 _trowTime = 0;
             }
         }
         else _trowTime = 0;
+
+
+        if (Input.GetAxis("Fire3") == 1f)
+        {
+            if (_mineTime == 0 && _mineCount > 0)
+            {
+                TrowMine();
+                _mineCount--;
+            }
+
+            _mineTime += Time.deltaTime;
+
+            if (_mineTime > 1000F)
+            {
+                _mineTime = 0;
+            }
+        }
+        else _mineTime = 0;
     }
 
 
@@ -194,10 +215,15 @@ public class PlayerActions : MonoBehaviour
 
     private void TrowBomb()
     {
-        var mine = Instantiate(_bombPref, _bombStartPosition.position, transform.rotation);
-        mine.GetComponent<Rigidbody>().AddForce(_bombStartPosition.forward * 20, ForceMode.Impulse);
-        var m = mine.GetComponent<Bomb>();
+        var bomb = Instantiate(_bombPref, _bombStartPosition.position, transform.rotation);
+        bomb.GetComponent<Rigidbody>().AddForce(_bombStartPosition.forward * 20, ForceMode.Impulse);
+        var m = bomb.GetComponent<Bomb>();
         m.Init();
+    }
+
+    private void TrowMine()
+    {
+        var mine = Instantiate(_minePref, _mineStartPosition.position, transform.rotation);
     }
 
 
@@ -207,6 +233,15 @@ public class PlayerActions : MonoBehaviour
         if (_hp <= 0)
         {
             Death();
+        }
+    }
+
+    public void TakingBombDamage(int damage)
+    {
+        _hp -= damage;
+        if (_hp <= 0)
+        {
+            Invoke("Death", 1f);
         }
     }
 

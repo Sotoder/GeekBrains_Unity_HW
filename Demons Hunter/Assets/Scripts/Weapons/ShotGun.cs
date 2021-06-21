@@ -6,10 +6,10 @@ public class ShotGun : MonoBehaviour, IWeapon
 {
     [SerializeField] private GameObject _bulletPref;
     [SerializeField] private Transform[] _bulletStartPosition;
-    [SerializeField] public float _fireRate = 1000f;
+    [SerializeField] private float _fireRate = 2f;
 
-    public float FireRate { get => _fireRate; }
-
+    private bool _isReload = true;
+    public bool IsReload { get => _isReload; }
     public void Fire()
     {
         for (int i = 0; i < _bulletStartPosition.Length; i++)
@@ -20,6 +20,13 @@ public class ShotGun : MonoBehaviour, IWeapon
                                                   (this.transform.rotation.w + Random.Range(-0.15f, 0.15f)));
             var fractions = Instantiate(_bulletPref, _bulletStartPosition[i].position, fractQuat);
         }
+        _isReload = false;
+        Invoke("Reload", _fireRate);
+    }
+
+    private void Reload()
+    {
+        _isReload = true;
     }
 
     public void DestroyWeapon()

@@ -352,7 +352,7 @@ MonoBehaviour:
   - {fileID: 9019933306636025870}
   - {fileID: 1734447537020275940}
   - {fileID: 659061521676147482}
-  _fireRate: 1000
+  _fireRate: 1.5
 --- !u!1 &5012609044242912277
 GameObject:
   m_ObjectHideFlags: 0
