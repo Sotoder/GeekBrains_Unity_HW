@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
         }
 
 
-        if (!other.CompareTag("Bullets") && !other.CompareTag("Traps"))
+        if (!other.CompareTag("Bullets") && !other.CompareTag("Traps") && !other.CompareTag("Weapon") && !other.CompareTag("Vision"))
         {
             Debug.Log(other.gameObject.name);
             Destroy(gameObject);

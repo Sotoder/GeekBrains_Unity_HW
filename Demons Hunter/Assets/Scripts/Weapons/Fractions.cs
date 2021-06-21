@@ -20,7 +20,7 @@ public class Fractions : MonoBehaviour
             {
                 other.GetComponent<RegEnemy>().TakingDamage(_damage);
             }
-            if (!other.CompareTag("Bullets"))
+            if (!other.CompareTag("Bullets") && !other.CompareTag("Traps") && !other.CompareTag("Weapon"))
             {
                 Destroy(gameObject);
             }

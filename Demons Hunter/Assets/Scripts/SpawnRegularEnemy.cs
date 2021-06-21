@@ -14,12 +14,14 @@ public class SpawnRegularEnemy : MonoBehaviour
     {
         if (_isPatrol)
         {
-            var patrolEnemy = Instantiate(_regEnemyRef, _enemyPosition.position, Quaternion.Euler(0f, _enemyAnglePosition, 0f)).GetComponent<RegEnemy>() ;
+            var patrolEnemy = Instantiate(_regEnemyRef, _enemyPosition.position, Quaternion.Euler(0f, _enemyAnglePosition, 0f)).GetComponent<RegEnemy>();
+            patrolEnemy.SpawnPosition = _enemyPosition;
             patrolEnemy.PatrolStart(_patrolWayPoints);
-
         } else
         {
-            Instantiate(_regEnemyRef, _enemyPosition.position, Quaternion.Euler(0f, _enemyAnglePosition, 0f));
+            var stayEnemy = Instantiate(_regEnemyRef, _enemyPosition.position, Quaternion.Euler(0f, _enemyAnglePosition, 0f)).GetComponent<RegEnemy>();
+            stayEnemy.SpawnPosition = _enemyPosition;
+            stayEnemy.SpawnAngle = _enemyAnglePosition;
         }
     }
 }

@@ -8,6 +8,9 @@ TagManager:
   - Bullets
   - Traps
   - Walls
+  - Ground
+  - Weapon
+  - Movable
   layers:
   - Default
   - TransparentFX

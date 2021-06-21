@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IWeapon
 {
-    public float FireRate { get; }
+    public bool IsReload { get; }
     public void Fire();
     public void DestroyWeapon();
 }
