@@ -94,7 +94,7 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
             if (_patrolPoints.Length > 0)
             {
                 _onAttack = false;
-                StartPatrol();
+                ContinuePatrol();
             }
             else
             {
@@ -108,12 +108,20 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
 
     public void StopPatrol()
     {
-        _onPatrol = false;
+        if (_patrolPoints.Length > 0)
+        {
+            _onPatrol = false;
+            _agent.isStopped = true;
+        }
     }
 
-    public void StartPatrol()
+    public void ContinuePatrol()
     {
-        _onPatrol = true;
+        if (_patrolPoints.Length > 0)
+        {
+            _onPatrol = true;
+            _agent.isStopped = false;
+        }
     }
 
 
@@ -160,5 +168,11 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
         _isChangeKinematic = false;
+    }
+
+    public void SendInvoke(string methodName, float time)
+    {
+        Debug.Log("GetInvoke");
+        Invoke(methodName, time);
     }
 }

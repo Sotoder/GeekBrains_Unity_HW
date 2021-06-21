@@ -7,5 +7,6 @@ interface IEnemy
     bool IsChangeKinematic { set; }
     Transform[] PatrolPoints { get; }
     void StopPatrol();
-    void StartPatrol();
+    void ContinuePatrol();
+    void SendInvoke(string methodName, float time);
 }

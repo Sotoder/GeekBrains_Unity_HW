@@ -37,8 +37,10 @@ public class Mine : MonoBehaviour
                         if (rb.isKinematic == true && hit.gameObject.CompareTag("Enemy"))
                         {
                             rb.isKinematic = false;
+                            enemy.StopPatrol();
                             AddExpForce(rb);
                             enemy.IsChangeKinematic = true;
+                            enemy.SendInvoke("ContinuePatrol", 2f);
                         }
                         else AddExpForce(rb);
                     }

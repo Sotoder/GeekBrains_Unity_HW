@@ -45,8 +45,10 @@ public class Bomb : MonoBehaviour
                         if (rb.isKinematic == true && hit.gameObject.CompareTag("Enemy"))
                         {
                             rb.isKinematic = false;
+                            enemy.StopPatrol();
                             AddExpForce(rb);
                             enemy.IsChangeKinematic = true;
+                            enemy.SendInvoke("ContinuePatrol", 2f);
                         }
                         else AddExpForce(rb);
                     }
@@ -56,6 +58,7 @@ public class Bomb : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
     private void AddExpForce(Rigidbody rb)
     {
         rb.AddExplosionForce(_power, transform.position, _radius, 2.0F, ForceMode.Impulse);
