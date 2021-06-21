@@ -9,17 +9,22 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
     [SerializeField] private int _maxHP = 100;
     [SerializeField] private bool _onPatrol;
     [SerializeField] private bool _onAttack;
+    [SerializeField] private int _damage = 20;
+    [SerializeField] private float _attackSpeed = 0.5f;
 
     private Vector3 playerPosition;
+    private GameObject player;
     private int _hp;
     private Transform _spawnPosition;
     private float _spawnAngle;
     private Transform[] _patrolPoints;
     private NavMeshAgent _agent;
-    [SerializeField] private int currentPatrolPoint;
+    private int currentPatrolPoint;
     private bool _isChangeKinematic = false;
+    private bool _isTired = false;
 
     public Transform SpawnPosition { get => _spawnPosition; set => _spawnPosition = value; }
+    public Transform[] PatrolPoints { get => _patrolPoints; }
 
     public bool IsChangeKinematic { set => _isChangeKinematic = value; }
     public float SpawnAngle { set => _spawnAngle = value; }
@@ -48,32 +53,67 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
         if (_onAttack)
         {
             _agent.SetDestination(playerPosition);
+            if (_agent.remainingDistance <= _agent.stoppingDistance && _isTired == false)
+            {
+                BitePlayer();
+                _isTired = true;
+                Invoke("Tired", _attackSpeed);
+            }
         }
     }
 
-    public void StartAttack(Vector3 direction)
+    private void BitePlayer()
+    {
+        if (!(player is null))
+        {
+            player.GetComponent<PlayerActions>().TakingDamage(_damage);
+            Debug.Log("BITE!!!");
+        } else
+        {
+            EndAttack(_spawnPosition);
+        }
+    }
+
+    private void Tired()
+    {
+        _isTired = false;
+    }
+
+    public void StartAttack(GameObject _player)
     {
         _onAttack = true;
-        playerPosition = direction;
+        playerPosition = _player.transform.position;
+        player = _player;
     }
 
     public void EndAttack(Transform spawnPosition)
     {
-        if (_patrolPoints.Length > 0)
+        if (_onAttack == true)
         {
-            _onAttack = false;
-            _onPatrol = true;
-        } else
-        {
-            _agent.SetDestination(_spawnPosition.position);
-            if (_agent.remainingDistance <= _agent.stoppingDistance)
-                transform.rotation = Quaternion.Euler (0f, _spawnAngle, 0f); // пока так, после сделать плавный поворот в стартовую позицию
+
+            if (_patrolPoints.Length > 0)
+            {
+                _onAttack = false;
+                StartPatrol();
+            }
+            else
+            {
+                _onAttack = false;
+                _agent.SetDestination(_spawnPosition.position);
+                if (_agent.remainingDistance <= _agent.stoppingDistance)
+                    transform.rotation = Quaternion.Euler(0f, _spawnAngle, 0f); // пока так, после сделать плавный поворот в стартовую позицию
+            }
         }
     }
 
     public void StopPatrol()
     {
         _onPatrol = false;
+    }
+
+    public void StartPatrol()
+    {
+        _onPatrol = true;
     }
 
 

@@ -6,16 +6,16 @@ using UnityEngine;
 public class Observer : MonoBehaviour
 {
     [SerializeField] private GameObject _body;
-    Transform player;
     bool m_IsPlayerInRange = false;
     private WaitForFixedUpdate _waitForFixedUpdate = new WaitForFixedUpdate();
+    private GameObject _player;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            player = other.transform;
             m_IsPlayerInRange = true;
+            _player = other.gameObject;
         }
     }
 
@@ -34,8 +34,7 @@ public class Observer : MonoBehaviour
         {
             
             enemy.StopPatrol();
-            Vector3 direction = player.position;
-            enemy.StartAttack(direction);
+            enemy.StartAttack(_player);
 
         } else
         {

@@ -28,10 +28,11 @@ public class Bomb : MonoBehaviour
         var colliders = Physics.OverlapSphere(transform.position, _radius);
         foreach (var hit in colliders)
         {
-            if (hit.gameObject.CompareTag("Enemy") || hit.gameObject.CompareTag("Movable"))
+            if (hit.gameObject.CompareTag("Player") || hit.gameObject.CompareTag("Enemy") || hit.gameObject.CompareTag("Movable"))
             {
                 Debug.Log(hit.gameObject.name);
                 Rigidbody rb = hit.GetComponent<Rigidbody>();
+                IEnemy enemy = hit.GetComponent<IEnemy>();
 
                 if (hit.gameObject.CompareTag("Movable"))
                 {
@@ -45,7 +46,7 @@ public class Bomb : MonoBehaviour
                         {
                             rb.isKinematic = false;
                             AddExpForce(rb);
-                            hit.gameObject.GetComponent<IEnemy>().IsChangeKinematic = true;
+                            enemy.IsChangeKinematic = true;
                         }
                         else AddExpForce(rb);
                     }

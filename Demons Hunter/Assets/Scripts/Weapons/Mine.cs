@@ -25,6 +25,7 @@ public class Mine : MonoBehaviour
             {
                 Debug.Log(hit.gameObject.name);
                 Rigidbody rb = hit.GetComponent<Rigidbody>();
+                IEnemy enemy = hit.GetComponent<IEnemy>();
 
                 if (hit.gameObject.CompareTag("Movable"))
                 {
@@ -37,7 +38,7 @@ public class Mine : MonoBehaviour
                         {
                             rb.isKinematic = false;
                             AddExpForce(rb);
-                            hit.gameObject.GetComponent<IEnemy>().IsChangeKinematic = true;
+                            enemy.IsChangeKinematic = true;
                         }
                         else AddExpForce(rb);
                     }
