@@ -4,6 +4,7 @@ public class Trap : MonoBehaviour
 {
     [SerializeField] private int _damage = 50;
     [SerializeField] private float _activationTime = 3f;
+    [SerializeField] private GameObject _indicator;
     private bool _isPressed = false;
     private float _stayTime = 0f;
 
@@ -13,6 +14,8 @@ public class Trap : MonoBehaviour
         {
 
             Debug.Log("Mine is near");
+            _indicator.GetComponent<Indicator>().TargetIsNear(true);
+
             _stayTime += Time.deltaTime;
 
             if (_stayTime >= _activationTime)
@@ -34,6 +37,7 @@ public class Trap : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        _indicator.GetComponent<Indicator>().TargetIsNear(false);
         _stayTime = 0f;
     }
 

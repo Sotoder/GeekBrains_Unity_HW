@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5391231661237632705}
   - component: {fileID: 8741873923113916}
   m_Layer: 0
-  m_Name: Mine
+  m_Name: Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 840f887490b76ba4a9b3567bb7b635fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxLifeTime: 10
   _damage: 100
+  _radius: 5
+  _power: 5000
 --- !u!135 &5391231661237632705
 SphereCollider:
   m_ObjectHideFlags: 0

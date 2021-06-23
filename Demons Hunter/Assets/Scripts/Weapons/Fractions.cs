@@ -7,7 +7,7 @@ public class Fractions : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private int _damage = 5;
 
-
+    public int modifer = 1;
     public void Update()
     {
         transform.Translate(Vector3.forward * _speed * Time.deltaTime);
@@ -18,9 +18,14 @@ public class Fractions : MonoBehaviour
         {
             if (other.CompareTag("Enemy"))
             {
-                other.GetComponent<RegEnemy>().TakingDamage(_damage);
+                other.GetComponent<ITakingDamage>().TakingDamage(_damage * modifer);
             }
-            if (!other.CompareTag("Bullets") && !other.CompareTag("Traps") && !other.CompareTag("Weapon"))
+            else if (other.CompareTag("EnemyExtra"))
+            {
+                other.GetComponentInParent<ITakingDamage>().TakingDamage(_damage * 2 * modifer);
+            }
+
+            if (!other.CompareTag("Bullets") && !other.CompareTag("Traps") && !other.CompareTag("Weapon") && !other.CompareTag("Vision"))
             {
                 Destroy(gameObject);
             }

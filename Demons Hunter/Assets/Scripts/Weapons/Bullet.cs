@@ -7,6 +7,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private int _damage = 20;
 
+    public int modifer = 1;
+    
     public void Update()
     {
         transform.Translate(Vector3.forward * _speed * Time.deltaTime);
@@ -14,19 +16,19 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") || other.CompareTag("Player"))
         {
-            other.GetComponent<RegEnemy>().TakingDamage(_damage);
+            other.GetComponent<ITakingDamage>().TakingDamage(_damage * modifer);
 
-        } else if (other.CompareTag("Player"))
+        } else if (other.CompareTag("EnemyExtra"))
         {
-            other.GetComponent<PlayerActions>().TakingDamage(_damage);
+            other.GetComponentInParent<ITakingDamage>().TakingDamage(_damage * 2 * modifer);
         }
 
 
-        if (!other.CompareTag("Bullets") && !other.CompareTag("Traps") && !other.CompareTag("Weapon") && !other.CompareTag("Vision"))
+            if (!other.CompareTag("Bullets") && !other.CompareTag("Traps") && !other.CompareTag("Weapon") && !other.CompareTag("Vision"))
         {
-            Debug.Log(other.gameObject.name);
+            Debug.Log(other.gameObject.tag);
             Destroy(gameObject);
         }    
     }

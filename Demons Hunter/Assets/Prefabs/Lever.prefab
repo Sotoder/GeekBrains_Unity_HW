@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 3655442220896296749}
   - component: {fileID: 9173250615676680026}
   - component: {fileID: 7898956738129138225}
+  - component: {fileID: 8589109223041499676}
   m_Layer: 0
   m_Name: LeverAxis
   m_TagString: Untagged
@@ -139,6 +140,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a76399f3ca12b74a96438e9d3d3acf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _destroibleObject: {fileID: 0}
+--- !u!95 &8589109223041499676
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2468175979912285129}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dbfce556b90a88a43bd5f4a5596b1a9c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5520063643815234429
 GameObject:
   m_ObjectHideFlags: 0

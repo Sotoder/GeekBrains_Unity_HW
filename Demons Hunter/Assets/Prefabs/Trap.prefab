@@ -157,6 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 50
   _activationTime: 3
+  _indicator: {fileID: 8891189477957041142}
 --- !u!65 &2212888256720266042
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -182,6 +183,7 @@ GameObject:
   - component: {fileID: 4830868568869137538}
   - component: {fileID: 126954374311014952}
   - component: {fileID: 4137584130086121995}
+  - component: {fileID: 100022550}
   m_Layer: 0
   m_Name: Indicator
   m_TagString: Untagged
@@ -230,7 +232,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3e1396d5de46bd14292d113915777ac2, type: 2}
+  - {fileID: 2100000, guid: 4f44ecefa62f2d843a6f8a139e171944, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -266,3 +268,15 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &100022550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8891189477957041142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bad5ca22d979244c8bf2ca1367ca4af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

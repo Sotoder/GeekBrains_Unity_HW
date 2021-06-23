@@ -16,6 +16,14 @@ public class Mine : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Bullets"))
+        {
+            Invoke("Explosion", _explosionTime);
+        }
+    }
+
     private void Explosion()
     {
         var colliders = Physics.OverlapSphere(transform.position, _radius);
@@ -30,22 +38,18 @@ public class Mine : MonoBehaviour
                 if (hit.gameObject.CompareTag("Movable"))
                 {
                     AddExpForce(rb);
-                } else
+                }
+                else
                 {
-                    if (rb != null)
+                    if (rb.isKinematic == true && hit.gameObject.CompareTag("Enemy"))
                     {
-                        if (rb.isKinematic == true && hit.gameObject.CompareTag("Enemy"))
-                        {
-                            rb.isKinematic = false;
-                            enemy.StopPatrol();
-                            AddExpForce(rb);
-                            enemy.IsChangeKinematic = true;
-                            enemy.SendInvoke("ContinuePatrol", 2f);
-                        }
-                        else AddExpForce(rb);
+                        enemy.IsBombed();
+                        AddExpForce(rb);
                     }
+                    else AddExpForce(rb);
                     hit.GetComponent<ITakingDamage>().TakingBombDamage(_damage);
                 }
+
             }
         }
         Destroy(gameObject);

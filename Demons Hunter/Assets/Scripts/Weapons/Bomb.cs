@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
-    [SerializeField] private int _damage = 100;
+    [SerializeField] private int _damage = 10;
     [SerializeField] private float _radius = 5f;
-    [SerializeField] private float _power = 1000f;
+    [SerializeField] private float _power = 5000f;
 
     public void Init()
     {
@@ -37,23 +37,17 @@ public class Bomb : MonoBehaviour
                 if (hit.gameObject.CompareTag("Movable"))
                 {
                     AddExpForce(rb);
-                }
-                else
+                } else
                 {
-                    if (rb != null)
+                    if (rb.isKinematic == true && hit.gameObject.CompareTag("Enemy"))
                     {
-                        if (rb.isKinematic == true && hit.gameObject.CompareTag("Enemy"))
-                        {
-                            rb.isKinematic = false;
-                            enemy.StopPatrol();
-                            AddExpForce(rb);
-                            enemy.IsChangeKinematic = true;
-                            enemy.SendInvoke("ContinuePatrol", 2f);
-                        }
-                        else AddExpForce(rb);
+                        enemy.IsBombed();
+                        AddExpForce(rb);
                     }
+                    else AddExpForce(rb);
                     hit.GetComponent<ITakingDamage>().TakingBombDamage(_damage);
                 }
+
             }
         }
         Destroy(gameObject);

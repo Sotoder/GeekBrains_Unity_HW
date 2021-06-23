@@ -8,10 +8,24 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     //Params
     [SerializeField] private int _maxHP = 100;
     [SerializeField] private int _maxAmmo = 50;
+
+    private Dictionary<Color, int> _keyContainer = new Dictionary<Color, int>
+    {
+        [new Color(1f, 0f, 0f, 1f)] = 0,
+        [new Color(1f, 0.922f, 0.016f, 1f)] = 0,
+        [new Color(0f, 0f, 1f, 1f)] = 0,
+        [new Color(0f, 1f, 0f, 1f)] = 0
+    };
     private int _hp;
     private int _ammo;
     private int _leverCount = 0;
+    private int _secretBossDamageModifer = 1;
+
+
+    public Dictionary<Color, int> KeyContainer { get => _keyContainer; set => _keyContainer = value; }
     public int LeverCount { get => _leverCount; set => _leverCount = value; }
+    public int SecretBossDamageModifer { get => _secretBossDamageModifer; set => _secretBossDamageModifer = value; }
+
 
     //Move Player
     [SerializeField] private float sensetivity;
@@ -87,7 +101,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
         if (Input.GetAxis("Fire1") == 1f && w.IsReload)
         {
-            w.Fire();  
+            w.Fire(_secretBossDamageModifer);  
         }  
 
 
@@ -217,8 +231,8 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     {
         var bomb = Instantiate(_bombPref, _bombStartPosition.position, transform.rotation);
         bomb.GetComponent<Rigidbody>().AddForce(_bombStartPosition.forward * 20, ForceMode.Impulse);
-        var m = bomb.GetComponent<Bomb>();
-        m.Init();
+        var b = bomb.GetComponent<Bomb>();
+        b.Init();
     }
 
     private void TrowMine()
@@ -230,6 +244,8 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     public void TakingDamage(int damage)
     {
         _hp -= damage;
+        Debug.Log("Auch!");
+        Debug.Log(_hp);
         if (_hp <= 0)
         {
             Death();
@@ -247,6 +263,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
     private void Death()
     {
+        Application.Quit();
         Destroy(gameObject);
     }
 
@@ -268,5 +285,19 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     {
         LeverCount += 1;
         Debug.Log("Add Lever. Now " + LeverCount);
+    }
+
+    public void AddKey(Color color)
+    {
+
+        if (_keyContainer.TryGetValue(color, out int value))
+        {
+            _keyContainer[color] = 1;
+        }
+
+        foreach (var item in _keyContainer)
+        {
+            Debug.Log(item.Key + ": " + item.Value);
+        }
     }
 }

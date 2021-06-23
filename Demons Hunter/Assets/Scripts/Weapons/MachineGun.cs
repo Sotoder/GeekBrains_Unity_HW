@@ -18,6 +18,14 @@ public class MachineGun : MonoBehaviour, IWeapon
         Invoke("Reload", _fireRate);
     }
 
+    public void Fire(int modifer)
+    {
+        var bullet = Instantiate(_bulletPref, _bulletStartPosition.position, transform.rotation);
+        bullet.GetComponent<Bullet>().modifer = modifer;
+        _isReload = false;
+        Invoke("Reload", _fireRate);
+    }
+
     private void Reload()
     {
         _isReload = true;

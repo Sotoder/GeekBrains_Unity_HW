@@ -6,5 +6,7 @@ public interface IWeapon
 {
     public bool IsReload { get; }
     public void Fire();
+
+    public void Fire(int modifer);
     public void DestroyWeapon();
 }
