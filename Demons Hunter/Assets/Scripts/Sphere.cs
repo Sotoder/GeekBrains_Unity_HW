@@ -11,16 +11,8 @@ public class Sphere : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    public void ChangeColor(string color)
-    {
-        string parametr = color switch
-        {
-            "red" => "RColor",
-            "blue" => "BColor",
-            "yellow" => "YColor",
-            "green" => "GColor"
-        };
-        
-        _animator.SetBool(parametr, true);
+    public void ChangeColor(string pcolor)
+    {    
+        _animator.SetBool(pcolor, true);
     }
 }

@@ -20,6 +20,8 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     private int _ammo;
     private int _leverCount = 0;
     private int _secretBossDamageModifer = 1;
+    private Animator animator;
+    private bool _isDeath = false;
 
 
     public Dictionary<Color, int> KeyContainer { get => _keyContainer; set => _keyContainer = value; }
@@ -45,6 +47,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     [SerializeField] private GameObject _mgPref;
     [SerializeField] private GameObject _sgPref;
     [SerializeField] private Transform _weaponPosition;
+    [SerializeField] private Transform _weaponPositionAxie;
     [SerializeField] private GameObject _bombPref;
     [SerializeField] private Transform _bombStartPosition;
     [SerializeField] private GameObject _minePref;
@@ -62,10 +65,13 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     {
         _hp = _maxHP;
         _weaponPref = _mgPref;
-        weapon = Instantiate(_weaponPref, _weaponPosition.position, transform.rotation);
-        weapon.transform.parent = _weaponPosition;
+        weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, transform.rotation);
+        weapon.transform.parent = _weaponPositionAxie;
         w = weapon.GetComponent<MachineGun>();
         Cursor.lockState = CursorLockMode.Locked;
+        animator = GetComponent<Animator>();
+        animator.SetBool("MGun", true);
+        animator.SetBool("SGun", false);
 
         _rb = gameObject.GetComponent<Rigidbody>();
     }
@@ -78,31 +84,43 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         //    f+=(0.5f * Time.deltaTime);
         //}
         //f = 0f;
+        if (_isDeath) return;
+        
+        PlayerLook();
 
-        PlayerLook(); 
-
-
+        if (Input.GetKeyDown(KeyCode.Y)) 
+        {
+            Death();
+        }
         if (Input.GetButton("Weapon1"))
         {
+            animator.SetBool("MGun", true);
+            animator.SetBool("SGun", false);
             w.DestroyWeapon();
             _weaponPref = _mgPref;
-            weapon = Instantiate(_weaponPref, _weaponPosition.position, _head.rotation);
-            weapon.transform.parent = _weaponPosition;
+            weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, _head.rotation);
+            weapon.transform.parent = _weaponPositionAxie;
             w = weapon.GetComponent<MachineGun>();
         }
         else if (Input.GetButton("Weapon2"))
         {
+            animator.SetBool("MGun", false);
+            animator.SetBool("SGun", true);
             w.DestroyWeapon();
             _weaponPref = _sgPref;
-            weapon = Instantiate(_weaponPref, _weaponPosition.position, _head.rotation);
-            weapon.transform.parent = _weaponPosition;
+            weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, _head.rotation);
+            weapon.transform.parent = _weaponPositionAxie;
             w = weapon.GetComponent<ShotGun>();
         }
 
         if (Input.GetAxis("Fire1") == 1f && w.IsReload)
         {
+            animator.SetBool("Fire", true);
             w.Fire(_secretBossDamageModifer);  
-        }  
+        }  else
+        {
+            animator.SetBool("Fire", false);
+        }
 
 
         if (Input.GetAxis("Fire2") == 1f)
@@ -145,6 +163,13 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
     private void FixedUpdate()
     {
+        if (_direction != Vector3.zero)
+        {
+            animator.SetBool("Run", true);
+        } else
+        {
+            animator.SetBool("Run", false);
+        }
         _direction.x = Input.GetAxis("Horizontal");
         _direction.z = Input.GetAxis("Vertical");
 
@@ -180,7 +205,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         //}
 
         xRotation += mouseLookY; // —тара€, не совсем верна€ реализаци€ поворота головы и оружи€, но без бага поворота
-        xRotation = Mathf.Clamp(xRotation, -45f, 45f);
+        xRotation = Mathf.Clamp(xRotation, -40f, 25f);
         _head.localRotation = Quaternion.Euler(xRotation, 0, 0);
 
         _weaponPosition.localRotation = _head.localRotation;
@@ -243,6 +268,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
     public void TakingDamage(int damage)
     {
+        if (_isDeath) return;
         _hp -= damage;
         Debug.Log("Auch!");
         Debug.Log(_hp);
@@ -254,6 +280,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
     public void TakingBombDamage(int damage)
     {
+        if (_isDeath) return;
         _hp -= damage;
         if (_hp <= 0)
         {
@@ -263,8 +290,8 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
     private void Death()
     {
-        Application.Quit();
-        Destroy(gameObject);
+        animator.SetTrigger("Death");
+        _isDeath = true;
     }
 
     public void GetHeal(int healCount)
