@@ -292,6 +292,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     {
         animator.SetTrigger("Death");
         _isDeath = true;
+        Application.Quit();
     }
 
     public void GetHeal(int healCount)
