@@ -14,20 +14,18 @@ public class Turret : MonoBehaviour
 
     private float _shotTimer = 0f;
     private float _rotationDelay = 0f;
+    private Animator animator;
 
-
-
-    //‘ункци€ расчета максимального отклонени€.
-    private float GetMax(float maxRotation)
+    private void Awake()
     {
-        if (_base.rotation.eulerAngles.y + maxRotation > 360f) return (_base.rotation.eulerAngles.y + maxRotation) - 360f;
-        else return _base.rotation.eulerAngles.y + maxRotation;
+        animator = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            animator.enabled = false;
             Quaternion rotateTarget = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, _target.position + (Vector3.up * 1.4f) - transform.position, _speed * Time.deltaTime, 0.0f));
             transform.rotation = new Quaternion(0, rotateTarget.y, 0, rotateTarget.w);
         }
@@ -37,6 +35,7 @@ public class Turret : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            animator.enabled = false;
             Quaternion rotateTarget = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, _target.position + (Vector3.up * 1.4f) - transform.position, _speed * Time.deltaTime, 0.0f));
             PlayerSearch(rotateTarget);
             if (_shotTimer == 0f && _rotationDelay > 0.8f) Fire();
@@ -52,9 +51,10 @@ public class Turret : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        transform.rotation = new Quaternion(0, 0, 0, 0); // Ќужно сделать плавный поворот в начальную позицию, пока не придумал как
-        _shotTimer = 0f;
-        _rotationDelay = 0f;
+        animator.enabled = true;
+        //transform.rotation = new Quaternion(0, 0, 0, 0); // Ќужно сделать плавный поворот в начальную позицию, пока не придумал как
+        //_shotTimer = 0f;
+        //_rotationDelay = 0f;
     }
 
     private void PlayerSearch(Quaternion rotateTarget)
@@ -79,5 +79,12 @@ public class Turret : MonoBehaviour
     public void Fire()
     {
         var bullet = Instantiate(_bulletPref, _bulletStartPosition.position, transform.rotation);
+    }
+
+    //‘ункци€ расчета максимального отклонени€.
+    private float GetMax(float maxRotation)
+    {
+        if (_base.rotation.eulerAngles.y + maxRotation > 360f) return (_base.rotation.eulerAngles.y + maxRotation) - 360f;
+        else return _base.rotation.eulerAngles.y + maxRotation;
     }
 }

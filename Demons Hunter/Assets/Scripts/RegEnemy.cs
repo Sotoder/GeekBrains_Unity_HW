@@ -9,10 +9,9 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
     [SerializeField] private int _maxHP = 100;
     [SerializeField] private bool _onPatrol;
     [SerializeField] private bool _onAttack;
-    [SerializeField] private int _damage = 20;
+    [SerializeField] private int _damage = 10;
     [SerializeField] private float _attackSpeed = 0.5f;
 
-    private Vector3 playerPosition;
     private GameObject player;
     private int _hp;
     private Transform _spawnPosition;
@@ -20,19 +19,19 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
     private Transform[] _patrolPoints;
     private NavMeshAgent _agent;
     private int currentPatrolPoint;
+    Rigidbody _rb;
     private bool _isChangeKinematic = false;
     private bool _isTired = false;
 
     public Transform SpawnPosition { get => _spawnPosition; set => _spawnPosition = value; }
-    public Transform[] PatrolPoints { get => _patrolPoints; }
 
-    public bool IsChangeKinematic { set => _isChangeKinematic = value; }
     public float SpawnAngle { set => _spawnAngle = value; }
 
     private void Awake()
     {
         _hp = _maxHP;
         _agent = GetComponent<NavMeshAgent>();
+        _rb = GetComponent<Rigidbody>();
         _onPatrol = false;
         _onAttack = false;
         _patrolPoints = new Transform[0];
@@ -52,13 +51,19 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
 
         if (_onAttack)
         {
-            _agent.SetDestination(playerPosition);
+            _agent.SetDestination(player.transform.position);
             if (_agent.remainingDistance <= _agent.stoppingDistance && _isTired == false)
             {
                 BitePlayer();
                 _isTired = true;
                 Invoke("Tired", _attackSpeed);
             }
+        }
+
+        if (!_onAttack && !_onPatrol)
+        {
+            if (_agent.remainingDistance <= _agent.stoppingDistance)
+                transform.rotation = Quaternion.Euler(0f, _spawnAngle, 0f); // пока так, после сделать плавный поворот в стартовую позицию
         }
     }
 
@@ -82,7 +87,6 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
     public void StartAttack(GameObject _player)
     {
         _onAttack = true;
-        playerPosition = _player.transform.position;
         player = _player;
     }
 
@@ -100,8 +104,6 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
             {
                 _onAttack = false;
                 _agent.SetDestination(_spawnPosition.position);
-                if (_agent.remainingDistance <= _agent.stoppingDistance)
-                    transform.rotation = Quaternion.Euler(0f, _spawnAngle, 0f); // пока так, после сделать плавный поворот в стартовую позицию
             }
         }
     }
@@ -111,7 +113,6 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
         if (_patrolPoints.Length > 0)
         {
             _onPatrol = false;
-            _agent.isStopped = true;
         }
     }
 
@@ -121,6 +122,9 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
         {
             _onPatrol = true;
             _agent.isStopped = false;
+        } else
+        {
+            _agent.isStopped = false;
         }
     }
 
@@ -129,6 +133,7 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
     {
         if (_isChangeKinematic == true)
         {
+            _isChangeKinematic = false;
             Invoke("ReturnKinematic", 2f);
         }
     }
@@ -154,6 +159,7 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
     private void Death()
     {
         Destroy(gameObject);
+
     }
 
     public void PatrolStart(Transform[] points)
@@ -165,14 +171,16 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
 
     private void ReturnKinematic()
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
-        rb.isKinematic = true;
+        _rb.isKinematic = true;
         _isChangeKinematic = false;
     }
 
-    public void SendInvoke(string methodName, float time)
+    public void IsBombed()
     {
-        Debug.Log("GetInvoke");
-        Invoke(methodName, time);
+        _rb.isKinematic = false;
+        StopPatrol();
+        _agent.isStopped = true;
+        _isChangeKinematic = true;
+        Invoke("ContinuePatrol", 2f);
     }
 }

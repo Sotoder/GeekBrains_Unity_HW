@@ -59,9 +59,15 @@
     <Compile Include="Assets\Scripts\Weapons\Mine.cs" />
     <Compile Include="Assets\Scripts\Bonuses\Heal.cs" />
     <Compile Include="Assets\Scripts\SpawnRegularEnemy.cs" />
+    <Compile Include="Assets\Scripts\Doors\BossDoor.cs" />
     <Compile Include="Assets\Scripts\Weapons\Bomb.cs" />
     <Compile Include="Assets\Scripts\RegEnemy.cs" />
+    <Compile Include="Assets\Scripts\IEnemy.cs" />
+    <Compile Include="Assets\Scripts\Doors\DownDoor.cs" />
+    <Compile Include="Assets\Scripts\BossArea.cs" />
+    <Compile Include="Assets\Scripts\Pedestal.cs" />
     <Compile Include="Assets\Scripts\Doors\DoorButton.cs" />
+    <Compile Include="Assets\Scripts\Traps\Indicator.cs" />
     <Compile Include="Assets\Scripts\Doors\Door.cs" />
     <Compile Include="Assets\Scripts\Weapons\Fractions.cs" />
     <Compile Include="Assets\Scripts\Traps\Turret.cs" />
@@ -69,13 +75,17 @@
     <Compile Include="Assets\Scripts\Weapons\Bullet.cs" />
     <Compile Include="Assets\Scripts\ITakingDamage.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerActions.cs" />
+    <Compile Include="Assets\Scripts\EliteEnemy.cs" />
     <Compile Include="Assets\Scripts\LeverAxis.cs" />
+    <Compile Include="Assets\Scripts\Boss.cs" />
     <Compile Include="Assets\Scripts\Weapons\IWeapon.cs" />
+    <Compile Include="Assets\Scripts\ObserverElite.cs" />
     <Compile Include="Assets\Scripts\Bonuses\Ammo.cs" />
+    <Compile Include="Assets\Scripts\Doors\SlidingDoor.cs" />
+    <Compile Include="Assets\Scripts\Observer.cs" />
     <Compile Include="Assets\Scripts\Weapons\ShotGun.cs" />
     <Compile Include="Assets\Scripts\Weapons\MachineGun.cs" />
-    <Compile Include="Assets\Scripts\IEnemy.cs" />
-    <Compile Include="Assets\Scripts\Observer.cs" />
+    <Compile Include="Assets\Scripts\Sphere.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

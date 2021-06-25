@@ -11,6 +11,8 @@ TagManager:
   - Ground
   - Weapon
   - Movable
+  - Vision
+  - EnemyExtra
   layers:
   - Default
   - TransparentFX
