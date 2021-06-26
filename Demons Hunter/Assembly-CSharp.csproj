@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Weapons\Bomb.cs" />
     <Compile Include="Assets\Scripts\RegEnemy.cs" />
     <Compile Include="Assets\Scripts\IEnemy.cs" />
+    <Compile Include="Assets\Scripts\Sphere.cs" />
     <Compile Include="Assets\Scripts\Doors\DownDoor.cs" />
     <Compile Include="Assets\Scripts\BossArea.cs" />
     <Compile Include="Assets\Scripts\Pedestal.cs" />
@@ -71,10 +72,12 @@
     <Compile Include="Assets\Scripts\Doors\Door.cs" />
     <Compile Include="Assets\Scripts\Weapons\Fractions.cs" />
     <Compile Include="Assets\Scripts\Traps\Turret.cs" />
+    <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Traps\Trap.cs" />
     <Compile Include="Assets\Scripts\Weapons\Bullet.cs" />
     <Compile Include="Assets\Scripts\ITakingDamage.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerActions.cs" />
+    <Compile Include="Assets\Scripts\Menu\Settings.cs" />
     <Compile Include="Assets\Scripts\EliteEnemy.cs" />
     <Compile Include="Assets\Scripts\LeverAxis.cs" />
     <Compile Include="Assets\Scripts\Boss.cs" />
@@ -85,7 +88,7 @@
     <Compile Include="Assets\Scripts\Observer.cs" />
     <Compile Include="Assets\Scripts\Weapons\ShotGun.cs" />
     <Compile Include="Assets\Scripts\Weapons\MachineGun.cs" />
-    <Compile Include="Assets\Scripts\Sphere.cs" />
+    <Compile Include="Assets\Scripts\Menu\PauseMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

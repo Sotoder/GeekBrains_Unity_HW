@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerActions : MonoBehaviour, ITakingDamage
 {
@@ -8,6 +9,10 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     //Params
     [SerializeField] private int _maxHP = 100;
     [SerializeField] private int _maxAmmo = 50;
+    [SerializeField] private GameObject _hpBar;
+    [SerializeField] private GameObject _menuPanel;
+    [SerializeField] private Image _hpBarImage;
+    [SerializeField] private Text _hpText;
 
     private Dictionary<Color, int> _keyContainer = new Dictionary<Color, int>
     {
@@ -64,6 +69,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     private void Awake()
     {
         _hp = _maxHP;
+        UpdateHPBar();
         _weaponPref = _mgPref;
         weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, transform.rotation);
         weapon.transform.parent = _weaponPositionAxie;
@@ -158,6 +164,14 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
             }
         }
         else _mineTime = 0;
+
+        if(Input.GetButton("Cancel"))
+        {
+            _hpBar.SetActive(false);
+            _menuPanel.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
+        }
     }
 
 
@@ -270,12 +284,20 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     {
         if (_isDeath) return;
         _hp -= damage;
+        UpdateHPBar();
         Debug.Log("Auch!");
         Debug.Log(_hp);
         if (_hp <= 0)
         {
             Death();
         }
+    }
+
+    private void UpdateHPBar()
+    {
+        _hpText.text = _hp.ToString() + "/" + _maxHP;
+        float fill = (((float)_hp * 100) / (float)_maxHP) / 100;
+        _hpBarImage.fillAmount = fill;
     }
 
     public void TakingBombDamage(int damage)
@@ -300,6 +322,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         Debug.Log("Was " + _hp);
         _hp += healCount;
         if (_hp > _maxHP) _hp = _maxHP;
+        UpdateHPBar();
         Debug.Log("Became " + _hp);
     }
 
