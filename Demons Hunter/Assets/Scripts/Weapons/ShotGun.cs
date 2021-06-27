@@ -6,9 +6,10 @@ public class ShotGun : MonoBehaviour, IWeapon
 {
     [SerializeField] private GameObject _bulletPref;
     [SerializeField] private Transform[] _bulletStartPosition;
-    [SerializeField] private float _fireRate = 2f;
+    [SerializeField] private float _fireRate = 1.5f;
 
     private bool _isReload = true;
+
     public bool IsReload { get => _isReload; }
     public void Fire()
     {

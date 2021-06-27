@@ -8,11 +8,13 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
     //Params
     [SerializeField] private int _maxHP = 100;
-    [SerializeField] private int _maxAmmo = 50;
+    [SerializeField] private int _maxSGAmmo = 50;
+    [SerializeField] private int _maxMGAmmo = 500;
     [SerializeField] private GameObject _hpBar;
     [SerializeField] private GameObject _menuPanel;
     [SerializeField] private Image _hpBarImage;
     [SerializeField] private Text _hpText;
+    [SerializeField] private Text _ammoText;
 
     private Dictionary<Color, int> _keyContainer = new Dictionary<Color, int>
     {
@@ -22,7 +24,10 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         [new Color(0f, 1f, 0f, 1f)] = 0
     };
     private int _hp;
-    private int _ammo;
+    private int _sgAmmo = 50;
+    private int _mgAmmo = 500;
+    private int _curentWeaponAmmo;
+    private int _curentWeaponMaxAmmo;
     private int _leverCount = 0;
     private int _secretBossDamageModifer = 1;
     private Animator animator;
@@ -74,6 +79,8 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, transform.rotation);
         weapon.transform.parent = _weaponPositionAxie;
         w = weapon.GetComponent<MachineGun>();
+        _curentWeaponAmmo = _mgAmmo;
+        _curentWeaponMaxAmmo = _maxMGAmmo;
         Cursor.lockState = CursorLockMode.Locked;
         animator = GetComponent<Animator>();
         animator.SetBool("MGun", true);
@@ -107,6 +114,8 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
             weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, _head.rotation);
             weapon.transform.parent = _weaponPositionAxie;
             w = weapon.GetComponent<MachineGun>();
+            _curentWeaponAmmo = _mgAmmo;
+            _curentWeaponMaxAmmo = _maxMGAmmo;
         }
         else if (Input.GetButton("Weapon2"))
         {
@@ -117,12 +126,22 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
             weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, _head.rotation);
             weapon.transform.parent = _weaponPositionAxie;
             w = weapon.GetComponent<ShotGun>();
+            _curentWeaponAmmo = _sgAmmo;
+            _curentWeaponMaxAmmo = _maxSGAmmo;
         }
 
         if (Input.GetAxis("Fire1") == 1f && w.IsReload)
         {
-            animator.SetBool("Fire", true);
-            w.Fire(_secretBossDamageModifer);  
+            if (_curentWeaponAmmo > 0)
+            {
+                animator.SetBool("Fire", true);
+                w.Fire(_secretBossDamageModifer);
+                _curentWeaponAmmo--;
+                if (animator.GetBool("MGun")) 
+                    _mgAmmo--;
+                else _sgAmmo--;
+            }
+
         }  else
         {
             animator.SetBool("Fire", false);
@@ -172,6 +191,8 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
         }
+
+        _ammoText.text = "Ammo: " + _curentWeaponAmmo.ToString() + "/" + _curentWeaponMaxAmmo.ToString();
     }
 
 
@@ -326,10 +347,27 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         Debug.Log("Became " + _hp);
     }
 
-    public void GetAmmo(int ammoCount)
+    public void GetAmmo(int sgAmmoCount, int mgAmmoCount)
     {
-        _ammo += ammoCount;
-        if (_ammo > _maxAmmo) _ammo = _maxAmmo;
+        _sgAmmo += sgAmmoCount;       
+        _mgAmmo += mgAmmoCount;
+
+        if (_mgAmmo > _maxMGAmmo) _mgAmmo = _maxMGAmmo;
+        if (_sgAmmo > _maxSGAmmo) _sgAmmo = _maxSGAmmo;
+
+        if (animator.GetBool("MGun"))
+        {
+            _curentWeaponAmmo = _mgAmmo;
+        }
+        else
+        {
+            _curentWeaponAmmo = _sgAmmo;
+        }
+
+        
+        
+
+
     }
 
     public void AddLeverCount()

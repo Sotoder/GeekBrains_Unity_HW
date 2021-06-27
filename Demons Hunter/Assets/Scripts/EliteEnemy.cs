@@ -12,7 +12,8 @@ public class EliteEnemy : MonoBehaviour, ITakingDamage, IEnemy
     [SerializeField] private float _attackSpeed = 0.5f;
     [SerializeField] public Transform _spawnPosition;
     [SerializeField] private Color _color;
-    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject _player;
+    [SerializeField] private GameObject _tooltipe;
 
     private float _rangeAttack = 1f;   
     private int _hp;
@@ -20,6 +21,7 @@ public class EliteEnemy : MonoBehaviour, ITakingDamage, IEnemy
     Rigidbody _rb;
     private bool _isChangeKinematic = false;
     private bool _isTired = false;
+    private bool _isShowTooltip = false;
 
 
     private void Awake()
@@ -35,8 +37,8 @@ public class EliteEnemy : MonoBehaviour, ITakingDamage, IEnemy
     {
         if (_onAttack)
         {
-            _agent.SetDestination(player.transform.position);
-            if (Vector3.Distance(player.transform.position, transform.position) <= _rangeAttack && _isTired == false)
+            _agent.SetDestination(_player.transform.position);
+            if (Vector3.Distance(_player.transform.position, transform.position) <= _rangeAttack && _isTired == false)
             {
                 BitePlayer();
                 _isTired = true;
@@ -51,9 +53,9 @@ public class EliteEnemy : MonoBehaviour, ITakingDamage, IEnemy
 
     private void BitePlayer()
     {
-        if (!(player is null))
+        if (!(_player is null))
         {
-            player.GetComponent<PlayerActions>().TakingDamage(_damage);
+            _player.GetComponent<PlayerActions>().TakingDamage(_damage);
             Debug.Log("BITE!!!");
         }
         else
@@ -111,7 +113,14 @@ public class EliteEnemy : MonoBehaviour, ITakingDamage, IEnemy
 
     private void Death()
     {
-        player.GetComponent<PlayerActions>().AddKey(_color);
+        _player.GetComponent<PlayerActions>().AddKey(_color);
+        if(!_isShowTooltip)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
+            _tooltipe.SetActive(true);
+            _isShowTooltip = true;
+        }
         Destroy(gameObject);
     }
 

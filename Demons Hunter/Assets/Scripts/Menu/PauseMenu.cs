@@ -9,10 +9,13 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] Button _btnExit;
     [SerializeField] GameObject _hpBar;
 
+    Settings _settings;
     private void Awake()
     {
+        
         _btnResume.onClick.AddListener(ResumeGame);
         _btnExit.onClick.AddListener(ExitGame);
+
     }
 
     private void ExitGame()
