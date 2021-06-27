@@ -15,6 +15,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     [SerializeField] private Image _hpBarImage;
     [SerializeField] private Text _hpText;
     [SerializeField] private Text _ammoText;
+    [SerializeField] private Text _minesBombsText;
 
     private Dictionary<Color, int> _keyContainer = new Dictionary<Color, int>
     {
@@ -193,6 +194,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         }
 
         _ammoText.text = "Ammo: " + _curentWeaponAmmo.ToString() + "/" + _curentWeaponMaxAmmo.ToString();
+        _minesBombsText.text = "Mines: " + _mineCount.ToString() + " Bombs: " + _bombCount.ToString();
     }
 
 
