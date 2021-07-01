@@ -87,7 +87,11 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
         if (!_onAttack && !_onPatrol)
         {
             if (_agent.remainingDistance <= _agent.stoppingDistance)
+            {
+                _animator.SetBool("Walk", false);
+                _animator.SetBool("Stay", true);
                 transform.rotation = Quaternion.Euler(0f, _spawnAngle, 0f); // пока так, после сделать плавный поворот в стартовую позицию
+            }
         }
     }
 
