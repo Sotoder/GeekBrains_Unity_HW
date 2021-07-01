@@ -11,11 +11,15 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     [SerializeField] private int _maxSGAmmo = 50;
     [SerializeField] private int _maxMGAmmo = 500;
     [SerializeField] private GameObject _hpBar;
+    [SerializeField] private GameObject _head;
     [SerializeField] private GameObject _menuPanel;
+    [SerializeField] private GameObject _endGamePanel;
     [SerializeField] private Image _hpBarImage;
     [SerializeField] private Text _hpText;
     [SerializeField] private Text _ammoText;
     [SerializeField] private Text _minesBombsText;
+    [SerializeField] private AudioClip _walkAudio;
+    [SerializeField] private AudioClip _runAudio;
 
     private Dictionary<Color, int> _keyContainer = new Dictionary<Color, int>
     {
@@ -32,9 +36,15 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     private int _leverCount = 0;
     private int _secretBossDamageModifer = 1;
     private Animator animator;
-    private bool _isDeath = false;
+    private AudioSource _playerAudioSource;
+    private AudioSource _weaponAudioSource;
+    private bool _isDead = false;
+    private bool _isRun = false;
+    private bool _isWalk = true;
 
-
+    public bool IsDead { get => _isDead; }
+    public AudioSource WeaponAudioSource { get => _weaponAudioSource; }
+    public AudioSource PlayerAudioSource { get => _playerAudioSource; }
     public Dictionary<Color, int> KeyContainer { get => _keyContainer; set => _keyContainer = value; }
     public int LeverCount { get => _leverCount; set => _leverCount = value; }
     public int SecretBossDamageModifer { get => _secretBossDamageModifer; set => _secretBossDamageModifer = value; }
@@ -46,7 +56,6 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     [SerializeField] private float _speedMult;
     [SerializeField] private float _jumpForce = 300f;
     [SerializeField] private float _gravity = 9.18f;
-    [SerializeField] private Transform _head;
     private bool _isGrounded;
     private Rigidbody _rb;
     private Vector3 _direction;
@@ -76,18 +85,25 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     {
         _hp = _maxHP;
         UpdateHPBar();
+        Cursor.lockState = CursorLockMode.Locked;
+        PlayerPrefs.SetInt("_isShowTooltip", 0);
+
+
+        _rb = gameObject.GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+        _playerAudioSource = GetComponent<AudioSource>();
+
+
         _weaponPref = _mgPref;
         weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, transform.rotation);
         weapon.transform.parent = _weaponPositionAxie;
         w = weapon.GetComponent<MachineGun>();
+        _weaponAudioSource = weapon.GetComponent<AudioSource>();
+        _weaponAudioSource.Stop();
         _curentWeaponAmmo = _mgAmmo;
         _curentWeaponMaxAmmo = _maxMGAmmo;
-        Cursor.lockState = CursorLockMode.Locked;
-        animator = GetComponent<Animator>();
         animator.SetBool("MGun", true);
         animator.SetBool("SGun", false);
-
-        _rb = gameObject.GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -98,7 +114,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         //    f+=(0.5f * Time.deltaTime);
         //}
         //f = 0f;
-        if (_isDeath) return;
+        if (_isDead) return;
         
         PlayerLook();
 
@@ -112,9 +128,11 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
             animator.SetBool("SGun", false);
             w.DestroyWeapon();
             _weaponPref = _mgPref;
-            weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, _head.rotation);
+            weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, _head.transform.rotation);
             weapon.transform.parent = _weaponPositionAxie;
             w = weapon.GetComponent<MachineGun>();
+            _weaponAudioSource = weapon.GetComponent<AudioSource>();
+            _weaponAudioSource.Stop();
             _curentWeaponAmmo = _mgAmmo;
             _curentWeaponMaxAmmo = _maxMGAmmo;
         }
@@ -124,9 +142,11 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
             animator.SetBool("SGun", true);
             w.DestroyWeapon();
             _weaponPref = _sgPref;
-            weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, _head.rotation);
+            weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, _head.transform.rotation);
             weapon.transform.parent = _weaponPositionAxie;
             w = weapon.GetComponent<ShotGun>();
+            _weaponAudioSource = weapon.GetComponent<AudioSource>();
+            _weaponAudioSource.Stop();
             _curentWeaponAmmo = _sgAmmo;
             _curentWeaponMaxAmmo = _maxSGAmmo;
         }
@@ -138,12 +158,18 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
                 animator.SetBool("Fire", true);
                 w.Fire(_secretBossDamageModifer);
                 _curentWeaponAmmo--;
-                if (animator.GetBool("MGun")) 
+                if (animator.GetBool("MGun"))
+                {
+                    WeaponSoundStart();
                     _mgAmmo--;
+                }
                 else _sgAmmo--;
             }
 
-        }  else
+        }  else if (Input.GetAxis("Fire1") < 1f)
+        {
+            if (animator.GetBool("MGun")) WeaponSoundStop();
+        } else
         {
             animator.SetBool("Fire", false);
         }
@@ -153,8 +179,8 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         {
             if (_trowTime == 0 && _bombCount > 0)
             {
-                TrowBomb();
                 _bombCount--;
+                TrowBomb();
             }
 
             _trowTime += Time.deltaTime;
@@ -172,8 +198,9 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         {
             if (_mineTime == 0 && _mineCount > 0)
             {
-                TrowMine();
                 _mineCount--;
+                TrowMine();
+
             }
 
             _mineTime += Time.deltaTime;
@@ -191,10 +218,10 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
             _menuPanel.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
+            AudioListener.volume = 0f;
         }
 
         _ammoText.text = "Ammo: " + _curentWeaponAmmo.ToString() + "/" + _curentWeaponMaxAmmo.ToString();
-        _minesBombsText.text = "Mines: " + _mineCount.ToString() + " Bombs: " + _bombCount.ToString();
     }
 
 
@@ -206,6 +233,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         } else
         {
             animator.SetBool("Run", false);
+            _playerAudioSource.Stop();
         }
         _direction.x = Input.GetAxis("Horizontal");
         _direction.z = Input.GetAxis("Vertical");
@@ -213,18 +241,37 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         Vector3 speed;
         if (Input.GetButton("Sprint"))
         {
+            if (!_isRun) _playerAudioSource.Stop();
+
+            if (!_playerAudioSource.isPlaying)
+            {
+                _playerAudioSource.clip = _runAudio;
+                _playerAudioSource.loop = true;
+                _playerAudioSource.Play();
+                _isRun = true;
+                _isWalk = false;
+            }
             speed = _direction * (_speed * _speedMult);
         }
         else
         {
+            if (!_isWalk) _playerAudioSource.Stop();
+            if (!_playerAudioSource.isPlaying)
+            {
+                _playerAudioSource.clip = _walkAudio;
+                _playerAudioSource.loop = true;
+                _playerAudioSource.Play();
+                _isRun = false;
+                _isWalk = true;
+            }
             speed = _direction * _speed;
         }
 
         JumpLogic();
         MovementLogic(speed);
-
     }
 
+    
     private void PlayerLook()
     {
         mouseLookX = Input.GetAxis("Mouse X") * sensetivity * Time.deltaTime;
@@ -243,10 +290,10 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
         xRotation += mouseLookY; // —тара€, не совсем верна€ реализаци€ поворота головы и оружи€, но без бага поворота
         xRotation = Mathf.Clamp(xRotation, -40f, 25f);
-        _head.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        _head.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
 
-        _weaponPosition.localRotation = _head.localRotation;
-        _bombStartPosition.localRotation = _head.localRotation;
+        _weaponPosition.localRotation = _head.transform.localRotation;
+        _bombStartPosition.localRotation = _head.transform.localRotation;
     }
 
     private void MovementLogic(Vector3 speed)
@@ -295,21 +342,23 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         bomb.GetComponent<Rigidbody>().AddForce(_bombStartPosition.forward * 20, ForceMode.Impulse);
         var b = bomb.GetComponent<Bomb>();
         b.Init();
+        _minesBombsText.text = "Mines: " + _mineCount.ToString() + " Bombs: " + _bombCount.ToString();
     }
 
     private void TrowMine()
     {
         var mine = Instantiate(_minePref, _mineStartPosition.position, transform.rotation);
+        _minesBombsText.text = "Mines: " + _mineCount.ToString() + " Bombs: " + _bombCount.ToString();
     }
 
 
-    public void TakingDamage(int damage)
+    public void TakingDamage(int damage, Transform sourceDamage)
     {
-        if (_isDeath) return;
+        if (_isDead) return;
+        _head.GetComponent<AudioSource>().Play();
+        _head.GetComponent<ParticleSystem>().Play();
         _hp -= damage;
         UpdateHPBar();
-        Debug.Log("Auch!");
-        Debug.Log(_hp);
         if (_hp <= 0)
         {
             Death();
@@ -325,7 +374,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
     public void TakingBombDamage(int damage)
     {
-        if (_isDeath) return;
+        if (_isDead) return;
         _hp -= damage;
         if (_hp <= 0)
         {
@@ -336,8 +385,10 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     private void Death()
     {
         animator.SetTrigger("Death");
-        _isDeath = true;
-        Application.Quit();
+        _isDead = true;
+        AudioListener.volume = 0;
+        Cursor.lockState = CursorLockMode.None;
+        _endGamePanel.SetActive(true);
     }
 
     public void GetHeal(int healCount)
@@ -390,5 +441,17 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         {
             Debug.Log(item.Key + ": " + item.Value);
         }
+    }
+
+    private void WeaponSoundStart()
+    {
+
+        if (!_weaponAudioSource.isPlaying)
+            _weaponAudioSource.Play();
+    }
+
+    private void WeaponSoundStop()
+    {
+        _weaponAudioSource.Stop();
     }
 }

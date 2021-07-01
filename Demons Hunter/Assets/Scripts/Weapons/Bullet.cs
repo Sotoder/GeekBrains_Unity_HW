@@ -18,11 +18,11 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Enemy") || other.CompareTag("Player"))
         {
-            other.GetComponent<ITakingDamage>().TakingDamage(_damage * modifer);
+            other.GetComponent<ITakingDamage>().TakingDamage(_damage * modifer, gameObject.transform);
 
         } else if (other.CompareTag("EnemyExtra"))
         {
-            other.GetComponentInParent<ITakingDamage>().TakingDamage(_damage * 2 * modifer);
+            other.GetComponentInParent<ITakingDamage>().TakingDamage(_damage * 2 * modifer, gameObject.transform);
         }
 
 

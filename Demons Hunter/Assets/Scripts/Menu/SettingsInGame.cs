@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +11,7 @@ public class SettingsInGame : MonoBehaviour
     [SerializeField] GameObject _pausePanel;
     [SerializeField] Dropdown _ddQuality;
 
-    Settings _settings;
+    private Settings _settings;
     private int _qualityLevel;
     private bool _isMuted;
     private float _volume;
@@ -25,6 +23,7 @@ public class SettingsInGame : MonoBehaviour
         _isMuted = _settings.IsMuted;
         _volume = _settings.Volume;
         _txtVolumePercent.text = _settings.Volume.ToString();
+        AudioListener.volume = _volume * 0.01f;
 
         _ddQuality.value = _qualityLevel;
         _tglSoundsMute.isOn = _isMuted;
@@ -40,7 +39,9 @@ public class SettingsInGame : MonoBehaviour
         QualitySettings.SetQualityLevel(_ddQuality.value, true);
         _qualityLevel = _ddQuality.value;
         _volume = _slrSoundsVolume.value;
-        _settings.GetComponent<Settings>().SetSettings(_volume, _isMuted, _qualityLevel);
+        _settings.SetSettings(_volume, _isMuted, _qualityLevel);
+        AudioListener.volume = _volume * 0.01f;
+
         _settingsPanel.SetActive(false);
         _pausePanel.SetActive(true);
     }

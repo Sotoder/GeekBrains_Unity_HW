@@ -30,7 +30,7 @@ public class Observer : MonoBehaviour
     void Update()
     {
         var enemy = _body.GetComponent<RegEnemy>();
-        if (m_IsPlayerInRange)
+        if (m_IsPlayerInRange && !_player.GetComponent<PlayerActions>().IsDead)
         {
             
             enemy.StopPatrol();

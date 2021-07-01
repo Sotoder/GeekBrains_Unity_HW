@@ -7,6 +7,10 @@ public class Bomb : MonoBehaviour
     [SerializeField] private int _damage = 10;
     [SerializeField] private float _radius = 5f;
     [SerializeField] private float _power = 5000f;
+    [SerializeField] private GameObject _particleObject;
+    [SerializeField] private GameObject _bombBody;
+
+    private bool _isDetonate = false;
 
     public void Init()
     {
@@ -17,9 +21,10 @@ public class Bomb : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy") && !_isDetonate)
         {
             Explosion();
+            _isDetonate = true;
         }
     }
 
@@ -50,7 +55,12 @@ public class Bomb : MonoBehaviour
 
             }
         }
-        Destroy(gameObject);
+        _particleObject.SetActive(true);
+        GetComponent<AudioSource>().Play();
+        Destroy(_bombBody);
+        gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        gameObject.GetComponent<SphereCollider>().enabled = false;
+        Destroy(gameObject, 5f);
     }
 
     private void AddExpForce(Rigidbody rb)

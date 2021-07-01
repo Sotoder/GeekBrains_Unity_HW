@@ -10,11 +10,13 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject _hpBar;
 
     Settings _settings;
+
     private void Awake()
     {
         
         _btnResume.onClick.AddListener(ResumeGame);
         _btnExit.onClick.AddListener(ExitGame);
+        _settings = GameObject.FindObjectOfType<Settings>();
 
     }
 
@@ -29,5 +31,13 @@ public class PauseMenu : MonoBehaviour
         _hpBar.SetActive(true);
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
+        if (!(_settings is null))
+        {
+            AudioListener.volume = _settings.Volume * 0.01f;
+        }
+        else
+        {
+            AudioListener.volume = 0.5f;
+        }
     }
 }

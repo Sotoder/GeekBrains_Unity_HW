@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -23,11 +21,13 @@ public class MainMenu : MonoBehaviour
     private void Awake()
     {
         SoundsMute(_tglSoundsMute.isOn);
-        _volume = 50;
+        _isMuted = false;
+        _volume = AudioListener.volume * 100;
         _slrSoundsVolume.value = _volume;
         ChangeVolumeText(_volume);
         QualitySettings.SetQualityLevel(1, true);
         _ddQuality.value = 1;
+        _settings.GetComponent<Settings>().SetSettings(_volume, _isMuted, _ddQuality.value);
 
 
         _btnStart.onClick.AddListener(StartGame);
@@ -54,6 +54,7 @@ public class MainMenu : MonoBehaviour
         _qualityLevel = _ddQuality.value;
         _volume = _slrSoundsVolume.value;
         _settings.GetComponent<Settings>().SetSettings(_volume, _isMuted, _qualityLevel);
+        AudioListener.volume = _volume * 0.01f;
         _settingsPanel.SetActive(false);
     }
 

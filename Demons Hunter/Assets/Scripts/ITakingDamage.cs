@@ -4,6 +4,8 @@ using UnityEngine;
 
 interface ITakingDamage
 {
-    void TakingDamage(int damage);
+    void TakingDamage(int damage, Transform sorceDamageTransform);
+
     void TakingBombDamage(int damage);
+
 }

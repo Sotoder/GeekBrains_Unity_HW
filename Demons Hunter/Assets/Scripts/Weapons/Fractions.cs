@@ -18,11 +18,11 @@ public class Fractions : MonoBehaviour
         {
             if (other.CompareTag("Enemy"))
             {
-                other.GetComponent<ITakingDamage>().TakingDamage(_damage * modifer);
+                other.GetComponent<ITakingDamage>().TakingDamage(_damage * modifer, gameObject.transform);
             }
             else if (other.CompareTag("EnemyExtra"))
             {
-                other.GetComponentInParent<ITakingDamage>().TakingDamage(_damage * 2 * modifer);
+                other.GetComponentInParent<ITakingDamage>().TakingDamage(_damage * 2 * modifer, gameObject.transform);
             }
 
             if (!other.CompareTag("Bullets") && !other.CompareTag("Traps") && !other.CompareTag("Weapon") && !other.CompareTag("Vision"))
