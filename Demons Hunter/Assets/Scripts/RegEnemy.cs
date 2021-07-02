@@ -203,6 +203,7 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
 
     public void PatrolStart(Transform[] points)
     {
+        if (_isDead) return;
         _onPatrol = true;
         _patrolPoints = points;
         _agent.SetDestination(_patrolPoints[0].position);
@@ -210,12 +211,14 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
 
     private void ReturnKinematic()
     {
+        if (_isDead) return;
         _rb.isKinematic = true;
         _isChangeKinematic = false;
     }
 
     public void IsBombed()
     {
+        if (_isDead) return;
         _rb.isKinematic = false;
         StopPatrol();
         _agent.isStopped = true;

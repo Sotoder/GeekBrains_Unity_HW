@@ -168,6 +168,7 @@ public class EliteEnemy : MonoBehaviour, ITakingDamage, IEnemy
 
     private void ReturnKinematic()
     {
+        if (_isDead) return;
         _rb.isKinematic = true;
         _isChangeKinematic = false;
         _agent.isStopped = false;
@@ -175,6 +176,7 @@ public class EliteEnemy : MonoBehaviour, ITakingDamage, IEnemy
 
     public void IsBombed()
     {
+        if (_isDead) return;
         _rb.isKinematic = false;
         _agent.isStopped = true;
         _isChangeKinematic = true;

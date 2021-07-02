@@ -164,12 +164,14 @@ public class Boss : MonoBehaviour,ITakingDamage, IEnemy
 
     public void IsBombed()
     {
+        if (_isDead) return;
         _rb.isKinematic = false;
         _isChangeKinematic = true;
     }
 
     private void ReturnKinematic()
     {
+        if (_isDead) return;
         _rb.isKinematic = true;
         _isChangeKinematic = false;
     }
