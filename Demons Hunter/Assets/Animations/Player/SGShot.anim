@@ -276,7 +276,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.3333334
+  - time: 0.9166667
     functionName: WeaponSoundStop
     data: 
     objectReferenceParameter: {fileID: 0}

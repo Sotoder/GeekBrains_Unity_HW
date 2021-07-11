@@ -151,28 +151,23 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
             _curentWeaponMaxAmmo = _maxSGAmmo;
         }
 
-        if (Input.GetAxis("Fire1") == 1f && w.IsReload)
+        if (Input.GetAxis("Fire1") == 1f && w.IsReload && _curentWeaponAmmo > 0)
         {
-            if (_curentWeaponAmmo > 0)
+            animator.SetBool("Fire", true);
+            w.Fire(_secretBossDamageModifer);
+            _curentWeaponAmmo--;
+            if (animator.GetBool("MGun"))
             {
-                animator.SetBool("Fire", true);
-                w.Fire(_secretBossDamageModifer);
-                _curentWeaponAmmo--;
-                if (animator.GetBool("MGun"))
-                {
-                    WeaponSoundStart();
-                    _mgAmmo--;
-                }
-                else _sgAmmo--;
+                WeaponSoundStart();
+                _mgAmmo--;
             }
+            else _sgAmmo--;
 
-        }  else if (Input.GetAxis("Fire1") < 1f)
+        }  else if (Input.GetButtonUp("Fire1") || _curentWeaponAmmo == 0)
         {
             if (animator.GetBool("MGun")) WeaponSoundStop();
-        } else
-        {
             animator.SetBool("Fire", false);
-        }
+        } 
 
 
         if (Input.GetAxis("Fire2") == 1f)

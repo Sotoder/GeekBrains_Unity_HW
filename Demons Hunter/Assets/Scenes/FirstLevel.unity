@@ -45492,6 +45492,10 @@ PrefabInstance:
       propertyPath: m_AngularDrag
       value: 20000
       objectReference: {fileID: 0}
+    - target: {fileID: 1343684216386567989, guid: 7693266fe3db1b14297d570ee969064b, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 1875141811020004324, guid: 7693266fe3db1b14297d570ee969064b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -45559,6 +45563,30 @@ PrefabInstance:
     - target: {fileID: 5066052693690712488, guid: 7693266fe3db1b14297d570ee969064b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7790448979398668385, guid: 7693266fe3db1b14297d570ee969064b, type: 3}
+      propertyPath: m_Height
+      value: 1.8149366
+      objectReference: {fileID: 0}
+    - target: {fileID: 7790448979398668385, guid: 7693266fe3db1b14297d570ee969064b, type: 3}
+      propertyPath: m_Radius
+      value: 0.2624963
+      objectReference: {fileID: 0}
+    - target: {fileID: 7790448979398668385, guid: 7693266fe3db1b14297d570ee969064b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7790448979398668385, guid: 7693266fe3db1b14297d570ee969064b, type: 3}
+      propertyPath: m_Center.x
+      value: -0.0007007122
+      objectReference: {fileID: 0}
+    - target: {fileID: 7790448979398668385, guid: 7693266fe3db1b14297d570ee969064b, type: 3}
+      propertyPath: m_Center.y
+      value: 0.89753175
+      objectReference: {fileID: 0}
+    - target: {fileID: 7790448979398668385, guid: 7693266fe3db1b14297d570ee969064b, type: 3}
+      propertyPath: m_Center.z
+      value: 0.015077591
       objectReference: {fileID: 0}
     - target: {fileID: 8983545159673882981, guid: 7693266fe3db1b14297d570ee969064b, type: 3}
       propertyPath: looping
