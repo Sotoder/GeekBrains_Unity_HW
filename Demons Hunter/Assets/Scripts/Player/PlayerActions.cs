@@ -309,7 +309,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
         if (!_isGrounded)
         {
-            _rb.AddForce(Vector3.down * _gravity * 200);
+            _rb.AddForce(Vector3.down * _gravity * 300);
         }
     }
 
