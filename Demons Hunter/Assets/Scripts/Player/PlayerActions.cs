@@ -11,6 +11,8 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     [SerializeField] private int _maxSGAmmo = 50;
     [SerializeField] private int _maxMGAmmo = 500;
     [SerializeField] private GameObject _hpBar;
+    [SerializeField] private GameObject _minesAndBombBar;
+    [SerializeField] private GameObject _ammoBar;
     [SerializeField] private GameObject _head;
     [SerializeField] private GameObject _menuPanel;
     [SerializeField] private GameObject _endGamePanel;
@@ -41,6 +43,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     private bool _isDead = false;
     private bool _isRun = false;
     private bool _isWalk = true;
+    private Settings _settings;
 
     public bool IsDead { get => _isDead; }
     public AudioSource WeaponAudioSource { get => _weaponAudioSource; }
@@ -48,6 +51,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     public Dictionary<Color, int> KeyContainer { get => _keyContainer; set => _keyContainer = value; }
     public int LeverCount { get => _leverCount; set => _leverCount = value; }
     public int SecretBossDamageModifer { get => _secretBossDamageModifer; set => _secretBossDamageModifer = value; }
+    public int MaxHP { get => _maxHP; }
 
 
     //Move Player
@@ -80,11 +84,21 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     private float _trowTime = 0f;
     private float _mineTime = 0f;
 
+    //GUI
+    [SerializeField] private GameObject _hpBarObjectGUI;
+    [SerializeField] private GameObject _tooltipObjectGUI;
+    [SerializeField] private GameObject _colorSettingsGUI;
+    [SerializeField] private GameObject _weaponChangerGUI;
+    private HPBar _hpBarGUI => _hpBarObjectGUI.GetComponent<HPBar>();
+    private LightColorChanger _colorSettings => _colorSettingsGUI.GetComponent<LightColorChanger>();
+    private WeaponChanger _weaponChanger => _weaponChangerGUI.GetComponent<WeaponChanger>();
+    private Tooltipes _tooltipes => _tooltipObjectGUI.GetComponent<Tooltipes>();
 
     private void Awake()
     {
         _hp = _maxHP;
         UpdateHPBar();
+        _hpBarGUI.UpdateHPBar(_hp);
         Cursor.lockState = CursorLockMode.Locked;
         PlayerPrefs.SetInt("_isShowTooltip", 0);
 
@@ -92,7 +106,6 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         _rb = gameObject.GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         _playerAudioSource = GetComponent<AudioSource>();
-
 
         _weaponPref = _mgPref;
         weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, transform.rotation);
@@ -104,6 +117,8 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         _curentWeaponMaxAmmo = _maxMGAmmo;
         animator.SetBool("MGun", true);
         animator.SetBool("SGun", false);
+
+        _settings = GameObject.FindObjectOfType<Settings>();
     }
 
     void Update()
@@ -124,31 +139,11 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         }
         if (Input.GetButton("Weapon1"))
         {
-            animator.SetBool("MGun", true);
-            animator.SetBool("SGun", false);
-            w.DestroyWeapon();
-            _weaponPref = _mgPref;
-            weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, _head.transform.rotation);
-            weapon.transform.parent = _weaponPositionAxie;
-            w = weapon.GetComponent<MachineGun>();
-            _weaponAudioSource = weapon.GetComponent<AudioSource>();
-            _weaponAudioSource.Stop();
-            _curentWeaponAmmo = _mgAmmo;
-            _curentWeaponMaxAmmo = _maxMGAmmo;
+            SwitchWeapon(1);
         }
         else if (Input.GetButton("Weapon2"))
         {
-            animator.SetBool("MGun", false);
-            animator.SetBool("SGun", true);
-            w.DestroyWeapon();
-            _weaponPref = _sgPref;
-            weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, _head.transform.rotation);
-            weapon.transform.parent = _weaponPositionAxie;
-            w = weapon.GetComponent<ShotGun>();
-            _weaponAudioSource = weapon.GetComponent<AudioSource>();
-            _weaponAudioSource.Stop();
-            _curentWeaponAmmo = _sgAmmo;
-            _curentWeaponMaxAmmo = _maxSGAmmo;
+            SwitchWeapon(2);
         }
 
         if (Input.GetAxis("Fire1") == 1f && w.IsReload && _curentWeaponAmmo > 0)
@@ -210,15 +205,80 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         if(Input.GetButton("Cancel"))
         {
             _hpBar.SetActive(false);
+            _ammoBar.SetActive(false);
+            _minesAndBombBar.SetActive(false);
+
+            _tooltipes.IsPause = true;
+            _hpBarGUI.IsPause = true;
+
             _menuPanel.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
             AudioListener.volume = 0f;
         }
 
+        if (Input.GetButtonDown("ColorSettings")) 
+        { 
+            _colorSettings.IsColorChangerButtonDown = true; 
+        }
+
+
+        if (Input.GetButtonDown("WeaponChanger"))
+        {
+            _weaponChanger.IsWeaponChangerButtonDown = true;
+        }
+        else if (Input.GetButtonUp("WeaponChanger")) 
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 1f;
+            if (!(_settings is null))
+            {
+                AudioListener.volume = _settings.Volume * 0.01f;
+            }
+            else
+            {
+                AudioListener.volume = 0.5f;
+            }
+            _weaponChanger.IsWeaponChangerButtonDown = false; 
+        }
+
+
         _ammoText.text = "Ammo: " + _curentWeaponAmmo.ToString() + "/" + _curentWeaponMaxAmmo.ToString();
     }
 
+    public void SwitchWeapon(int weaponType)
+    {
+        switch (weaponType)
+        {
+            case 1:
+                animator.SetBool("MGun", true);
+                animator.SetBool("SGun", false);
+                w.DestroyWeapon();
+                _weaponPref = _mgPref;
+                weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, _head.transform.rotation);
+                weapon.transform.parent = _weaponPositionAxie;
+                w = weapon.GetComponent<MachineGun>();
+                _weaponAudioSource = weapon.GetComponent<AudioSource>();
+                _weaponAudioSource.Stop();
+                _curentWeaponAmmo = _mgAmmo;
+                _curentWeaponMaxAmmo = _maxMGAmmo;
+                break;
+
+            case 2:
+                animator.SetBool("MGun", false);
+                animator.SetBool("SGun", true);
+                w.DestroyWeapon();
+                _weaponPref = _sgPref;
+                weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, _head.transform.rotation);
+                weapon.transform.parent = _weaponPositionAxie;
+                w = weapon.GetComponent<ShotGun>();
+                _weaponAudioSource = weapon.GetComponent<AudioSource>();
+                _weaponAudioSource.Stop();
+                _curentWeaponAmmo = _sgAmmo;
+                _curentWeaponMaxAmmo = _maxSGAmmo;
+                break;
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -354,9 +414,22 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         _head.GetComponent<ParticleSystem>().Play();
         _hp -= damage;
         UpdateHPBar();
+        _hpBarGUI.UpdateHPBar(_hp);
         if (_hp <= 0)
         {
             Death();
+        }
+    }
+
+    public void TakingBombDamage(int damage)
+    {
+        if (_isDead) return;
+        _hp -= damage;
+        UpdateHPBar();
+        _hpBarGUI.UpdateHPBar(_hp);
+        if (_hp <= 0)
+        {
+            Invoke("Death", 1f);
         }
     }
 
@@ -367,15 +440,6 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         _hpBarImage.fillAmount = fill;
     }
 
-    public void TakingBombDamage(int damage)
-    {
-        if (_isDead) return;
-        _hp -= damage;
-        if (_hp <= 0)
-        {
-            Invoke("Death", 1f);
-        }
-    }
 
     private void Death()
     {

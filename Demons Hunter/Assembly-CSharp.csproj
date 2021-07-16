@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\ElitZone.cs" />
     <Compile Include="Assets\Scripts\Doors\DoorButton.cs" />
     <Compile Include="Assets\Scripts\Traps\Indicator.cs" />
+    <Compile Include="Assets\Scripts\GUI\LightColorChanger.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo.cs" />
     <Compile Include="Assets\Scripts\Menu\Tooltipe.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo_Wall.cs" />
@@ -91,16 +92,19 @@
     <Compile Include="Assets\Scripts\Weapons\Bullet.cs" />
     <Compile Include="Assets\Scripts\Menu\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\ITakingDamage.cs" />
+    <Compile Include="Assets\Scripts\GUI\HPBar.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Spawn System\CFX_SpawnSystem.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerActions.cs" />
     <Compile Include="Assets\Scripts\Menu\Settings.cs" />
     <Compile Include="Assets\Scripts\EliteEnemy.cs" />
     <Compile Include="Assets\Scripts\LeverAxis.cs" />
+    <Compile Include="Assets\Scripts\GUI\Tooltipes.cs" />
     <Compile Include="Assets\Scripts\Boss.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\CFX_AutoDestructShuriken.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
     <Compile Include="Assets\Scripts\Weapons\IWeapon.cs" />
     <Compile Include="Assets\Scripts\ObserverElite.cs" />
+    <Compile Include="Assets\Scripts\GUI\WeaponChanger.cs" />
     <Compile Include="Assets\Scripts\Bonuses\Ammo.cs" />
     <Compile Include="Assets\Scripts\Doors\SlidingDoor.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo_New.cs" />
@@ -108,6 +112,10 @@
     <Compile Include="Assets\Scripts\Menu\SettingsInGame.cs" />
     <Compile Include="Assets\Scripts\Weapons\ShotGun.cs" />
     <Compile Include="Assets\Scripts\Weapons\MachineGun.cs" />
+    <Compile Include="Assets\Scripts\End_Door(World)\LeversManager.cs" />
+    <Compile Include="Assets\Scripts\End_Door(World)\Lever.cs" />
+    <Compile Include="Assets\Scripts\End_Door(World)\EndLevelDoor.cs" />
+    <Compile Include="Assets\Scripts\GUI\EndLevelDoorGUI.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\JMO Assets\WarFX\Shaders\WFX_S Multiply Soft.shader" />

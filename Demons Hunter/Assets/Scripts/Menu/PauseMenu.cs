@@ -8,8 +8,16 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] Button _btnResume;
     [SerializeField] Button _btnExit;
     [SerializeField] GameObject _hpBar;
+    [SerializeField] private GameObject _minesAndBombBar;
+    [SerializeField] private GameObject _ammoBar;
 
-    Settings _settings;
+    //GUI
+    [SerializeField] private GameObject _hpBarObjectGUI;
+    [SerializeField] private GameObject _tooltipObjectGUI;
+    private Tooltipes _tooltipes => _tooltipObjectGUI.GetComponent<Tooltipes>();
+    private HPBar _hpBarGUI => _hpBarObjectGUI.GetComponent<HPBar>();
+
+    private Settings _settings;
 
     private void Awake()
     {
@@ -29,6 +37,10 @@ public class PauseMenu : MonoBehaviour
     {
         gameObject.SetActive(false);
         _hpBar.SetActive(true);
+        _ammoBar.SetActive(true);
+        _hpBarGUI.IsPause = false;
+        _tooltipes.IsPause = false;
+        _minesAndBombBar.SetActive(true);
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
         if (!(_settings is null))

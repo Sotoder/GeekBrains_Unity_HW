@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Mine : MonoBehaviour
 {
-    [SerializeField] private int _damage = 100;
+    [SerializeField] private int _damage = 50;
     [SerializeField] private float _explosionTime = 2f;
     [SerializeField] private float _radius = 5f;
     [SerializeField] private float _power = 1000f;
