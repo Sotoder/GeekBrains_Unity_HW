@@ -408,6 +408,7 @@ GameObject:
   - component: {fileID: 3388451870619295328}
   - component: {fileID: 1685405620}
   - component: {fileID: 6117777061703918483}
+  - component: {fileID: 7962325388319363956}
   m_Layer: 0
   m_Name: ShotGun
   m_TagString: Weapon
@@ -563,6 +564,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!136 &7962325388319363956
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4128431112001538258}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.14227137
+  m_Height: 1.1467111
+  m_Direction: 2
+  m_Center: {x: 0, y: -0.04067269, z: 0.53102374}
 --- !u!1 &5012609044242912277
 GameObject:
   m_ObjectHideFlags: 0

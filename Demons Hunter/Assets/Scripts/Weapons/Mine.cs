@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Mine : MonoBehaviour
 {
-    [SerializeField] private int _damage = 100;
+    [SerializeField] private int _damage = 50;
     [SerializeField] private float _explosionTime = 2f;
     [SerializeField] private float _radius = 5f;
     [SerializeField] private float _power = 1000f;
@@ -16,7 +16,7 @@ public class Mine : MonoBehaviour
     {
         if ((collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemy")) && !_isDetonate)
         {
-            Invoke("Explosion", _explosionTime);
+            Invoke(nameof(Explosion), _explosionTime);
             _isDetonate = true;
         }
     }
@@ -25,7 +25,7 @@ public class Mine : MonoBehaviour
     {
         if (other.CompareTag("Bullets") && !_isDetonate)
         {
-            Invoke("Explosion", 0f);
+            Invoke(nameof(Explosion), 0f);
             _isDetonate = true;
         }
     }
