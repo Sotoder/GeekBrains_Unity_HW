@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class LeversManager : MonoBehaviour
 {
-    private static LeversManager _instance = null;
-    private int _downLeversCount = 0;
+    private static LeversManager _instance;
+    private int _downLeversCount;
     public int DownLeversCount { get => _downLeversCount; }
     public static LeversManager Instance
     {

@@ -89,16 +89,22 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     [SerializeField] private GameObject _tooltipObjectGUI;
     [SerializeField] private GameObject _colorSettingsGUI;
     [SerializeField] private GameObject _weaponChangerGUI;
-    private HPBar _hpBarGUI => _hpBarObjectGUI.GetComponent<HPBar>();
-    private LightColorChanger _colorSettings => _colorSettingsGUI.GetComponent<LightColorChanger>();
-    private WeaponChanger _weaponChanger => _weaponChangerGUI.GetComponent<WeaponChanger>();
-    private Tooltipes _tooltipes => _tooltipObjectGUI.GetComponent<Tooltipes>();
+    private HPBar _hpBarGUI;
+    private LightColorChanger _colorSettings;
+    private WeaponChanger _weaponChanger;
+    private Tooltipes _tooltipes;
 
     private void Awake()
     {
         _hp = _maxHP;
         UpdateHPBar();
+        _hpBarGUI = _hpBarObjectGUI.GetComponent<HPBar>();
         _hpBarGUI.UpdateHPBar(_hp);
+
+        _colorSettings = _colorSettingsGUI.GetComponent<LightColorChanger>();
+        _weaponChanger = _weaponChangerGUI.GetComponent<WeaponChanger>();
+        _tooltipes = _tooltipObjectGUI.GetComponent<Tooltipes>();
+
         Cursor.lockState = CursorLockMode.Locked;
         PlayerPrefs.SetInt("_isShowTooltip", 0);
 

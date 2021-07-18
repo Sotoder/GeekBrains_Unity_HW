@@ -5,7 +5,7 @@ using UnityEngine;
 public class Tooltipes : MonoBehaviour
 {
     private GUIStyle _guiStyle = new GUIStyle();
-    private bool _isPause = false;
+    private bool _isPause;
     public bool IsPause { set => _isPause = value; }
 
     private void OnGUI()

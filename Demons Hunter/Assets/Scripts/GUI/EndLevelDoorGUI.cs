@@ -20,24 +20,11 @@ public class EndLevelDoorGUI : MonoBehaviour
 
             if (_door.IsAllLeversDown)
             {
-                GUI.Box(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 100, 200, 100), "");
-                _guiStyle.normal.textColor = Color.white;
-                _guiStyle.fontStyle = FontStyle.Bold;
-                _guiStyle.alignment = TextAnchor.MiddleCenter;
-                _guiStyle.wordWrap = true;
-
-                GUI.Label(new Rect(Screen.width / 2 - 95, Screen.height / 2 - 100, 190, 90), "Путь открыт!", _guiStyle);
+                SetBoxAndStyle(true);              
             }
             else
             {
-
-                GUI.Box(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 100, 200, 100), "");
-                _guiStyle.normal.textColor = Color.white;
-                _guiStyle.fontStyle = FontStyle.Bold;
-                _guiStyle.alignment = TextAnchor.MiddleCenter;
-                _guiStyle.wordWrap = true;
-
-                GUI.Label(new Rect(Screen.width / 2 - 95, Screen.height / 2 - 90, 190, 10), "Дверь заблокирована!", _guiStyle);
+                SetBoxAndStyle(false);
 
                 _guiStyle.fontStyle = FontStyle.Normal;
                 GUI.Label(new Rect(Screen.width / 2 - 95, Screen.height / 2 - 80, 190, 80), "На востоке и западе ущелья расположены колонны." +
@@ -46,4 +33,25 @@ public class EndLevelDoorGUI : MonoBehaviour
             
         }
     }
+
+    private void SetBoxAndStyle(bool isDoorOpen)
+    {
+        string messege = isDoorOpen switch  //чтоб не забывать про выражение switch, тут конечно тернарный оператор зашел бы лучше)))
+        {
+            true => "Путь открыт",
+            false => "Дверь заблокирована!"
+        };
+
+        int margin = (isDoorOpen) ? 100 : 90;
+        
+        GUI.Box(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 100, 200, 100), "");
+        _guiStyle.normal.textColor = Color.white;
+        _guiStyle.fontStyle = FontStyle.Bold;
+        _guiStyle.alignment = TextAnchor.MiddleCenter;
+        _guiStyle.wordWrap = true;
+
+        GUI.Label(new Rect(Screen.width / 2 - 95, Screen.height / 2 - margin, 190, 90), messege, _guiStyle);
+    }
+
+
 }

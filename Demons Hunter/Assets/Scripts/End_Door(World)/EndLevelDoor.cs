@@ -2,18 +2,21 @@ using UnityEngine;
 
 public class EndLevelDoor : MonoBehaviour
 {
-    private bool _isAllLeversDown = false;
-    private bool _isPlayerNear = false;
+    private bool _isAllLeversDown;
+    private bool _isPlayerNear;
+    private const int _targetLeversCount = 2;
 
-    public bool IsAllLeversDown { get => _isAllLeversDown; }
-    public bool IsPlayerNear { get => _isPlayerNear; }
+
+    public bool IsAllLeversDown => _isAllLeversDown;
+    public bool IsPlayerNear => _isPlayerNear;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             _isPlayerNear = true;
 
-            if (LeversManager.Instance.DownLeversCount == 2)
+            if (LeversManager.Instance.DownLeversCount == _targetLeversCount)
             {
                 _isAllLeversDown = true;
             } 

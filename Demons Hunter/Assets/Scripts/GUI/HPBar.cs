@@ -14,7 +14,7 @@ public class HPBar : MonoBehaviour
     private int _hp;
     private int _maxHp;
 
-    private bool _isPause = false;
+    private bool _isPause;
     public bool IsPause { set => _isPause = value; }
 
     private void Awake()

@@ -16,7 +16,7 @@ public class Mine : MonoBehaviour
     {
         if ((collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemy")) && !_isDetonate)
         {
-            Invoke("Explosion", _explosionTime);
+            Invoke(nameof(Explosion), _explosionTime);
             _isDetonate = true;
         }
     }
@@ -25,7 +25,7 @@ public class Mine : MonoBehaviour
     {
         if (other.CompareTag("Bullets") && !_isDetonate)
         {
-            Invoke("Explosion", 0f);
+            Invoke(nameof(Explosion), 0f);
             _isDetonate = true;
         }
     }
