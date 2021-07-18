@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Ammo : MonoBehaviour
 {
-    [SerializeField] private int _ammoCount = 10;
+    [SerializeField] private int _sgAmmoCount = 10;
+    [SerializeField] private int _mgAmmoCount = 100;
 
     private void Update()
     {
@@ -15,7 +16,7 @@ public class Ammo : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<PlayerActions>().GetAmmo(_ammoCount);
+            other.GetComponent<PlayerActions>().GetAmmo(_sgAmmoCount, _mgAmmoCount);
             Debug.Log("GetAmmo!!");
             Destroy(gameObject);
         }

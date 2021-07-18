@@ -6,12 +6,15 @@ public class ShotGun : MonoBehaviour, IWeapon
 {
     [SerializeField] private GameObject _bulletPref;
     [SerializeField] private Transform[] _bulletStartPosition;
-    [SerializeField] private float _fireRate = 2f;
+    [SerializeField] private float _fireRate = 1.2f;
 
     private bool _isReload = true;
+
     public bool IsReload { get => _isReload; }
+
     public void Fire()
     {
+
         for (int i = 0; i < _bulletStartPosition.Length; i++)
         {
             Quaternion fractQuat = new Quaternion((this.transform.rotation.x + Random.Range(-0.15f, 0.15f)), 

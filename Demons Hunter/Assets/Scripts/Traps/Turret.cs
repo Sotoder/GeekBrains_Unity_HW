@@ -11,6 +11,8 @@ public class Turret : MonoBehaviour
     [SerializeField] private GameObject _bulletPref;
     [SerializeField] private Transform _bulletStartPosition;
     [SerializeField] public float _fireRate = 0.8f;
+    [SerializeField] public AudioClip _shotClip;
+
 
     private float _shotTimer = 0f;
     private float _rotationDelay = 0f;
@@ -79,6 +81,7 @@ public class Turret : MonoBehaviour
     public void Fire()
     {
         var bullet = Instantiate(_bulletPref, _bulletStartPosition.position, transform.rotation);
+        GetComponent<AudioSource>().PlayOneShot(_shotClip);
     }
 
     //Функция расчета максимального отклонения.

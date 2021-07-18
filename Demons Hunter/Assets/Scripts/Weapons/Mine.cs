@@ -3,24 +3,30 @@ using UnityEngine;
 
 public class Mine : MonoBehaviour
 {
-    [SerializeField] private int _damage = 100;
+    [SerializeField] private int _damage = 50;
     [SerializeField] private float _explosionTime = 2f;
     [SerializeField] private float _radius = 5f;
     [SerializeField] private float _power = 1000f;
+    [SerializeField] private GameObject _particleObject;
+    [SerializeField] private GameObject _mineBody;
+
+    private bool _isDetonate = false;
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemy"))
+        if ((collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemy")) && !_isDetonate)
         {
-            Invoke("Explosion", _explosionTime);
+            Invoke(nameof(Explosion), _explosionTime);
+            _isDetonate = true;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Bullets"))
+        if (other.CompareTag("Bullets") && !_isDetonate)
         {
-            Invoke("Explosion", _explosionTime);
+            Invoke(nameof(Explosion), 0f);
+            _isDetonate = true;
         }
     }
 
@@ -52,7 +58,12 @@ public class Mine : MonoBehaviour
 
             }
         }
-        Destroy(gameObject);
+        _particleObject.SetActive(true);
+        GetComponent<AudioSource>().Play();
+        Destroy(_mineBody);
+        gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+        Destroy(gameObject, 5f);
     }
 
     private void AddExpForce(Rigidbody rb)
