@@ -82,6 +82,7 @@
     <Compile Include="Assets\PyroParticles\Prefab\Script\MeteorSwarmScript.cs" />
     <Compile Include="Assets\Scripts\Pedestal.cs" />
     <Compile Include="Assets\Scripts\ElitZone.cs" />
+    <Compile Include="Assets\Scripts\AnimationScene\Move.cs" />
     <Compile Include="Assets\Scripts\Doors\DoorButton.cs" />
     <Compile Include="Assets\PyroParticles\Demo\DemoScript.cs" />
     <Compile Include="Assets\Scripts\Traps\Indicator.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Assets\Scripts\LeverAxis.cs" />
     <Compile Include="Assets\Scripts\GUI\Tooltipes.cs" />
     <Compile Include="Assets\Scripts\Boss.cs" />
+    <Compile Include="Assets\Scripts\LightSettings.cs" />
     <Compile Include="Assets\PyroParticles\Prefab\Script\FireProjectileScript.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\CFX_AutoDestructShuriken.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
@@ -127,7 +129,6 @@
     <Compile Include="Assets\Scripts\Weapons\ShotGun.cs" />
     <Compile Include="Assets\Scripts\Weapons\MachineGun.cs" />
     <Compile Include="Assets\PyroParticles\Prefab\Script\FireLightScript.cs" />
-    <Compile Include="Assets\Scripts\LightSettings.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\JMO Assets\WarFX\Shaders\WFX_S Multiply Soft.shader" />

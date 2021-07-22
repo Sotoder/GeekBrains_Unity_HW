@@ -509,10 +509,6 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
             _curentWeaponAmmo = _sgAmmo;
         }
 
-        
-        
-
-
     }
 
     public void AddLeverCount()
