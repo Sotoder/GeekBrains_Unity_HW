@@ -60,11 +60,11 @@ public class Move : MonoBehaviour
 
     private void StrafeMoveCheck(Vector3 direction)
     {
-        if (direction.z > 0 && direction.x != 0)
+        if (direction.z != 0 && direction.x != 0)
         {
             _animator.SetFloat("TurnDirection", Mathf.Lerp(_animator.GetFloat("TurnDirection"), _normDirection.x, Time.deltaTime * _speed));
         }
-        else if (direction.z > 0 && direction.x == 0)
+        else if (direction.x == 0)
         {
             SmoothEndAnimation("TurnDirection");
         }
@@ -121,6 +121,10 @@ public class Move : MonoBehaviour
         {
             if (_isGrounded)
             {
+                if (_direction.z < 0)
+                {
+                    _animator.SetBool("BackFlip", true);
+                }
                 _animator.SetBool("Jump", true);
                 _animator.SetBool("OnGround", false);
             }
@@ -134,6 +138,7 @@ public class Move : MonoBehaviour
         {
             _animator.SetBool("Jump", false);
             _animator.SetBool("OnGround", true);
+            _animator.SetBool("BackFlip", false);
         }
     }
 
