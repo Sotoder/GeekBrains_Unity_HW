@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Move : MonoBehaviour
@@ -9,20 +6,46 @@ public class Move : MonoBehaviour
     [SerializeField] private float sensetivity;
     [SerializeField] private float _speed;
     [SerializeField] private float _speedMult;
+    [SerializeField] private float _jumpForce = 4000;
     [SerializeField] private Transform _groundDetector;
     [SerializeField] private LayerMask _groundMasck;
 
     private Animator _animator;
+    private Rigidbody _rb;
     private bool _isGrounded;
     private Vector3 _direction;
     private float _mouseLookX;
     private Vector3 _normDirection;
+    private float _runMod = 1f;
+    
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _rb = gameObject.GetComponent<Rigidbody>();
 
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Sprint"))
+        {
+            _runMod = 2f;
+            _animator.SetBool("IsRun", true);
+        }
+        if (Input.GetButtonUp("Sprint"))
+        {
+            _runMod = 1f;
+            _animator.SetBool("IsRun", false);
+        }
+
+        if (Input.GetButton("Jump"))
+        {
+            Jump();
+        }
+
+        PlayerRotate();
     }
 
     private void FixedUpdate()
@@ -33,9 +56,7 @@ public class Move : MonoBehaviour
         _normDirection = _direction.normalized;
 
         MoveCheck(_direction);
-        PlayerRotate();
         IsGroundedUpate();
-        JumpLogic();
         //MovementLogic(_direction * _speed);
     }
 
@@ -45,7 +66,9 @@ public class Move : MonoBehaviour
         if (direction != Vector3.zero)
         {
             _animator.SetBool("IsStay", false);
-            _animator.SetFloat("MoveDirection", Mathf.Lerp(_animator.GetFloat("MoveDirection"), _normDirection.z, Time.deltaTime * _speed));
+            _animator.SetFloat("MoveDirection", Mathf.Lerp(_animator.GetFloat("MoveDirection"), _normDirection.z * _runMod, Time.deltaTime * _speed));
+
+            _animator.SetBool("IsBack", direction.z < 0 ? true: false);
 
             StrafeMoveCheck(direction);
             SideMoveChek(direction);
@@ -53,8 +76,9 @@ public class Move : MonoBehaviour
         else
         {
             SmoothEndAnimation("MoveDirection", "IsStay", true);
-
             SmoothEndAnimation("SideStepDirection", "SideStep", false);
+
+            _animator.SetBool("IsBack", false);
         }
     }
 
@@ -62,7 +86,7 @@ public class Move : MonoBehaviour
     {
         if (direction.z != 0 && direction.x != 0)
         {
-            _animator.SetFloat("TurnDirection", Mathf.Lerp(_animator.GetFloat("TurnDirection"), _normDirection.x, Time.deltaTime * _speed));
+            _animator.SetFloat("TurnDirection", Mathf.Lerp(_animator.GetFloat("TurnDirection"), _normDirection.x * _runMod, Time.deltaTime * _speed));
         }
         else if (direction.x == 0)
         {
@@ -75,7 +99,7 @@ public class Move : MonoBehaviour
         if (direction.z == 0 && direction.x != 0)
         {
             _animator.SetBool("SideStep", true);
-            _animator.SetFloat("SideStepDirection", Mathf.Lerp(_animator.GetFloat("SideStepDirection"), _normDirection.x, Time.deltaTime * _speed));
+            _animator.SetFloat("SideStepDirection", Mathf.Lerp(_animator.GetFloat("SideStepDirection"), _normDirection.x * _runMod, Time.deltaTime * _speed));
         } else if (direction.z != 0)
         {
             SmoothEndAnimation("SideStepDirection");
@@ -89,21 +113,14 @@ public class Move : MonoBehaviour
 
         if(_mouseLookX != 0 && _animator.GetBool("IsStay"))
         {
-            if (_mouseLookX > 0)
-            {
-                _animator.SetFloat("TurnDirection", Mathf.Lerp(_animator.GetFloat("TurnDirection"), 1, Time.deltaTime * _speed));
-            } else
-            {
-                _animator.SetFloat("TurnDirection", Mathf.Lerp(_animator.GetFloat("TurnDirection"), -1, Time.deltaTime * _speed));
-            }
+            _animator.SetFloat("TurnDirection", Mathf.Lerp(_animator.GetFloat("TurnDirection"), (_mouseLookX > 0) ? 1 : -1, Time.deltaTime * _speed));
             
         } else if (_animator.GetBool("IsStay"))
         {
-
             SmoothEndAnimation("TurnDirection");
         }
 
-        if (!_animator.GetBool("IsStay"))
+        if (!_animator.GetBool("IsStay")) // Если двигаемся, то разрешаем менять направление мышкой
             transform.Rotate(0, _mouseLookX, 0);
     }
 
@@ -115,30 +132,24 @@ public class Move : MonoBehaviour
 
     //}
 
-    private void JumpLogic()
+    private void Jump()
     {
-        if (Input.GetButton("Jump"))
+        if (_isGrounded)
         {
-            if (_isGrounded)
-            {
-                if (_direction.z < 0)
-                {
-                    _animator.SetBool("BackFlip", true);
-                }
-                _animator.SetBool("Jump", true);
-                _animator.SetBool("OnGround", false);
-            }
+            _animator.SetBool("Jump", true);
+            _animator.SetBool("OnGround", false);
+            if (_animator.GetBool("IsRun")) _rb.AddForce(Vector3.up * _jumpForce);
         }
     }
 
     private void IsGroundedUpate()
     {
         _isGrounded = Physics.CheckSphere(_groundDetector.position, 0.2f, _groundMasck);
+
         if (_isGrounded)
         {
             _animator.SetBool("Jump", false);
             _animator.SetBool("OnGround", true);
-            _animator.SetBool("BackFlip", false);
         }
     }
 
