@@ -12,19 +12,31 @@ public class Tooltipes : MonoBehaviour
     {
         if (!_isPause)
         {
-            GUI.Box(new Rect(5, 60, Screen.width / 5, 80), "Подсказки");
+            GUI.Box(new Rect(5, 60, Screen.width / 5, 100), "Подсказки");
             _guiStyle.normal.textColor = Color.white;
 
-            _guiStyle.fontStyle = FontStyle.Bold;
-            GUI.Label(new Rect(10, 80, 1, 1), "P", _guiStyle);
-            _guiStyle.fontStyle = FontStyle.Normal;
-            GUI.Label(new Rect(22, 80, 1, 1), "- изменить цвет", _guiStyle);
+            DrawButtonNameLabel(80, "P");
+            DrawTooltipeLabel(80, "- изменить цвет");
             GUI.Label(new Rect(10, 90, 1, 1), "освещения", _guiStyle);
 
-            _guiStyle.fontStyle = FontStyle.Bold;
-            GUI.Label(new Rect(10, 110, 1, 1), "Q", _guiStyle);
-            _guiStyle.fontStyle = FontStyle.Normal;
-            GUI.Label(new Rect(22, 110, 1, 1), "- выбрать оружие", _guiStyle);
+            
+            DrawButtonNameLabel(110, "Q");
+            DrawTooltipeLabel(110, "- выбрать оружие");
+
+            DrawButtonNameLabel(130, "E");
+            DrawTooltipeLabel(130, "- вкл/выкл фонарик");
         }
+    }
+
+    private void DrawButtonNameLabel (int y, string messege)
+    {
+        _guiStyle.fontStyle = FontStyle.Bold;
+        GUI.Label(new Rect(10, y, 1, 1), messege, _guiStyle);
+    }
+
+    private void DrawTooltipeLabel(int y, string messege)
+    {
+        _guiStyle.fontStyle = FontStyle.Normal;
+        GUI.Label(new Rect(22, y, 1, 1), messege, _guiStyle);
     }
 }

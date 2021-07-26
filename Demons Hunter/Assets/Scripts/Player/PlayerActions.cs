@@ -83,6 +83,8 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     private IWeapon w;
     private float _trowTime = 0f;
     private float _mineTime = 0f;
+    private FlashLight FlashLight;
+    private bool _isFlashLightOn;
 
     //GUI
     [SerializeField] private GameObject _hpBarObjectGUI;
@@ -118,6 +120,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         weapon.transform.parent = _weaponPositionAxie;
         w = weapon.GetComponent<MachineGun>();
         _weaponAudioSource = weapon.GetComponent<AudioSource>();
+        FlashLight = w.FlashLightPoint.GetComponent<FlashLight>();
         _weaponAudioSource.Stop();
         _curentWeaponAmmo = _mgAmmo;
         _curentWeaponMaxAmmo = _maxMGAmmo;
@@ -248,6 +251,20 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
             _weaponChanger.IsWeaponChangerButtonDown = false; 
         }
 
+        if (Input.GetButtonDown("FlashLight"))
+        {
+            if (_isFlashLightOn)
+            {
+                FlashLight.TurnOff();
+                _isFlashLightOn = false;
+            }
+            else
+            {
+                FlashLight.TurnOn();
+                _isFlashLightOn = true;
+            }
+        }
+
 
         _ammoText.text = "Ammo: " + _curentWeaponAmmo.ToString() + "/" + _curentWeaponMaxAmmo.ToString();
     }
@@ -264,6 +281,11 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
                 weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, _head.transform.rotation);
                 weapon.transform.parent = _weaponPositionAxie;
                 w = weapon.GetComponent<MachineGun>();
+                FlashLight = w.FlashLightPoint.GetComponent<FlashLight>();
+
+                if (_isFlashLightOn) FlashLight.TurnOn();
+                else FlashLight.TurnOff();
+
                 _weaponAudioSource = weapon.GetComponent<AudioSource>();
                 _weaponAudioSource.Stop();
                 _curentWeaponAmmo = _mgAmmo;
@@ -278,6 +300,11 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
                 weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, _head.transform.rotation);
                 weapon.transform.parent = _weaponPositionAxie;
                 w = weapon.GetComponent<ShotGun>();
+                FlashLight = w.FlashLightPoint.GetComponent<FlashLight>();
+
+                if (_isFlashLightOn) FlashLight.TurnOn();
+                else FlashLight.TurnOff();
+ 
                 _weaponAudioSource = weapon.GetComponent<AudioSource>();
                 _weaponAudioSource.Stop();
                 _curentWeaponAmmo = _sgAmmo;
@@ -481,10 +508,6 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         {
             _curentWeaponAmmo = _sgAmmo;
         }
-
-        
-        
-
 
     }
 

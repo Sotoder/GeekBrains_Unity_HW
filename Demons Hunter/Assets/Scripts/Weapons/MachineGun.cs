@@ -7,7 +7,9 @@ public class MachineGun : MonoBehaviour, IWeapon
     [SerializeField] private GameObject _bulletPref;
     [SerializeField] private Transform _bulletStartPosition;
     [SerializeField] private float _fireRate = 0.1f;
+    [SerializeField] private GameObject _flashlight;
 
+    public GameObject FlashLightPoint => _flashlight;
     private bool _isReload = true;
 
     public bool IsReload { get => _isReload; }

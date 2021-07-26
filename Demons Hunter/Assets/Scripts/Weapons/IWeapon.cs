@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IWeapon
 {
+    public GameObject FlashLightPoint { get; }
     public bool IsReload { get; }
     public void Fire();
 
