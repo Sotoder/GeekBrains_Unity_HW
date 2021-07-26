@@ -259,6 +259,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1117638919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117638916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdb3957ac1ed8ee469c9ac7ac54a9ae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &1117638920
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -288,6 +300,7 @@ MonoBehaviour:
   sensetivity: 50
   _speed: 5
   _speedMult: 3
+  _jumpForce: 4000
   _groundDetector: {fileID: 1254338966}
   _groundMasck:
     serializedVersion: 2

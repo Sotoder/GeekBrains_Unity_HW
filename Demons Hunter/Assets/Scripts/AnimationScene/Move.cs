@@ -17,7 +17,17 @@ public class Move : MonoBehaviour
     private float _mouseLookX;
     private Vector3 _normDirection;
     private float _runMod = 1f;
-    
+
+    private const string Jump_str = "Jump";
+    private const string Stay_str = "IsStay";
+    private const string Run_str = "IsRun";
+    private const string Back_str = "IsBack";
+    private const string Ground_str = "OnGround";
+    private const string Move_str = "MoveDirection";
+    private const string Turn_str = "TurnDirection";
+    private const string Side_direction_str = "SideStepDirection";
+    private const string Sidestep_str = "SideStep";
+
 
     private void Awake()
     {
@@ -32,15 +42,15 @@ public class Move : MonoBehaviour
         if (Input.GetButtonDown("Sprint"))
         {
             _runMod = 2f;
-            _animator.SetBool("IsRun", true);
+            _animator.SetBool(Run_str, true);
         }
         if (Input.GetButtonUp("Sprint"))
         {
             _runMod = 1f;
-            _animator.SetBool("IsRun", false);
+            _animator.SetBool(Run_str, false);
         }
 
-        if (Input.GetButton("Jump"))
+        if (Input.GetButton(Jump_str))
         {
             Jump();
         }
@@ -65,20 +75,20 @@ public class Move : MonoBehaviour
     {
         if (direction != Vector3.zero)
         {
-            _animator.SetBool("IsStay", false);
-            _animator.SetFloat("MoveDirection", Mathf.Lerp(_animator.GetFloat("MoveDirection"), _normDirection.z * _runMod, Time.deltaTime * _speed));
+            _animator.SetBool(Stay_str, false);
+            _animator.SetFloat(Move_str, Mathf.Lerp(_animator.GetFloat(Move_str), _normDirection.z * _runMod, Time.deltaTime * _speed));
 
-            _animator.SetBool("IsBack", direction.z < 0 ? true: false);
+            _animator.SetBool(Back_str, direction.z < 0 ? true: false);
 
             StrafeMoveCheck(direction);
             SideMoveChek(direction);
         }
         else
         {
-            SmoothEndAnimation("MoveDirection", "IsStay", true);
-            SmoothEndAnimation("SideStepDirection", "SideStep", false);
+            SmoothEndAnimation(Move_str, Stay_str, true);
+            SmoothEndAnimation(Side_direction_str, Sidestep_str, false);
 
-            _animator.SetBool("IsBack", false);
+            _animator.SetBool(Back_str, false);
         }
     }
 
@@ -86,11 +96,11 @@ public class Move : MonoBehaviour
     {
         if (direction.z != 0 && direction.x != 0)
         {
-            _animator.SetFloat("TurnDirection", Mathf.Lerp(_animator.GetFloat("TurnDirection"), _normDirection.x * _runMod, Time.deltaTime * _speed));
+            _animator.SetFloat(Turn_str, Mathf.Lerp(_animator.GetFloat(Turn_str), _normDirection.x * _runMod, Time.deltaTime * _speed));
         }
         else if (direction.x == 0)
         {
-            SmoothEndAnimation("TurnDirection");
+            SmoothEndAnimation(Turn_str);
         }
     }
 
@@ -98,12 +108,12 @@ public class Move : MonoBehaviour
     {
         if (direction.z == 0 && direction.x != 0)
         {
-            _animator.SetBool("SideStep", true);
-            _animator.SetFloat("SideStepDirection", Mathf.Lerp(_animator.GetFloat("SideStepDirection"), _normDirection.x * _runMod, Time.deltaTime * _speed));
+            _animator.SetBool(Sidestep_str, true);
+            _animator.SetFloat(Side_direction_str, Mathf.Lerp(_animator.GetFloat(Side_direction_str), _normDirection.x * _runMod, Time.deltaTime * _speed));
         } else if (direction.z != 0)
         {
-            SmoothEndAnimation("SideStepDirection");
-            _animator.SetBool("SideStep", false);
+            SmoothEndAnimation(Side_direction_str);
+            _animator.SetBool(Sidestep_str, false);
         }
     }
 
@@ -111,16 +121,16 @@ public class Move : MonoBehaviour
     {
         _mouseLookX = Input.GetAxis("Mouse X") * sensetivity * Time.deltaTime;
 
-        if(_mouseLookX != 0 && _animator.GetBool("IsStay"))
+        if(_mouseLookX != 0 && _animator.GetBool(Stay_str))
         {
-            _animator.SetFloat("TurnDirection", Mathf.Lerp(_animator.GetFloat("TurnDirection"), (_mouseLookX > 0) ? 1 : -1, Time.deltaTime * _speed));
+            _animator.SetFloat(Turn_str, Mathf.Lerp(_animator.GetFloat(Turn_str), (_mouseLookX > 0) ? 1 : -1, Time.deltaTime * _speed));
             
-        } else if (_animator.GetBool("IsStay"))
+        } else if (_animator.GetBool(Stay_str))
         {
-            SmoothEndAnimation("TurnDirection");
+            SmoothEndAnimation(Turn_str);
         }
 
-        if (!_animator.GetBool("IsStay")) // Если двигаемся, то разрешаем менять направление мышкой
+        if (!_animator.GetBool(Stay_str)) // Если двигаемся, то разрешаем менять направление мышкой
             transform.Rotate(0, _mouseLookX, 0);
     }
 
@@ -136,9 +146,9 @@ public class Move : MonoBehaviour
     {
         if (_isGrounded)
         {
-            _animator.SetBool("Jump", true);
-            _animator.SetBool("OnGround", false);
-            if (_animator.GetBool("IsRun")) _rb.AddForce(Vector3.up * _jumpForce);
+            _animator.SetBool(Jump_str, true);
+            _animator.SetBool(Ground_str, false);
+            if (_animator.GetBool(Run_str)) _rb.AddForce(Vector3.up * _jumpForce);
         }
     }
 
@@ -148,8 +158,8 @@ public class Move : MonoBehaviour
 
         if (_isGrounded)
         {
-            _animator.SetBool("Jump", false);
-            _animator.SetBool("OnGround", true);
+            _animator.SetBool(Jump_str, false);
+            _animator.SetBool(Ground_str, true);
         }
     }
 
