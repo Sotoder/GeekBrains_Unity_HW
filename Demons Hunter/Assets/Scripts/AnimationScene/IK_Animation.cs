@@ -16,6 +16,9 @@ public class IK_Animation : MonoBehaviour
     private Dictionary<Transform, float> _lookObjectContainer = new Dictionary<Transform, float>();
     private bool _isInVision;
 
+    private const string LookObjectTag = "InteractiveLook";
+    private const string CatchObjectTag = "InteractiveCatch";
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -53,12 +56,12 @@ public class IK_Animation : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("InteractiveLook"))
+        if (other.CompareTag(LookObjectTag))
         {
             _lookObjectContainer.Add(other.transform, Vector3.Distance(other.transform.position, transform.position));
         }
 
-        if (other.CompareTag("InteractiveCatch"))
+        if (other.CompareTag(CatchObjectTag))
         {
             _isInVision = true;
         }
@@ -66,7 +69,7 @@ public class IK_Animation : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("InteractiveLook"))
+        if (other.CompareTag(LookObjectTag))
         {
             UpdateDistanceValue(other);
         }
@@ -74,13 +77,13 @@ public class IK_Animation : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("InteractiveLook"))
+        if (other.CompareTag(LookObjectTag))
         {
             _lookObjectContainer.Remove(other.transform);
             if (_lookObjectContainer.Count < 1) _lookObject = null;
         }
 
-        if (other.CompareTag("InteractiveCatch"))
+        if (other.CompareTag(CatchObjectTag))
         {
             _isInVision = false;
         }

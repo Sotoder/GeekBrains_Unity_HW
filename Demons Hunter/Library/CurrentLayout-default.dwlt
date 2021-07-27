@@ -1062,23 +1062,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: f63b0000
-      m_LastClickedID: 15350
-      m_ExpandedIDs: 96faffffa0fafffffcfaffff00fbffff04fbffff12fbffff52fbffff923b00009a3b0000a23b0000c63b0000ce3b0000de3b0000fe3b00000e3c0000203c0000343c0000
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 4cfbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: mixamorig10:LeftHand
-        m_OriginalName: mixamorig10:LeftHand
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -1292
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 11}
       m_SearchString: 
