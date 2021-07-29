@@ -9,7 +9,7 @@ public class IK_Animation : MonoBehaviour
     [SerializeField] private bool _isActive;
     [SerializeField] private Transform _catchObject;
     [SerializeField] private Transform _catchPoint;
-    [SerializeField] private Transform _wallPoint;
+    [SerializeField] private Transform _wallStartPoint;
     [SerializeField] private LayerMask _rayLayer;
 
     private Transform _lookObject;
@@ -64,14 +64,13 @@ public class IK_Animation : MonoBehaviour
 
         if (_isWallNear)
         {
-            if (Physics.Raycast(_wallPoint.position, Vector3.forward, out var hit, 0.8f, _rayLayer))
+            if (Physics.Raycast(_wallStartPoint.position, Vector3.forward, out var hit, 0.8f, _rayLayer))
             {
                 if (!_isTargeted)
                 {
                     _catchPointForWall = new GameObject();
-                    _catchPointForWall.transform.position = _wallPoint.position;
-                    _catchPointForWall.transform.Translate(new Vector3 (0,0,hit.distance));
-                    _catchPointForWall.transform.rotation = _wallPoint.rotation;
+                    _catchPointForWall.transform.position = hit.point;
+                    _catchPointForWall.transform.Rotate(-103f, 0, 0);
 
                     _isTargeted = true;
                 }
