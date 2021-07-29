@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(Animator))]
 public class IK_Animation : MonoBehaviour
@@ -8,6 +9,8 @@ public class IK_Animation : MonoBehaviour
     [SerializeField] private bool _isActive;
     [SerializeField] private Transform _catchObject;
     [SerializeField] private Transform _catchPoint;
+    [SerializeField] private Transform _wallPoint;
+    [SerializeField] private LayerMask _rayLayer;
 
     private Transform _lookObject;
     private Animator _animator;
@@ -15,9 +18,15 @@ public class IK_Animation : MonoBehaviour
     private float _weight;
     private Dictionary<Transform, float> _lookObjectContainer = new Dictionary<Transform, float>();
     private bool _isInVision;
+    private bool _isWallNear;
+    private bool _isTargeted;
+    private GameObject _catchPointForWall;
+
 
     private const string LookObjectTag = "InteractiveLook";
     private const string CatchObjectTag = "InteractiveCatch";
+    private const string WallsTag = "Walls";
+
 
     private void Awake()
     {
@@ -26,9 +35,12 @@ public class IK_Animation : MonoBehaviour
 
     private void Update()
     {
-        IKActivate(); //ѕо хорошему разгрузить апдейт и убрать метод из него, флаг активации поднимать и опускать по триггеру,
-                      //а вес считать только если игрок остановилс€ в OnAnimatorIK. “огда не будет лишних просчетов, которые никак не используютс€.
-        if (_lookObjectContainer.Count > 0) _lookObject = GetObject(_lookObjectContainer);
+        //CheckIK(); //ѕо хорошему разгрузить апдейт и убрать метод из него, флаг активации поднимать и опускать по триггеру,
+        //а вес считать только если игрок остановилс€ в OnAnimatorIK. “огда не будет лишних просчетов, которые никак не используютс€.
+        if (_lookObjectContainer.Count > 0)
+        {
+            _lookObject = GetObject(_lookObjectContainer);
+        }
     }
 
     private void OnAnimatorIK(int layerIndex)
@@ -45,30 +57,54 @@ public class IK_Animation : MonoBehaviour
         {
             //float angle = Vector3.Angle(_catchPoint.position, transform.forward); // ’отел ограничивать углы, но пон€л что смотреть на угол между объектом
             //Debug.Log(angle);                                                     // и игроком плоха€ зате€. Ќужно смотреть на углы поворота костей модели и
-                                                                                    // ограничивать именно их.
-            
-            _animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, _weight);
-            _animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, _weight);
-            _animator.SetIKPosition(AvatarIKGoal.LeftHand, _catchPoint.position);
-            _animator.SetIKRotation(AvatarIKGoal.LeftHand, _catchPoint.rotation);
+            // ограничивать именно их.
+
+            SetIKAnimator(_catchPoint);
+        }
+
+        if (_isWallNear)
+        {
+            if (Physics.Raycast(_wallPoint.position, Vector3.forward, out var hit, 0.8f, _rayLayer))
+            {
+                if (!_isTargeted)
+                {
+                    _catchPointForWall = new GameObject();
+                    _catchPointForWall.transform.position = _wallPoint.position;
+                    _catchPointForWall.transform.Translate(new Vector3 (0,0,hit.distance));
+                    _catchPointForWall.transform.rotation = _wallPoint.rotation;
+
+                    _isTargeted = true;
+                }
+
+                SetIKAnimator(_catchPointForWall.transform);
+            }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(LookObjectTag))
-        {
-            _lookObjectContainer.Add(other.transform, Vector3.Distance(other.transform.position, transform.position));
-        }
+        CheckIK();
 
-        if (other.CompareTag(CatchObjectTag))
+        switch (other.tag)
         {
-            _isInVision = true;
+            case LookObjectTag: 
+                _lookObjectContainer.Add(other.transform, Vector3.Distance(other.transform.position, transform.position));
+                break;
+
+            case CatchObjectTag: 
+                _isInVision = true;
+                break;
+
+            case WallsTag:
+                _isWallNear = true;
+                break;
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
+        CheckIK();
+
         if (other.CompareTag(LookObjectTag))
         {
             UpdateDistanceValue(other);
@@ -77,16 +113,32 @@ public class IK_Animation : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(LookObjectTag))
+
+        switch (other.tag)
         {
-            _lookObjectContainer.Remove(other.transform);
-            if (_lookObjectContainer.Count < 1) _lookObject = null;
+            case LookObjectTag:
+                _lookObjectContainer.Remove(other.transform);
+                if (_lookObjectContainer.Count < 1) _lookObject = null;
+                break;
+
+            case CatchObjectTag:
+                _isInVision = false;
+                break;
+
+            case WallsTag:
+                _isWallNear = false;
+                break;
         }
 
-        if (other.CompareTag(CatchObjectTag))
-        {
-            _isInVision = false;
-        }
+        CheckIK();
+    }
+
+    private void SetIKAnimator(Transform _catchPoint)
+    {
+        _animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, _weight);
+        _animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, _weight);
+        _animator.SetIKPosition(AvatarIKGoal.LeftHand, _catchPoint.position);
+        _animator.SetIKRotation(AvatarIKGoal.LeftHand, _catchPoint.rotation);
     }
 
     private void UpdateDistanceValue(Collider other)
@@ -111,7 +163,7 @@ public class IK_Animation : MonoBehaviour
             return false;
     }
 
-    private void IKActivate()
+    private void CheckIK()
     {
         if (_animator.GetBool("IsStay"))
         {
@@ -122,6 +174,12 @@ public class IK_Animation : MonoBehaviour
         {
             _isActive = false;
             _weight = 0;
+
+            if (_isTargeted) //удаление объекта создаваемого дл€ касани€ стены
+            {
+                Destroy(_catchPointForWall);
+                _isTargeted = false;
+            }
         }
     }
 }
