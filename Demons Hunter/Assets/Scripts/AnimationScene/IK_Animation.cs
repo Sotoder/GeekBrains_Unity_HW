@@ -9,23 +9,22 @@ public class IK_Animation : MonoBehaviour
     [SerializeField] private bool _isActive;
     [SerializeField] private Transform _catchObject;
     [SerializeField] private Transform _catchPoint;
-    [SerializeField] private Transform _wallStartPoint;
     [SerializeField] private LayerMask _rayLayer;
 
+    private Dictionary<Transform, float> _lookObjectContainer = new Dictionary<Transform, float>();
+    private GameObject _catchPointForWall;
     private Transform _lookObject;
     private Animator _animator;
     private float _speed = 0.5f;
     private float _weight;
-    private Dictionary<Transform, float> _lookObjectContainer = new Dictionary<Transform, float>();
     private bool _isInVision;
     private bool _isWallNear;
     private bool _isTargeted;
-    private GameObject _catchPointForWall;
-
 
     private const string LookObjectTag = "InteractiveLook";
     private const string CatchObjectTag = "InteractiveCatch";
     private const string WallsTag = "Walls";
+    private const float HalfVector3Modifer = 0.5f;
 
 
     private void Awake()
@@ -64,12 +63,13 @@ public class IK_Animation : MonoBehaviour
 
         if (_isWallNear)
         {
-            if (Physics.Raycast(_wallStartPoint.position, Vector3.forward, out var hit, 0.8f, _rayLayer))
+            Vector3 _leftHand = _animator.GetIKPosition(AvatarIKGoal.LeftHand);
+            if (Physics.Raycast(_leftHand + (Vector3.up * HalfVector3Modifer), Vector3.forward, out var hit, 0.8f, _rayLayer))
             {
                 if (!_isTargeted)
                 {
                     _catchPointForWall = new GameObject();
-                    _catchPointForWall.transform.position = hit.point;
+                    _catchPointForWall.transform.Translate(hit.point);
                     _catchPointForWall.transform.Rotate(-103f, 0, 0);
 
                     _isTargeted = true;

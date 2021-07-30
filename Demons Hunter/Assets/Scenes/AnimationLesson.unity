@@ -744,36 +744,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &656958884
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 656958885}
-  m_Layer: 0
-  m_Name: WallPointStrtPosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &656958885
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 656958884}
-  m_LocalRotation: {x: -0.7826082, y: 0, z: 0, w: 0.62251467}
-  m_LocalPosition: {x: -0.247, y: 1.48, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1287354262}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: -103, y: 0, z: 0}
 --- !u!1 &714095546 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -630579834757482470, guid: 3197b71971ab70d4da324e538afe0eea, type: 3}
@@ -1622,7 +1592,6 @@ MonoBehaviour:
   _isActive: 0
   _catchObject: {fileID: 2094882324}
   _catchPoint: {fileID: 1944760939}
-  _wallPoint: {fileID: 656958885}
   _rayLayer:
     serializedVersion: 2
     m_Bits: 128
