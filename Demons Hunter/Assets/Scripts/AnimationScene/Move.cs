@@ -8,7 +8,7 @@ public class Move : MonoBehaviour
     [SerializeField] private float _speedMult;
     [SerializeField] private float _jumpForce = 4000;
     [SerializeField] private Transform _groundDetector;
-    [SerializeField] private LayerMask _groundMasck;
+    [SerializeField] private LayerMask _groundMask;
 
     private Animator _animator;
     private Rigidbody _rb;
@@ -33,8 +33,6 @@ public class Move : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _rb = gameObject.GetComponent<Rigidbody>();
-
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
@@ -148,13 +146,13 @@ public class Move : MonoBehaviour
         {
             _animator.SetBool(Jump_str, true);
             _animator.SetBool(Ground_str, false);
-            if (_animator.GetBool(Run_str)) _rb.AddForce(Vector3.up * _jumpForce);
+            if (_animator.GetBool(Run_str) && !_animator.GetBool(Back_str)) _rb.AddForce(Vector3.up * _jumpForce);
         }
     }
 
     private void IsGroundedUpate()
     {
-        _isGrounded = Physics.CheckSphere(_groundDetector.position, 0.2f, _groundMasck);
+        _isGrounded = Physics.CheckSphere(_groundDetector.position, 0.2f, _groundMask);
 
         if (_isGrounded)
         {
