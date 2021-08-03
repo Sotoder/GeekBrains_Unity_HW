@@ -19,7 +19,7 @@ public class Focusing : MonoBehaviour
 
     private void Update()
     {
-        if (Physics.Raycast(_body.position, Vector3.forward, out var hit, 5f, _rayLayer))
+        if (Physics.Raycast(_body.position, _body.transform.TransformDirection(Vector3.forward), out var hit, 5f, _rayLayer))
 
         {
             _depthOfField.enabled.Override(true);
