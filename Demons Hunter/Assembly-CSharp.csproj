@@ -132,7 +132,7 @@
     <Compile Include="Assets\Scripts\Observer.cs" />
     <Compile Include="Assets\Scripts\Menu\SettingsInGame.cs" />
     <Compile Include="Assets\Scripts\Weapons\ShotGun.cs" />
-    <Compile Include="Assets\Scripts\AnimationScene\IK_Animation.cs" />
+    <Compile Include="Assets\Scripts\AnimationScene\IKAnimation.cs" />
     <Compile Include="Assets\Scripts\Weapons\MachineGun.cs" />
     <Compile Include="Assets\PyroParticles\Prefab\Script\FireLightScript.cs" />
   </ItemGroup>

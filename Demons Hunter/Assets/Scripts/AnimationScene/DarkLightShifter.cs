@@ -13,6 +13,7 @@ public class DarkLightShifter : MonoBehaviour
     private bool _isInDark;
     private bool _isOnLight;
     private float _bloomValue;
+
     private const float BrightFromLightToDark = 9f;
     private const float BrightInDark = 3f;
     private const float BrightFromDarkToLight = -5f;
@@ -37,21 +38,12 @@ public class DarkLightShifter : MonoBehaviour
     {
         if (_isInDark)
         {
-            _autoExposure.speedDown.Override(SpeedDown);
-
-            _autoExposure.minLuminance.Override(BrightInDark);
-            _autoExposure.maxLuminance.Override(BrightInDark);
+            ShiftEntourage(BrightInDark, 335f);
         }
 
         if (_isOnLight)
         {
-            _autoExposure.speedDown.Override(SpeedDown);
-
-            _autoExposure.minLuminance.Override(0);
-            _autoExposure.maxLuminance.Override(0);
-
-            _bloomValue = Mathf.Lerp(_bloomValue, 0, BloomSpeedDown);
-            _bloom.intensity.value = _bloomValue;
+            ShiftEntourage(0f, 10f);
         }
 
     }
@@ -62,11 +54,8 @@ public class DarkLightShifter : MonoBehaviour
         {
             _isOnLight = false;
 
-            _autoExposure.speedUp.Override(SpeedUp);
-            _autoExposure.minLuminance.Override(BrightFromLightToDark);
-            _autoExposure.maxLuminance.Override(BrightFromLightToDark);
+            SetEffectsSettings(BrightFromLightToDark, "Dark");
 
-            StartCoroutine(WaitForAdaptation("Dark"));
         }
     }
 
@@ -77,15 +66,29 @@ public class DarkLightShifter : MonoBehaviour
         {
             _isInDark = false;
 
-            _autoExposure.speedUp.Override(SpeedUp);
-            _autoExposure.minLuminance.Override(BrightFromDarkToLight);
-            _autoExposure.maxLuminance.Override(BrightFromDarkToLight);
+            SetEffectsSettings(BrightFromDarkToLight, "Light");
 
-            _bloomValue = 5f;
-            _bloom.intensity.Override(_bloomValue);
-
-            StartCoroutine(WaitForAdaptation("Light"));
         }
+    }
+
+    private void ShiftEntourage(float bright, float targetBloom)
+    {
+        _autoExposure.speedDown.Override(SpeedDown);
+
+        _autoExposure.minLuminance.Override(bright);
+        _autoExposure.maxLuminance.Override(bright);
+
+        _bloomValue = Mathf.Lerp(_bloomValue, targetBloom, BloomSpeedDown);
+        _bloom.intensity.value = _bloomValue;
+    }
+
+    private void SetEffectsSettings(float bright, string environment)
+    {
+        _autoExposure.speedUp.Override(SpeedUp);
+        _autoExposure.minLuminance.Override(bright);
+        _autoExposure.maxLuminance.Override(bright);
+
+        StartCoroutine(WaitForAdaptation(environment));
     }
 
     private IEnumerator WaitForAdaptation(string entourage)

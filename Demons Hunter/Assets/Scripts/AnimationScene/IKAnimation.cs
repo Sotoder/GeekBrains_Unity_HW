@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 [RequireComponent(typeof(Animator))]
-public class IK_Animation : MonoBehaviour
+public class IKAnimation : MonoBehaviour
 {
     [SerializeField] private bool _isActive;
     [SerializeField] private Transform _catchObject;
@@ -61,23 +61,22 @@ public class IK_Animation : MonoBehaviour
             SetIKAnimator(_catchPoint);
         }
 
-        if (_isWallNear)
+        if (!_isWallNear) return;
+  
+        Vector3 _leftHand = _animator.GetIKPosition(AvatarIKGoal.LeftHand);
+        if (Physics.Raycast(_leftHand + (Vector3.up * HalfVector3Modifer), Vector3.forward, out var hit, 0.8f, _rayLayer))
         {
-            Vector3 _leftHand = _animator.GetIKPosition(AvatarIKGoal.LeftHand);
-            if (Physics.Raycast(_leftHand + (Vector3.up * HalfVector3Modifer), Vector3.forward, out var hit, 0.8f, _rayLayer))
+            if (!_isTargeted)
             {
-                if (!_isTargeted)
-                {
-                    _catchPointForWall = new GameObject();
-                    _catchPointForWall.transform.Translate(hit.point);
-                    _catchPointForWall.transform.Rotate(-103f, 0, 0);
+                _catchPointForWall = new GameObject();
+                _catchPointForWall.transform.Translate(hit.point);
+                _catchPointForWall.transform.Rotate(-103f, 0, 0);
 
-                    _isTargeted = true;
-                }
-
-                SetIKAnimator(_catchPointForWall.transform);
+                _isTargeted = true;
             }
-        }
+
+            SetIKAnimator(_catchPointForWall.transform);
+        }    
     }
 
     private void OnTriggerEnter(Collider other)
@@ -156,10 +155,7 @@ public class IK_Animation : MonoBehaviour
     {
         float distance = Vector3.Distance(catchObject.transform.position, transform.position);
 
-        if (distance > 0.4f && distance < 1.5f) 
-            return true;
-        else 
-            return false;
+        return distance > 0.4f && distance < 1.5f;
     }
 
     private void CheckIK()
