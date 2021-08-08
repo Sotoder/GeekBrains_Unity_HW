@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657755, g: 0.4964127, b: 0.57481825, a: 1}
+  m_IndirectSpecularColor: {r: 0.16788256, g: 0.21073583, b: 0.28994176, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1494,6 +1494,7 @@ GameObject:
   - component: {fileID: 154208531}
   - component: {fileID: 154208529}
   - component: {fileID: 154208528}
+  - component: {fileID: 154208532}
   m_Layer: 5
   m_Name: SettingsMenu
   m_TagString: Untagged
@@ -1585,6 +1586,27 @@ MonoBehaviour:
   _settingsPanel: {fileID: 154208527}
   _pausePanel: {fileID: 603554679}
   _ddQuality: {fileID: 992834404}
+--- !u!223 &154208532
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154208527}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &155082633
 GameObject:
   m_ObjectHideFlags: 0
@@ -4712,6 +4734,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 318864627}
+  - component: {fileID: 318864628}
   m_Layer: 5
   m_Name: HpBar
   m_TagString: Untagged
@@ -4741,6 +4764,27 @@ RectTransform:
   m_AnchoredPosition: {x: 5, y: 10}
   m_SizeDelta: {x: 200, y: 20}
   m_Pivot: {x: 0, y: 0}
+--- !u!223 &318864628
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318864626}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1001 &321903859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9723,6 +9767,7 @@ GameObject:
   m_Component:
   - component: {fileID: 603554680}
   - component: {fileID: 603554681}
+  - component: {fileID: 603554682}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -9769,6 +9814,27 @@ MonoBehaviour:
   _ammoBar: {fileID: 1522966390}
   _hpBarObjectGUI: {fileID: 209516423}
   _tooltipObjectGUI: {fileID: 1941652898}
+--- !u!223 &603554682
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603554679}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &604549624
 GameObject:
   m_ObjectHideFlags: 0
@@ -13936,6 +14002,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 840825371}
+  - component: {fileID: 840825372}
   m_Layer: 5
   m_Name: MinesAndBombs
   m_TagString: Untagged
@@ -13963,6 +14030,27 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 10}
   m_SizeDelta: {x: 210, y: 30}
   m_Pivot: {x: 1, y: 0}
+--- !u!223 &840825372
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840825370}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &843230259
 GameObject:
   m_ObjectHideFlags: 0
@@ -19850,6 +19938,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1162788447}
   - component: {fileID: 1162788446}
+  - component: {fileID: 1162788448}
   m_Layer: 5
   m_Name: EndGame
   m_TagString: Untagged
@@ -19892,6 +19981,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 404, y: 152}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!223 &1162788448
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162788445}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &1166631877
 GameObject:
   m_ObjectHideFlags: 0
@@ -30661,6 +30771,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1522966391}
+  - component: {fileID: 1522966392}
   m_Layer: 5
   m_Name: AmmoCount
   m_TagString: Untagged
@@ -30688,6 +30799,27 @@ RectTransform:
   m_AnchoredPosition: {x: 5, y: 40}
   m_SizeDelta: {x: 200, y: 30}
   m_Pivot: {x: 0, y: 0}
+--- !u!223 &1522966392
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522966390}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &1524891605
 GameObject:
   m_ObjectHideFlags: 0
