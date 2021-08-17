@@ -13,6 +13,8 @@ TagManager:
   - Movable
   - Vision
   - EnemyExtra
+  - InteractiveLook
+  - InteractiveCatch
   layers:
   - Default
   - TransparentFX
@@ -20,11 +22,11 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Mirror
+  - Wall
+  - Post Processing
+  - Light
+  - Player
   - 
   - 
   - 
