@@ -75,7 +75,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     [SerializeField] private int _mineCount = 5;
     [SerializeField] private int _bombCount = 5;
     private GameObject _weaponPref;
-    private GameObject weapon;
+    private GameObject _weapon;
     private IWeapon w;
     private float _trowTime = 0f;
     private float _mineTime = 0f;
@@ -95,10 +95,10 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
 
         _weaponPref = _mgPref;
-        weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, transform.rotation);
-        weapon.transform.parent = _weaponPositionAxie;
-        w = weapon.GetComponent<MachineGun>();
-        _weaponAudioSource = weapon.GetComponent<AudioSource>();
+        _weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, transform.rotation);
+        _weapon.transform.parent = _weaponPositionAxie;
+        w = _weapon.GetComponent<MachineGun>();
+        _weaponAudioSource = _weapon.GetComponent<AudioSource>();
         _weaponAudioSource.Stop();
         _curentWeaponAmmo = _mgAmmo;
         _curentWeaponMaxAmmo = _maxMGAmmo;
@@ -108,12 +108,6 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
     void Update()
     {
-        //float f = 0f; // √енератор лагов =)
-        //while (f < 100000f)
-        //{
-        //    f+=(0.5f * Time.deltaTime);
-        //}
-        //f = 0f;
         if (_isDead) return;
         
         PlayerLook();
@@ -128,10 +122,10 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
             animator.SetBool("SGun", false);
             w.DestroyWeapon();
             _weaponPref = _mgPref;
-            weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, _head.transform.rotation);
-            weapon.transform.parent = _weaponPositionAxie;
-            w = weapon.GetComponent<MachineGun>();
-            _weaponAudioSource = weapon.GetComponent<AudioSource>();
+            _weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, _head.transform.rotation);
+            _weapon.transform.parent = _weaponPositionAxie;
+            w = _weapon.GetComponent<MachineGun>();
+            _weaponAudioSource = _weapon.GetComponent<AudioSource>();
             _weaponAudioSource.Stop();
             _curentWeaponAmmo = _mgAmmo;
             _curentWeaponMaxAmmo = _maxMGAmmo;
@@ -142,10 +136,10 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
             animator.SetBool("SGun", true);
             w.DestroyWeapon();
             _weaponPref = _sgPref;
-            weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, _head.transform.rotation);
-            weapon.transform.parent = _weaponPositionAxie;
-            w = weapon.GetComponent<ShotGun>();
-            _weaponAudioSource = weapon.GetComponent<AudioSource>();
+            _weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, _head.transform.rotation);
+            _weapon.transform.parent = _weaponPositionAxie;
+            w = _weapon.GetComponent<ShotGun>();
+            _weaponAudioSource = _weapon.GetComponent<AudioSource>();
             _weaponAudioSource.Stop();
             _curentWeaponAmmo = _sgAmmo;
             _curentWeaponMaxAmmo = _maxSGAmmo;
@@ -212,8 +206,10 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
             _hpBar.SetActive(false);
             _menuPanel.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
-            Time.timeScale = 0;
-            AudioListener.volume = 0f;
+
+
+            _playerAudioSource.Stop();
+            _weaponAudioSource.Stop();
         }
 
         _ammoText.text = "Ammo: " + _curentWeaponAmmo.ToString() + "/" + _curentWeaponMaxAmmo.ToString();
@@ -274,16 +270,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
         transform.Rotate(0, mouseLookX, 0);
 
-        //xRotation += mouseLookY; // более правильна€ реализаци€, но ловит баг, в случае если продолжать двигать мышку, то xRotation продолжает измен€тьс€
-
-        //if (xRotation <= 45f && xRotation >= -45)
-        //{
-
-        //    _head.Rotate(mouseLookY, 0, 0);
-        //    _weaponPosition.Rotate(mouseLookY, 0, 0);
-        //}
-
-        xRotation += mouseLookY; // —тара€, не совсем верна€ реализаци€ поворота головы и оружи€, но без бага поворота
+        xRotation += mouseLookY;
         xRotation = Mathf.Clamp(xRotation, -40f, 25f);
         _head.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
 
@@ -371,6 +358,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     {
         if (_isDead) return;
         _hp -= damage;
+        UpdateHPBar();
         if (_hp <= 0)
         {
             Invoke("Death", 1f);
@@ -411,11 +399,6 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         {
             _curentWeaponAmmo = _sgAmmo;
         }
-
-        
-        
-
-
     }
 
     public void AddLeverCount()

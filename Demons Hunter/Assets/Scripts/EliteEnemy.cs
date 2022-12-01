@@ -157,9 +157,7 @@ public class EliteEnemy : MonoBehaviour, ITakingDamage, IEnemy
         if (PlayerPrefs.GetInt("_isShowTooltip") != 1)
         {
             Cursor.lockState = CursorLockMode.None;
-            Time.timeScale = 0;
             _tooltipe.SetActive(true);
-            AudioListener.volume = 0;
             PlayerPrefs.SetInt("_isShowTooltip", 1);
         }
         Destroy(gameObject, 1.5f);

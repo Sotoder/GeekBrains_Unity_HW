@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
@@ -8,21 +10,18 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] Button _btnResume;
     [SerializeField] Button _btnExit;
     [SerializeField] GameObject _hpBar;
-
-    Settings _settings;
+    [SerializeField] SettingsInGame _settings;
 
     private void Awake()
-    {
-        
+    {        
         _btnResume.onClick.AddListener(ResumeGame);
         _btnExit.onClick.AddListener(ExitGame);
-        _settings = GameObject.FindObjectOfType<Settings>();
-
+        _settings.LoadPlayerSettings();
     }
 
     private void ExitGame()
     {
-        Application.Quit();
+        SceneManager.LoadScene(0);
     }
 
     private void ResumeGame()
@@ -31,13 +30,5 @@ public class PauseMenu : MonoBehaviour
         _hpBar.SetActive(true);
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
-        if (!(_settings is null))
-        {
-            AudioListener.volume = _settings.Volume * 0.01f;
-        }
-        else
-        {
-            AudioListener.volume = 0.5f;
-        }
     }
 }

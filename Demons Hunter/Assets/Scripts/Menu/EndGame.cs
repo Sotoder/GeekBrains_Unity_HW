@@ -1,15 +1,18 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EndGame : MonoBehaviour
 {
     [SerializeField] Text _txtInEnd;
     [SerializeField] GameObject _player;
-    [SerializeField] Button _btnOk;
+    [SerializeField] Button _btnExit;
+    [SerializeField] Button _btnRestart;
 
     private void Awake()
     {
-        _btnOk.onClick.AddListener(QuitGame);
+        _btnExit.onClick.AddListener(QuitGame);
+        _btnRestart.onClick.AddListener(Restart);
         if (_player.GetComponent<PlayerActions>().IsDead)
         {
             _txtInEnd.text = "GAME OVER";
@@ -18,9 +21,14 @@ public class EndGame : MonoBehaviour
             _txtInEnd.text = "YOU WIN!!!";
         }
     }
+
+    private void Restart()
+    {
+        SceneManager.LoadScene(1);
+    }
     
     private void QuitGame()
     {
-        Application.Quit();
+        SceneManager.LoadScene(0);
     }
 }

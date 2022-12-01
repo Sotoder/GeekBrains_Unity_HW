@@ -15,21 +15,35 @@ public class Bomb : MonoBehaviour
     public void Init()
     {
         Debug.Log("BombIsOut");
-        Invoke("Explosion", 3f);
+        StartCoroutine(ExplosionCoroutine());
     }
 
+    private IEnumerator ExplosionCoroutine()
+    {
+        var timer = 3;
+        while(timer > 0)
+        {
+            timer--;
+            yield return new WaitForSeconds(1f);
+        }
+
+        if(!_isDetonate)
+        {
+            Explosion();
+        }
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy") && !_isDetonate)
         {
             Explosion();
-            _isDetonate = true;
         }
     }
 
     private void Explosion()
     {
+        _isDetonate = true;
         var colliders = Physics.OverlapSphere(transform.position, _radius);
         foreach (var hit in colliders)
         {

@@ -8,7 +8,12 @@ public class Bullet : MonoBehaviour
     [SerializeField] private int _damage = 20;
 
     public int modifer = 1;
-    
+
+    private void Awake()
+    {
+        Invoke("DestroyBullet", 5f);
+    }
+
     public void Update()
     {
         transform.Translate(Vector3.forward * _speed * Time.deltaTime);
@@ -29,7 +34,12 @@ public class Bullet : MonoBehaviour
             if (!other.CompareTag("Bullets") && !other.CompareTag("Traps") && !other.CompareTag("Weapon") && !other.CompareTag("Vision"))
         {
             Debug.Log(other.gameObject.tag);
-            Destroy(gameObject);
-        }    
+            DestroyBullet();
+        }
+    }
+
+    private void DestroyBullet()
+    {
+        Destroy(gameObject);
     }
 }
