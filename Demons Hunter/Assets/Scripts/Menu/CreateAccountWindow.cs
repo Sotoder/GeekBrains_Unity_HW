@@ -35,6 +35,7 @@ public class CreateAccountWindow : AccountDataWindowBase
         PlayFabClientAPI.RegisterPlayFabUser(new RegisterPlayFabUserRequest
         {
             Username = _username,
+            DisplayName = _username,
             Email = _email,
             Password = _password
         }, Success, Fail);

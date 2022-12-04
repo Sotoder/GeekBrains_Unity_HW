@@ -1,5 +1,8 @@
+using PlayFab.ClientModels;
+using PlayFab;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
 {
@@ -11,6 +14,7 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
     [SerializeField] private GameObject _particleSystemObject;
 
 
+    private Text _expText;
     private Animator _animator;
     private ParticleSystem _particleSystem;
     private float _rangeAttack = 2f;
@@ -113,6 +117,11 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
         _agent.angularSpeed = 800;
     }
 
+    public void SetExpText(Text text)
+    {
+        _expText = text;
+    }
+
     public void EndAttack(Transform spawnPosition)
     {
         if (_isDead) return;
@@ -198,7 +207,16 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
         _audioSource.enabled = false;
         _animator.SetTrigger("Death");
         Destroy(gameObject, 1.5f);
+        GetExpForPlayer();
+    }
 
+    private void GetExpForPlayer()
+    {
+        PlayFabClientAPI.AddUserVirtualCurrency(new AddUserVirtualCurrencyRequest()
+        {
+            Amount = 20,
+            VirtualCurrency = "EX"
+        }, result => _expText.text ="Exp: " + result.Balance, error => Debug.Log(error.ToString()));
     }
 
     public void PatrolStart(Transform[] points)

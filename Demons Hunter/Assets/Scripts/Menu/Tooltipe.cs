@@ -6,10 +6,13 @@ using UnityEngine.UI;
 public class Tooltipe : MonoBehaviour
 {
     [SerializeField] Button _btnOk;
+    [SerializeField] PlayerActions _player;
 
     private void Awake()
     {
         _btnOk.onClick.AddListener(Close);
+        _player.PlayerAudioSource.Stop();
+        _player.WeaponAudioSource.Stop();
     }
 
     private void Close()

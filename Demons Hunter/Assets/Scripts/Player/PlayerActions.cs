@@ -1,3 +1,5 @@
+using PlayFab;
+using PlayFab.ClientModels;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +22,11 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     [SerializeField] private Text _minesBombsText;
     [SerializeField] private AudioClip _walkAudio;
     [SerializeField] private AudioClip _runAudio;
+    [SerializeField] private Text _expText;
+    [SerializeField] private Image _redKeyImage;
+    [SerializeField] private Image _blueKeyImage;
+    [SerializeField] private Image _yellowKeyImage;
+    [SerializeField] private Image _greenKeyImage;
 
     private Dictionary<Color, int> _keyContainer = new Dictionary<Color, int>
     {
@@ -28,6 +35,10 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         [new Color(0f, 0f, 1f, 1f)] = 0,
         [new Color(0f, 1f, 0f, 1f)] = 0
     };
+
+    private Dictionary<Color, Image> _keyImages = new Dictionary<Color, Image>();
+
+
     private int _hp;
     private int _sgAmmo = 50;
     private int _mgAmmo = 500;
@@ -88,6 +99,13 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         Cursor.lockState = CursorLockMode.Locked;
         PlayerPrefs.SetInt("_isShowTooltip", 0);
 
+        _keyImages = new Dictionary<Color, Image>
+        {
+            [new Color(1f, 0f, 0f, 1f)] = _redKeyImage,
+            [new Color(1f, 0.922f, 0.016f, 1f)] = _yellowKeyImage,
+            [new Color(0f, 0f, 1f, 1f)] = _greenKeyImage,
+            [new Color(0f, 1f, 0f, 1f)] = _blueKeyImage
+        };
 
         _rb = gameObject.GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
@@ -104,6 +122,12 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         _curentWeaponMaxAmmo = _maxMGAmmo;
         animator.SetBool("MGun", true);
         animator.SetBool("SGun", false);
+
+        PlayFabClientAPI.AddUserVirtualCurrency(new AddUserVirtualCurrencyRequest()
+        {
+            Amount = 0,
+            VirtualCurrency = "EX"
+        }, result => _expText.text = "Exp: " + result.Balance, error => Debug.Log(error.ToString()));
     }
 
     void Update()
@@ -203,9 +227,9 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
         if(Input.GetButton("Cancel"))
         {
-            _hpBar.SetActive(false);
             _menuPanel.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
+            Time.timeScale= 0f;
 
 
             _playerAudioSource.Stop();
@@ -213,8 +237,17 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         }
 
         _ammoText.text = "Ammo: " + _curentWeaponAmmo.ToString() + "/" + _curentWeaponMaxAmmo.ToString();
+
+        IfIsFalling();
     }
 
+    private void IfIsFalling()
+    {
+        if (transform.position.y < -0.8)
+        {
+            TakingDamage(100, transform);
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -242,7 +275,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
                 _isRun = true;
                 _isWalk = false;
             }
-            speed = _direction * (_speed * _speedMult);
+            speed = _direction * (_speed * _speedMult) * Time.fixedDeltaTime;
         }
         else
         {
@@ -255,7 +288,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
                 _isRun = false;
                 _isWalk = true;
             }
-            speed = _direction * _speed;
+            speed = _direction * _speed * Time.fixedDeltaTime;
         }
 
         JumpLogic();
@@ -280,8 +313,10 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
     private void MovementLogic(Vector3 speed)
     {
-        _rb.AddForce(transform.forward * speed.z, ForceMode.Impulse);
-        _rb.AddForce(transform.right * speed.x, ForceMode.Impulse);
+        var v = transform.TransformDirection(speed);
+        v.y = _rb.velocity.y;
+
+        _rb.velocity = v;
     }
 
     private void JumpLogic()
@@ -290,13 +325,13 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         {
             if (_isGrounded)
             {
-                _rb.AddForce(Vector3.up * _jumpForce * 100);
+                _rb.AddForce(Vector3.up * _jumpForce * 50);
             }
         }
 
         if (!_isGrounded)
         {
-            _rb.AddForce(Vector3.down * _gravity * 200);
+            _rb.AddForce(Vector3.down * _gravity * 100);
         }
     }
 
@@ -349,8 +384,10 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
     private void UpdateHPBar()
     {
-        _hpText.text = _hp.ToString() + "/" + _maxHP;
-        float fill = (((float)_hp * 100) / (float)_maxHP) / 100;
+        var hpText = _hp < 0 ? 0 : _hp;
+
+        _hpText.text = hpText.ToString() + "/" + _maxHP;
+        float fill = (((float)hpText * 100) / (float)_maxHP) / 100;
         _hpBarImage.fillAmount = fill;
     }
 
@@ -409,8 +446,12 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
     public void AddKey(Color color)
     {
+        if(_keyImages.TryGetValue(color, out Image image))
+        {
+            image.color = color;
+        }
 
-        if (_keyContainer.TryGetValue(color, out int value))
+        if (_keyContainer.ContainsKey(color))
         {
             _keyContainer[color] = 1;
         }

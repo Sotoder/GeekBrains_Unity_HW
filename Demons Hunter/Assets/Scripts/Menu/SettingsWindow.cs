@@ -1,10 +1,8 @@
 ﻿using PlayFab.ClientModels;
 using PlayFab;
 using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 public class SettingsWindow: MonoBehaviour
 {

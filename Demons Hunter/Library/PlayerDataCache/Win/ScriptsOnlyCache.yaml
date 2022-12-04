@@ -8,18 +8,22 @@ ScriptsOnlyBuild:
     - BossDoor
     - Bullet
     - CFX_AutoDestructShuriken
+    - CreateAccountWindow
+    - DigitalRuby.PyroParticles.FireConstantBaseScript
+    - DigitalRuby.PyroParticles.FireLightScript
     - Door
     - DoorButton
     - DownDoor
     - ElitZone
     - EliteEnemy
-    - EndGame
     - Fractions
+    - GameStarter
     - Heal
     - Indicator
     - LeverAxis
+    - LooseGame
     - MachineGun
-    - MainMenu
+    - MainMenuController
     - Mine
     - Observer
     - ObserverElite
@@ -28,15 +32,22 @@ ScriptsOnlyBuild:
     - PlayerActions
     - RegEnemy
     - ReverbOff
-    - Settings
     - SettingsInGame
+    - SettingsWindow
     - ShotGun
+    - SignInWindow
     - SlidingDoor
     - SpawnRegularEnemy
     - Sphere
     - Tooltipe
     - Trap
     - Turret
+    - WinGame
+    PlayFab.dll:
+    - PlayFabSharedSettings
+    PlayFabEditorExtensions.dll:
+    - PlayFab.PfEditor.PlayFabEditor
+    - PlayFab.PfEditor.PlayFabEditorPrefsSO
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     UnityEditor.TestRunner.dll:
@@ -51,6 +62,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Dropdown
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.InputField
     - UnityEngine.UI.Mask
     - UnityEngine.UI.ScrollRect
     - UnityEngine.UI.Scrollbar
@@ -103,99 +115,107 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1498}
+      Script: {instanceID: 1514}
     - Class: 114
-      Script: {instanceID: 1564}
+      Script: {instanceID: 1582}
     - Class: 114
-      Script: {instanceID: 1590}
+      Script: {instanceID: 1610}
     - Class: 114
-      Script: {instanceID: 1640}
-    - Class: 114
-      Script: {instanceID: 1652}
-    - Class: 114
-      Script: {instanceID: 1664}
+      Script: {instanceID: 1670}
     - Class: 114
       Script: {instanceID: 1682}
     - Class: 114
-      Script: {instanceID: 1718}
+      Script: {instanceID: 1696}
     - Class: 114
-      Script: {instanceID: 1734}
+      Script: {instanceID: 1716}
     - Class: 114
-      Script: {instanceID: 1950}
+      Script: {instanceID: 1752}
     - Class: 114
-      Script: {instanceID: 1988}
+      Script: {instanceID: 1768}
     - Class: 114
-      Script: {instanceID: 2026}
+      Script: {instanceID: 2008}
     - Class: 114
-      Script: {instanceID: 2098}
+      Script: {instanceID: 2046}
     - Class: 114
-      Script: {instanceID: 2126}
+      Script: {instanceID: 2084}
     - Class: 114
-      Script: {instanceID: 2134}
+      Script: {instanceID: 2164}
     - Class: 114
-      Script: {instanceID: 2280}
+      Script: {instanceID: 2196}
     - Class: 114
-      Script: {instanceID: 2294}
+      Script: {instanceID: 2204}
     - Class: 114
-      Script: {instanceID: 2386}
+      Script: {instanceID: 2360}
     - Class: 114
-      Script: {instanceID: 2394}
+      Script: {instanceID: 2374}
     - Class: 114
-      Script: {instanceID: 2434}
+      Script: {instanceID: 2474}
     - Class: 114
-      Script: {instanceID: 2442}
+      Script: {instanceID: 2482}
     - Class: 114
-      Script: {instanceID: 2536}
+      Script: {instanceID: 2524}
     - Class: 114
-      Script: {instanceID: 2718}
+      Script: {instanceID: 2532}
     - Class: 114
-      Script: {instanceID: 2726}
+      Script: {instanceID: 2550}
     - Class: 114
-      Script: {instanceID: 2734}
+      Script: {instanceID: 2644}
     - Class: 114
-      Script: {instanceID: 2798}
+      Script: {instanceID: 2844}
     - Class: 114
-      Script: {instanceID: 2812}
+      Script: {instanceID: 2850}
     - Class: 114
-      Script: {instanceID: 3052}
+      Script: {instanceID: 2856}
     - Class: 114
-      Script: {instanceID: 3100}
+      Script: {instanceID: 2866}
     - Class: 114
-      Script: {instanceID: 3298}
+      Script: {instanceID: 2940}
     - Class: 114
-      Script: {instanceID: 3316}
+      Script: {instanceID: 2954}
     - Class: 114
-      Script: {instanceID: 3322}
+      Script: {instanceID: 3222}
     - Class: 114
-      Script: {instanceID: 3336}
+      Script: {instanceID: 3274}
     - Class: 114
-      Script: {instanceID: 3354}
+      Script: {instanceID: 3494}
     - Class: 114
-      Script: {instanceID: 3382}
+      Script: {instanceID: 3514}
     - Class: 114
-      Script: {instanceID: 3468}
+      Script: {instanceID: 3524}
     - Class: 114
-      Script: {instanceID: 3550}
+      Script: {instanceID: 3544}
     - Class: 114
-      Script: {instanceID: 3590}
+      Script: {instanceID: 3564}
     - Class: 114
-      Script: {instanceID: 3652}
+      Script: {instanceID: 3596}
     - Class: 114
-      Script: {instanceID: 3698}
+      Script: {instanceID: 3686}
     - Class: 114
-      Script: {instanceID: 3860}
+      Script: {instanceID: 3774}
     - Class: 114
-      Script: {instanceID: 3940}
+      Script: {instanceID: 3816}
     - Class: 114
-      Script: {instanceID: 4106}
+      Script: {instanceID: 3884}
     - Class: 114
-      Script: {instanceID: 4182}
+      Script: {instanceID: 3932}
     - Class: 114
-      Script: {instanceID: 4234}
+      Script: {instanceID: 4104}
     - Class: 114
-      Script: {instanceID: 4244}
+      Script: {instanceID: 4202}
     - Class: 114
-      Script: {instanceID: 4294}
+      Script: {instanceID: 4370}
+    - Class: 114
+      Script: {instanceID: 4458}
+    - Class: 114
+      Script: {instanceID: 4518}
+    - Class: 114
+      Script: {instanceID: 4530}
+    - Class: 114
+      Script: {instanceID: 4582}
+    - Class: 114
+      Script: {instanceID: 126926}
+    - Class: 114
+      Script: {instanceID: 126934}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -276,45 +296,53 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1498}
+      Script: {instanceID: 1514}
     - Class: 114
-      Script: {instanceID: 1590}
+      Script: {instanceID: 1610}
     - Class: 114
-      Script: {instanceID: 1640}
+      Script: {instanceID: 1670}
     - Class: 114
-      Script: {instanceID: 1950}
+      Script: {instanceID: 2008}
     - Class: 114
-      Script: {instanceID: 1988}
+      Script: {instanceID: 2046}
     - Class: 114
-      Script: {instanceID: 2134}
+      Script: {instanceID: 2204}
     - Class: 114
-      Script: {instanceID: 2280}
+      Script: {instanceID: 2360}
     - Class: 114
-      Script: {instanceID: 2386}
+      Script: {instanceID: 2474}
     - Class: 114
-      Script: {instanceID: 2536}
+      Script: {instanceID: 2644}
     - Class: 114
-      Script: {instanceID: 2718}
+      Script: {instanceID: 2688}
     - Class: 114
-      Script: {instanceID: 2726}
+      Script: {instanceID: 2844}
     - Class: 114
-      Script: {instanceID: 2798}
+      Script: {instanceID: 2856}
     - Class: 114
-      Script: {instanceID: 3042}
+      Script: {instanceID: 2940}
     - Class: 114
-      Script: {instanceID: 3298}
+      Script: {instanceID: 3090}
     - Class: 114
-      Script: {instanceID: 3322}
+      Script: {instanceID: 3212}
     - Class: 114
-      Script: {instanceID: 3468}
+      Script: {instanceID: 3494}
     - Class: 114
-      Script: {instanceID: 3590}
+      Script: {instanceID: 3522}
     - Class: 114
-      Script: {instanceID: 3638}
+      Script: {instanceID: 3524}
     - Class: 114
-      Script: {instanceID: 3788}
+      Script: {instanceID: 3686}
     - Class: 114
-      Script: {instanceID: 4244}
+      Script: {instanceID: 3794}
+    - Class: 114
+      Script: {instanceID: 3816}
+    - Class: 114
+      Script: {instanceID: 3868}
+    - Class: 114
+      Script: {instanceID: 4090}
+    - Class: 114
+      Script: {instanceID: 4530}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -408,7 +436,7 @@ ScriptsOnlyBuild:
     className: HorizontalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 6926197036fc81fe66e22db171f1d6c7
+      Hash: 88bbe90095d27991ee2137dc0ffd1296
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SpawnRegularEnemy
@@ -444,10 +472,10 @@ ScriptsOnlyBuild:
     className: WFX_Demo_RandomDir
   - hash:
       serializedVersion: 2
-      Hash: 9bf1ffbedbe1e8ab5805aba57a5fc7cd
+      Hash: c6fd210083e06abd9d1e331ba046d062
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: EndGame
+    className: LooseGame
   - hash:
       serializedVersion: 2
       Hash: 660deb0ce569359218f0ba85b7ce0e3a
@@ -510,7 +538,7 @@ ScriptsOnlyBuild:
     className: WFX_Demo
   - hash:
       serializedVersion: 2
-      Hash: 4be8ee17f3900b626fd3692aba9f6baa
+      Hash: af51fb2313de44b31f2aa7590bcf367b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Tooltipe
@@ -576,7 +604,7 @@ ScriptsOnlyBuild:
     className: EventSystem
   - hash:
       serializedVersion: 2
-      Hash: 3bee7770abc84aac8e13e34827e496ea
+      Hash: f5aea0c04ddcac078100bc22a237b62a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerActions
@@ -606,7 +634,7 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: ab075e5358420a0509868f184d2b8ad5
+      Hash: 862483e7396c91624908db5f7700b541
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EliteEnemy
@@ -616,6 +644,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LeverAxis
+  - hash:
+      serializedVersion: 2
+      Hash: 619aadab9b2c601a15e83e0e884fb2c6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameStarter
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -666,6 +700,12 @@ ScriptsOnlyBuild:
     className: StandaloneInputModule
   - hash:
       serializedVersion: 2
+      Hash: 6ea74ac0827cd74b701e9cd689a66794
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: WinGame
+  - hash:
+      serializedVersion: 2
       Hash: f7858108331b563fb41b80b729297acd
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -708,7 +748,7 @@ ScriptsOnlyBuild:
     className: Button
   - hash:
       serializedVersion: 2
-      Hash: 4df568b956e17623847ecef7bd77112c
+      Hash: ce2338c41747ccc4663b129b215c046a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SettingsInGame
@@ -718,6 +758,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextContainer
+  - hash:
+      serializedVersion: 2
+      Hash: 593ab805620a6b5ad4d3ecb4a1afcd1e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CreateAccountWindow
   - hash:
       serializedVersion: 2
       Hash: 8aa3d6ccbcb54ee8db6c1229854adaaa
@@ -846,6 +892,12 @@ ScriptsOnlyBuild:
     className: CFX_Demo_Translate
   - hash:
       serializedVersion: 2
+      Hash: bc8d5a16cdc0bb11217587af2000e9e4
+    assemblyName: PlayFab.dll
+    namespaceName: 
+    className: PlayFabSharedSettings
+  - hash:
+      serializedVersion: 2
       Hash: a81d4c2c1cf3ad164d277d927a193679
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -906,6 +958,12 @@ ScriptsOnlyBuild:
     className: ControlTrack
   - hash:
       serializedVersion: 2
+      Hash: 579b7208cf3ea0372dbdf48226fc7ad7
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SettingsWindow
+  - hash:
+      serializedVersion: 2
       Hash: 3165968ba45c74472d279ba04455fccb
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -930,10 +988,10 @@ ScriptsOnlyBuild:
     className: PhysicsRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 8efdf1a5cae2fac4ba78e6b79a246eee
+      Hash: 334908baffa56abce59f324eabaafbf2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: MainMenu
+    className: MainMenuController
   - hash:
       serializedVersion: 2
       Hash: 0fb27be807aa299702f28ad0bcad1f46
@@ -960,16 +1018,16 @@ ScriptsOnlyBuild:
     className: TMP_Settings
   - hash:
       serializedVersion: 2
-      Hash: de5ddcd90cf7476e57c834e1622af4d2
+      Hash: adb6760b3499cd5fd3a27d7c889c1047
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PauseMenu
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: b1664ce4d6160351fb8df7bb8f6d6a27
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: Settings
+    className: AccountDataWindowBase
   - hash:
       serializedVersion: 2
       Hash: 6980e81ddc615a861309d2d659cc3760
@@ -978,7 +1036,13 @@ ScriptsOnlyBuild:
     className: TMP_SubMeshUI
   - hash:
       serializedVersion: 2
-      Hash: 1196f9ab4d212e54b03f1b6dd4de7a13
+      Hash: 1d6b3be72066d1009ec29243256af74f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SignInWindow
+  - hash:
+      serializedVersion: 2
+      Hash: 5c56fb4139b6a757965d71fe331ce3e0
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Boss
@@ -1060,6 +1124,42 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MachineGun
+  - hash:
+      serializedVersion: 2
+      Hash: e393b3cf019d3604c6d9c27df1a22c39
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: DigitalRuby.PyroParticles
+    className: FireLightScript
+  - hash:
+      serializedVersion: 2
+      Hash: 669853fafdd959b7abf87c79703f5b3e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: DigitalRuby.PyroParticles
+    className: MeteorSwarmScript
+  - hash:
+      serializedVersion: 2
+      Hash: f2e9964e2184d68450e47cf0989b6210
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: DigitalRuby.PyroParticles
+    className: FireProjectileScript
+  - hash:
+      serializedVersion: 2
+      Hash: 9bc32bf9bef5f4ea94dc3f3d94fa972f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: DigitalRuby.PyroParticles
+    className: FireConstantBaseScript
+  - hash:
+      serializedVersion: 2
+      Hash: 9bc32bf9bef5f4ea94dc3f3d94fa972f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: DigitalRuby.PyroParticles
+    className: FireBaseScript
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: DigitalRuby.PyroParticles
+    className: FireCollisionForwardScript
   platform: 5
   scenePathNames:
   - Assets/Scenes/Menu.unity

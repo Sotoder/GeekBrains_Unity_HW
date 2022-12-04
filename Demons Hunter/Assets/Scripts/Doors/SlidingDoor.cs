@@ -15,7 +15,6 @@ public class SlidingDoor : MonoBehaviour
     {
         if (other.CompareTag("Enemy") || other.CompareTag("Player"))
         {
-            Debug.Log(other.tag);
             _animator.SetBool("needOpen", true);
             _animator.SetBool("needClose", false);
         }
@@ -25,7 +24,6 @@ public class SlidingDoor : MonoBehaviour
     {
         if (other.CompareTag("Enemy") || other.CompareTag("Player"))
         {
-            Debug.Log(other.tag);
             _animator.SetBool("needOpen", false);
             _animator.SetBool("needClose", true);
         }

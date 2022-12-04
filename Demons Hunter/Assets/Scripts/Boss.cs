@@ -1,8 +1,14 @@
+using PlayFab;
+using PlayFab.ClientModels;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Boss : MonoBehaviour,ITakingDamage, IEnemy
 {
+    public Action OnBossDead;
 
     [SerializeField] private int _maxHP = 300;
     [SerializeField] private bool _onAttack;
@@ -13,7 +19,7 @@ public class Boss : MonoBehaviour,ITakingDamage, IEnemy
     [SerializeField] private AudioClip[] _clips = new AudioClip[6];
     [SerializeField] private AudioClip _attackRoar;
     [SerializeField] private GameObject _particleSystemObject;
-    [SerializeField] private GameObject _endGamePanel;
+    [SerializeField] private Text _expText;
 
     private Animator _animator;
     private ParticleSystem _particleSystem;
@@ -155,11 +161,20 @@ public class Boss : MonoBehaviour,ITakingDamage, IEnemy
 
         if (_isMain)
         {
-            Cursor.lockState = CursorLockMode.None;
-            _endGamePanel.SetActive(true);
+            OnBossDead?.Invoke();
             Destroy(gameObject, 1.5f);
         }
-        
+
+        GetExpForPlayer();
+    }
+
+    private void GetExpForPlayer()
+    {
+        PlayFabClientAPI.AddUserVirtualCurrency(new AddUserVirtualCurrencyRequest()
+        {
+            Amount = 100,
+            VirtualCurrency = "EX"
+        }, result => _expText.text = "Exp: " + result.Balance, error => Debug.Log(error.ToString()));
     }
 
     public void IsBombed()

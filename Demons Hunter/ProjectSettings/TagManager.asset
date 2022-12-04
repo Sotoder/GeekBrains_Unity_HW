@@ -13,6 +13,7 @@ TagManager:
   - Movable
   - Vision
   - EnemyExtra
+  - Fire
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - FireLayer
   - 
   - 
   - 

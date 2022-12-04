@@ -1,5 +1,8 @@
+using PlayFab.ClientModels;
+using PlayFab;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EliteEnemy : MonoBehaviour, ITakingDamage, IEnemy
 {
@@ -12,6 +15,7 @@ public class EliteEnemy : MonoBehaviour, ITakingDamage, IEnemy
     [SerializeField] private GameObject _tooltipe;
     [SerializeField] private AudioClip _attackRoar;
     [SerializeField] private GameObject _particleSystemObject;
+    [SerializeField] private Text _expText;
 
     private Animator _animator;
     private bool _isDead = false;
@@ -157,10 +161,21 @@ public class EliteEnemy : MonoBehaviour, ITakingDamage, IEnemy
         if (PlayerPrefs.GetInt("_isShowTooltip") != 1)
         {
             Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0f;
             _tooltipe.SetActive(true);
             PlayerPrefs.SetInt("_isShowTooltip", 1);
         }
         Destroy(gameObject, 1.5f);
+        GetExpForPlayer();
+    }
+
+    private void GetExpForPlayer()
+    {
+        PlayFabClientAPI.AddUserVirtualCurrency(new AddUserVirtualCurrencyRequest()
+        {
+            Amount = 50,
+            VirtualCurrency = "EX"
+        }, result => _expText.text = "Exp: " + result.Balance, error => Debug.Log(error.ToString()));
     }
 
 
