@@ -7977,7 +7977,9 @@ MonoBehaviour:
     RMB, Alt - Bombs
 
     CMB -
-    Mines'
+    Mines
+
+    Y - Death'
 --- !u!222 &1622838720
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12397,6 +12399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sphere: {fileID: 0}
   _pcolor: 
+  _respectTextGameObject: {fileID: 0}
   _onLight: 0
 --- !u!114 &5298272373317754575
 MonoBehaviour:
@@ -12412,6 +12415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sphere: {fileID: 0}
   _pcolor: 
+  _respectTextGameObject: {fileID: 0}
   _onLight: 0
 --- !u!23 &5325828625083057803
 MeshRenderer:
@@ -14196,7 +14200,10 @@ MonoBehaviour:
 
     Space - Jump
 
-    Esc - Pause Menu'
+    Esc - Pause Menu
+
+    F
+    - for respect'
 --- !u!4 &8501564441177046737
 Transform:
   m_ObjectHideFlags: 0

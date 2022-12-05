@@ -83,7 +83,7 @@ public class AccountDataWindowBase : MonoBehaviour
     {
         while (_isLogginInProgress)
         {
-            _statusImage.transform.Rotate(Vector3.forward * Time.deltaTime * 100);
+            _statusImage.transform.Rotate(-Vector3.forward * Time.deltaTime * 100);
             yield return new WaitForEndOfFrame();
         }
     }
