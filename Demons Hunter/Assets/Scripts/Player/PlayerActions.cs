@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class PlayerActions : MonoBehaviour, ITakingDamage
 {
+    public Action OnGiveRespect;
 
     //Params
     [SerializeField] private int _maxHP = 100;
@@ -144,10 +145,16 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
         PlayerLook();
 
+        if(Input.GetKeyDown(KeyCode.F)) 
+        {
+            OnGiveRespect?.Invoke();
+        }
+
         if (Input.GetKeyDown(KeyCode.Y)) 
         {
             Death();
         }
+
         if (Input.GetButton("Weapon1"))
         {
             animator.SetBool("MGun", true);
