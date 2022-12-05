@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class GameStarter : MonoBehaviour
 {
+    [SerializeField] private PlayerActions _player;
     [SerializeField] private GameInitalizatorModel _gameInitalizatorModel;
     [SerializeField] private GameLoaderModel _gameLoaderModel;
 
@@ -17,7 +18,10 @@ public class GameStarter : MonoBehaviour
         Time.timeScale = 1f;
         _gameController = new GameController();
 
+        AudioListener.volume = 0f;
         _gameLoader = new GameLoader(_gameLoaderModel);
+        _gameController.Add(_gameLoader);
+
         _gameLoader.OnLoad += StartGame;
         StartCoroutine(_gameLoader.LoadCoroutine());
     }
@@ -25,6 +29,7 @@ public class GameStarter : MonoBehaviour
     private void StartGame()
     {
         new GameInitializator(_gameInitalizatorModel, _gameController);
+        _player.StartGame();
     }
 
     private void Update()
@@ -38,6 +43,11 @@ public class GameStarter : MonoBehaviour
     {
         var fixedDeltaTime = Time.fixedDeltaTime;
         _gameController.FixedUpdate(fixedDeltaTime);
+    }
+
+    private void OnDestroy()
+    {
+        _gameController.Clear();
     }
 
 }

@@ -119,6 +119,27 @@ public class MainMenuController : MonoBehaviour
 
     private void StartGame()
     {
-        SceneManager.LoadScene("FirstLevel");
+        if (PlayFabClientAPI.IsClientLoggedIn())
+        {
+            SceneManager.LoadScene("FirstLevel");
+        } else
+        {
+            _menuButtonGroup.SetActive(false);
+            _playFabButtonGroup.SetActive(true);
+        }
+
+    }
+
+    private void OnDestroy()
+    {
+        _btnCreateAccaunt.onClick.RemoveListener(OpenCreateWindow);
+        _btnLogin.onClick.RemoveListener(OpenLoginWindow);
+        _btnStart.onClick.RemoveListener(StartGame);
+        _btnLogout.onClick.RemoveListener(Logout);
+        _btnExit.onClick.RemoveListener(ExitGame);
+
+
+        _signInWindow.OnLogin -= ShowMenuButtons;
+        _createAccountWindow.OnLogin -= ShowMenuButtons;
     }
 }

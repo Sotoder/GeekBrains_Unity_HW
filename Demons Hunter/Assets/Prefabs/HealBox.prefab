@@ -290,6 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healCount: 50
+  _healAudioSource: {fileID: 0}
 --- !u!135 &4348841323542381191
 SphereCollider:
   m_ObjectHideFlags: 0

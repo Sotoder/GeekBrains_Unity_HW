@@ -106,4 +106,12 @@ public class SettingsWindow: MonoBehaviour
     {
         _txtMusicVolumePercent.text = value.ToString();
     }
+
+    private void OnDestroy()
+    {
+        _btnSaveSettings.onClick.RemoveListener(SaveSettings);
+        _tglSoundsMute.onValueChanged.RemoveListener(SoundsMute);
+        _slrSoundsVolume.onValueChanged.RemoveListener(ChangeVolumeText);
+        _slrMusicVolume.onValueChanged.RemoveListener(ChangeMusicVolumeText);
+    }
 }

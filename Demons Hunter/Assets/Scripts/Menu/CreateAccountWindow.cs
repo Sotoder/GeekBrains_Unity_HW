@@ -55,8 +55,9 @@ public class CreateAccountWindow : AccountDataWindowBase
         _emailField.text = "";
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         _emailField.onValueChanged.RemoveAllListeners();
         _createAccountButton.onClick.RemoveAllListeners();
     }

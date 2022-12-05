@@ -21,6 +21,7 @@ public class SettingsInGame : MonoBehaviour
     private bool _isMuted;
     private float _volume;
     private float _musicVolume;
+    private bool _isGameLoaded;
 
     private void Awake()
     {
@@ -30,6 +31,12 @@ public class SettingsInGame : MonoBehaviour
         _tglSoundsMute.onValueChanged.AddListener(SoundsMute);
         _slrSoundsVolume.onValueChanged.AddListener(ChangeGlobalVolume);
         _slrMusicVolume.onValueChanged.AddListener(ChangeMusicVolumeText);
+    }
+
+    public void OnGameLoaded()
+    {
+        _isGameLoaded= true;
+        AudioListener.volume = _volume * 0.01f;
     }
 
     public void LoadPlayerSettings()
@@ -63,14 +70,18 @@ public class SettingsInGame : MonoBehaviour
         }
 
         _musicSource.volume = musicVolume;
-        _musicVolume = _musicSource.volume * 100;
+        _musicVolume = musicVolume * 100;
         _slrMusicVolume.value = _musicVolume;
         ChangeMusicVolumeText(_musicVolume);
 
-        AudioListener.volume = globalVolume;
-        _volume = AudioListener.volume * 100;
+        _volume = globalVolume * 100;
         _slrSoundsVolume.value = _volume;
         ChangeVolumeText(_volume);
+
+        if (_isGameLoaded)
+        {
+            AudioListener.volume = globalVolume;
+        }
 
         QualitySettings.SetQualityLevel(graphic, true);
         _ddQuality.value = graphic;

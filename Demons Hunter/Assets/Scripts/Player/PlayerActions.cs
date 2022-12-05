@@ -22,6 +22,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     [SerializeField] private Text _minesBombsText;
     [SerializeField] private AudioClip _walkAudio;
     [SerializeField] private AudioClip _runAudio;
+    [SerializeField] private AudioClip _jumpAudio;
     [SerializeField] private Text _expText;
     [SerializeField] private Image _redKeyImage;
     [SerializeField] private Image _blueKeyImage;
@@ -52,6 +53,8 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     private bool _isDead = false;
     private bool _isRun = false;
     private bool _isWalk = true;
+    private bool _isLevelLoad;
+    private bool _isJumped;
 
     public bool IsDead { get => _isDead; }
     public AudioSource WeaponAudioSource { get => _weaponAudioSource; }
@@ -91,7 +94,6 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     private float _trowTime = 0f;
     private float _mineTime = 0f;
 
-
     private void Awake()
     {
         _hp = _maxHP;
@@ -130,10 +132,16 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         }, result => _expText.text = "Exp: " + result.Balance, error => Debug.Log(error.ToString()));
     }
 
+    public void StartGame()
+    {
+        _isLevelLoad= true;
+    }
+
     void Update()
     {
         if (_isDead) return;
-        
+        if (!_isLevelLoad) return;
+
         PlayerLook();
 
         if (Input.GetKeyDown(KeyCode.Y)) 
@@ -251,30 +259,42 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
     private void FixedUpdate()
     {
-        if (_direction != Vector3.zero)
+        if (!_isLevelLoad) return;
+
+        if(!_isJumped)
         {
-            animator.SetBool("Run", true);
-        } else
-        {
-            animator.SetBool("Run", false);
-            _playerAudioSource.Stop();
+            if (_direction != Vector3.zero)
+            {
+                animator.SetBool("Run", true);
+            }
+            else
+            {
+                animator.SetBool("Run", false);
+                _playerAudioSource.Stop();
+            }
         }
+
         _direction.x = Input.GetAxis("Horizontal");
         _direction.z = Input.GetAxis("Vertical");
 
         Vector3 speed;
+
         if (Input.GetButton("Sprint"))
         {
-            if (!_isRun) _playerAudioSource.Stop();
-
-            if (!_playerAudioSource.isPlaying)
+            if(!_isJumped)
             {
-                _playerAudioSource.clip = _runAudio;
-                _playerAudioSource.loop = true;
-                _playerAudioSource.Play();
-                _isRun = true;
-                _isWalk = false;
+                if (!_isRun) _playerAudioSource.Stop();
+
+                if (!_playerAudioSource.isPlaying)
+                {
+                    _playerAudioSource.clip = _runAudio;
+                    _playerAudioSource.loop = true;
+                    _playerAudioSource.Play();
+                    _isRun = true;
+                    _isWalk = false;
+                }
             }
+
             speed = _direction * (_speed * _speedMult) * Time.fixedDeltaTime;
         }
         else
@@ -323,10 +343,18 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     {
         if (Input.GetAxis("Jump") > 0)
         {
-            if (_isGrounded)
+            if (_isGrounded && !_isJumped)
             {
                 _rb.AddForce(Vector3.up * _jumpForce * 50);
+                _isJumped = true;
+                _playerAudioSource.clip = _jumpAudio;
+                _playerAudioSource.loop = false;
+                _playerAudioSource.Play();
             }
+        }         
+        else if(Input.GetAxis("Jump") == 0 && _isJumped)
+        {
+            _isJumped = false;
         }
 
         if (!_isGrounded)
@@ -335,21 +363,11 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         }
     }
 
-    void OnCollisionEnter(Collision collision) // Устанавливаем флаг Ground при приземлении
+    public void IsGroundedUpate(Collider collider, bool isOngraund)
     {
-        IsGroundedUpate(collision, true);
-    }
-
-    void OnCollisionExit(Collision collision) // Снимаем флаг Ground при прыжке
-    {
-        IsGroundedUpate(collision, false);
-    }
-
-    private void IsGroundedUpate(Collision collision, bool value)
-    {
-        if (collision.gameObject.tag == ("Ground"))
+        if (collider.gameObject.tag == ("Ground") || collider.gameObject.tag == ("Vision"))
         {
-            _isGrounded = value;
+            _isGrounded = isOngraund;
         }
     }
 

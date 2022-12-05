@@ -21,4 +21,9 @@ public class Tooltipe : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;  
     }
+
+    private void OnDestroy()
+    {
+        _btnOk.onClick.RemoveListener(Close);
+    }
 }

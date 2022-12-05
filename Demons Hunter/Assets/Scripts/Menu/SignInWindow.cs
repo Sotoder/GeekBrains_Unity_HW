@@ -38,8 +38,9 @@ public class SignInWindow : AccountDataWindowBase
         HideStatusImage();
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         _signInButton.onClick.RemoveAllListeners();
     }
 }

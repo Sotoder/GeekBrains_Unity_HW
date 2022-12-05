@@ -88,9 +88,10 @@ public class AccountDataWindowBase : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         _usernameField.onValueChanged.RemoveAllListeners();
         _passwordField.onValueChanged.RemoveAllListeners();
+        _backButton.onClick.RemoveListener(CloseWindow);
     }
 }

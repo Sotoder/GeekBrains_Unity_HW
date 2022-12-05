@@ -18,6 +18,11 @@
         {
             _model.FixedControllers.Add(fixedController);
         }
+
+        if (controller is IClearable clearableController)
+        {
+            _model.ClearableControllers.Add(clearableController);
+        }
     }
 
     public void Update(float deltaTime)
@@ -33,6 +38,14 @@
         for (var element = 0; element < _model.FixedControllers.Count; ++element)
         {
             _model.FixedControllers[element].FixedUpdate(fixedDeltaTime);
+        }
+    }
+
+    public void Clear()
+    {
+        for (var element = 0; element < _model.FixedControllers.Count; ++element)
+        {
+            _model.ClearableControllers[element].Clear();
         }
     }
 }

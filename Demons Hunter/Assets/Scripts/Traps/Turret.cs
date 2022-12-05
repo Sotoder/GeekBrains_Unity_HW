@@ -54,24 +54,18 @@ public class Turret : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         animator.enabled = true;
-        //transform.rotation = new Quaternion(0, 0, 0, 0); // Нужно сделать плавный поворот в начальную позицию, пока не придумал как
-        //_shotTimer = 0f;
-        //_rotationDelay = 0f;
     }
 
     private void PlayerSearch(Quaternion rotateTarget)
     {
         rotateTarget = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, _target.position + (Vector3.up * 1.4f) - transform.position, _speed * Time.deltaTime, 0.0f));
 
-        //Первая попытка ограничить углы поворота, с учетом изменения угла базы, расчитывались относительно поворота базы по оси Y, учитывалось что при смене координат базы
-        //нужны были проверки угла как с логическим И, так и с ИЛИ. Пытался переделать добавив ограничивающие объекты, но при повороте родительского объекта приходилось делать
-        //более сложные условия. Возможно лучше будет переделать работу с коллайдерами и избавиться от текущих условий. Пока так
         if (_base.rotation.eulerAngles.y > 90)
         {
             if ((rotateTarget.eulerAngles.x <= 40 || rotateTarget.eulerAngles.x >= 320) && rotateTarget.eulerAngles.y >= GetMax(270) && rotateTarget.eulerAngles.y <= GetMax(90))
                 transform.rotation = rotateTarget;
         }
-        else if (_base.rotation.eulerAngles.y <= 90) //Если угол поворота базы больше 90 градусов, переходим на конструкцию с логическим ИЛИ
+        else if (_base.rotation.eulerAngles.y <= 90) 
         {
             if ((rotateTarget.eulerAngles.x <= 40 || rotateTarget.eulerAngles.x >= 320) && (rotateTarget.eulerAngles.y >= GetMax(270) || rotateTarget.eulerAngles.y <= GetMax(90)))
                 transform.rotation = rotateTarget;
@@ -84,7 +78,6 @@ public class Turret : MonoBehaviour
         GetComponent<AudioSource>().PlayOneShot(_shotClip);
     }
 
-    //Функция расчета максимального отклонения.
     private float GetMax(float maxRotation)
     {
         if (_base.rotation.eulerAngles.y + maxRotation > 360f) return (_base.rotation.eulerAngles.y + maxRotation) - 360f;

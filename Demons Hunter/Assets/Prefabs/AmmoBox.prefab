@@ -157,6 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sgAmmoCount: 10
   _mgAmmoCount: 100
+  _ammoAudioSource: {fileID: 0}
 --- !u!1 &2547493630895945222
 GameObject:
   m_ObjectHideFlags: 0

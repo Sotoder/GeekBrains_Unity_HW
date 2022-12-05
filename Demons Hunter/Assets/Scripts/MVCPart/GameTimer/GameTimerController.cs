@@ -3,11 +3,12 @@ using PlayFab;
 using System;
 using System.Collections.Generic;
 
-public class GameTimerController: IUpdateble
+public class GameTimerController: IUpdateble, IClearable
 {
     private TimerModel _timerModel;
     private float _timeSpent;
     private float _finalTime;
+    private float _bestTime;
     private string _displayName;
 
     public GameTimerController (TimerModel timerModel)
@@ -41,8 +42,8 @@ public class GameTimerController: IUpdateble
     private void OnSelfPositionLoaded(GetLeaderboardAroundPlayerResult result)
     {
         var leaderboard = result.Leaderboard;
-        float time = (float)leaderboard[0].StatValue / -100;
-        var bestSpan = TimeSpan.FromSeconds(time);
+        _bestTime = (float)leaderboard[0].StatValue / -100;
+        var bestSpan = TimeSpan.FromSeconds(_bestTime);
         var currentSpan = TimeSpan.FromSeconds(_finalTime);
 
         var selfString = "Current time:" + string.Format("{0:00}:{1:00}:{2:00}", (int)currentSpan.TotalHours, currentSpan.Minutes, currentSpan.Seconds) + "\n";
@@ -86,12 +87,13 @@ public class GameTimerController: IUpdateble
         for (int i = 0; i < leaderboard.Count; i++)
         {
             int finalInt = (int)(_finalTime * 100);
+            int bestInt = (int)(_bestTime * 100);
             int leaderInt = -leaderboard[i].StatValue;
             float leaderTime = (float)leaderboard[i].StatValue / -100;
             var leadNameString = "";
             var leadTimeString = "";
 
-            if (leaderInt >= finalInt && !isSelfResultsAdded)
+            if (finalInt < bestInt && leaderInt >= finalInt && !isSelfResultsAdded)
             {
                 var currentSpan = TimeSpan.FromSeconds(_finalTime);
                 leadNameString = $"{leaderboard[i].Position + positionShift}. {_displayName}:\n";
@@ -103,7 +105,7 @@ public class GameTimerController: IUpdateble
                 _timerModel.WinGamePanel.LeadersTimeText.text += leadTimeString;
             }
 
-            if (_displayName == leaderboard[i].DisplayName)
+            if (finalInt < bestInt && _displayName == leaderboard[i].DisplayName)
             {
                 positionShift--;
                 continue;
@@ -132,7 +134,7 @@ public class GameTimerController: IUpdateble
     }
 
 
-    public void Clean()
+    public void Clear()
     {
         _timerModel.Boss.OnBossDead -= LevelEnd;
     }

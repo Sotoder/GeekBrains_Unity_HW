@@ -18,6 +18,7 @@ ScriptsOnlyBuild:
     - EliteEnemy
     - Fractions
     - GameStarter
+    - GroundDetector
     - Heal
     - Indicator
     - LeverAxis
@@ -50,6 +51,12 @@ ScriptsOnlyBuild:
     - PlayFab.PfEditor.PlayFabEditorPrefsSO
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
+    Unity.TextMeshPro.dll:
+    - TMPro.TMP_FontAsset
+    - TMPro.TMP_Settings
+    - TMPro.TMP_SpriteAsset
+    - TMPro.TMP_StyleSheet
+    - TMPro.TextMeshProUGUI
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -115,107 +122,113 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1514}
+      Script: {instanceID: 1544}
     - Class: 114
-      Script: {instanceID: 1582}
+      Script: {instanceID: 1612}
     - Class: 114
-      Script: {instanceID: 1610}
+      Script: {instanceID: 1640}
     - Class: 114
-      Script: {instanceID: 1670}
+      Script: {instanceID: 1702}
     - Class: 114
-      Script: {instanceID: 1682}
+      Script: {instanceID: 1714}
     - Class: 114
-      Script: {instanceID: 1696}
+      Script: {instanceID: 1728}
     - Class: 114
-      Script: {instanceID: 1716}
+      Script: {instanceID: 1748}
     - Class: 114
-      Script: {instanceID: 1752}
+      Script: {instanceID: 1784}
     - Class: 114
-      Script: {instanceID: 1768}
+      Script: {instanceID: 1794}
     - Class: 114
-      Script: {instanceID: 2008}
+      Script: {instanceID: 1800}
     - Class: 114
-      Script: {instanceID: 2046}
+      Script: {instanceID: 2044}
     - Class: 114
-      Script: {instanceID: 2084}
+      Script: {instanceID: 2082}
     - Class: 114
-      Script: {instanceID: 2164}
+      Script: {instanceID: 2120}
     - Class: 114
-      Script: {instanceID: 2196}
+      Script: {instanceID: 2200}
     - Class: 114
-      Script: {instanceID: 2204}
+      Script: {instanceID: 2232}
     - Class: 114
-      Script: {instanceID: 2360}
+      Script: {instanceID: 2240}
     - Class: 114
-      Script: {instanceID: 2374}
+      Script: {instanceID: 2396}
     - Class: 114
-      Script: {instanceID: 2474}
+      Script: {instanceID: 2410}
     - Class: 114
-      Script: {instanceID: 2482}
+      Script: {instanceID: 2510}
     - Class: 114
-      Script: {instanceID: 2524}
+      Script: {instanceID: 2518}
     - Class: 114
-      Script: {instanceID: 2532}
+      Script: {instanceID: 2552}
     - Class: 114
-      Script: {instanceID: 2550}
+      Script: {instanceID: 2560}
     - Class: 114
-      Script: {instanceID: 2644}
+      Script: {instanceID: 2568}
     - Class: 114
-      Script: {instanceID: 2844}
+      Script: {instanceID: 2586}
     - Class: 114
-      Script: {instanceID: 2850}
+      Script: {instanceID: 2680}
     - Class: 114
-      Script: {instanceID: 2856}
+      Script: {instanceID: 2882}
     - Class: 114
-      Script: {instanceID: 2866}
+      Script: {instanceID: 2888}
     - Class: 114
-      Script: {instanceID: 2940}
+      Script: {instanceID: 2894}
     - Class: 114
-      Script: {instanceID: 2954}
+      Script: {instanceID: 2904}
     - Class: 114
-      Script: {instanceID: 3222}
+      Script: {instanceID: 2978}
     - Class: 114
-      Script: {instanceID: 3274}
+      Script: {instanceID: 2992}
     - Class: 114
-      Script: {instanceID: 3494}
+      Script: {instanceID: 3262}
     - Class: 114
-      Script: {instanceID: 3514}
+      Script: {instanceID: 3314}
     - Class: 114
-      Script: {instanceID: 3524}
+      Script: {instanceID: 3534}
     - Class: 114
-      Script: {instanceID: 3544}
+      Script: {instanceID: 3554}
     - Class: 114
       Script: {instanceID: 3564}
     - Class: 114
-      Script: {instanceID: 3596}
+      Script: {instanceID: 3584}
     - Class: 114
-      Script: {instanceID: 3686}
+      Script: {instanceID: 3604}
     - Class: 114
-      Script: {instanceID: 3774}
+      Script: {instanceID: 3636}
+    - Class: 114
+      Script: {instanceID: 3726}
     - Class: 114
       Script: {instanceID: 3816}
     - Class: 114
-      Script: {instanceID: 3884}
+      Script: {instanceID: 3858}
     - Class: 114
-      Script: {instanceID: 3932}
+      Script: {instanceID: 3926}
     - Class: 114
-      Script: {instanceID: 4104}
+      Script: {instanceID: 3974}
     - Class: 114
-      Script: {instanceID: 4202}
+      Script: {instanceID: 4146}
     - Class: 114
-      Script: {instanceID: 4370}
+      Script: {instanceID: 4246}
     - Class: 114
-      Script: {instanceID: 4458}
+      Script: {instanceID: 4414}
     - Class: 114
-      Script: {instanceID: 4518}
+      Script: {instanceID: 4502}
     - Class: 114
-      Script: {instanceID: 4530}
+      Script: {instanceID: 4508}
     - Class: 114
-      Script: {instanceID: 4582}
+      Script: {instanceID: 4564}
     - Class: 114
-      Script: {instanceID: 126926}
+      Script: {instanceID: 4576}
     - Class: 114
-      Script: {instanceID: 126934}
+      Script: {instanceID: 4628}
+    - Class: 114
+      Script: {instanceID: 4648}
+    - Class: 114
+      Script: {instanceID: 4662}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -271,6 +284,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 49
+      Script: {instanceID: 0}
     - Class: 54
       Script: {instanceID: 0}
     - Class: 64
@@ -296,53 +311,61 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1514}
+      Script: {instanceID: 1544}
     - Class: 114
-      Script: {instanceID: 1610}
+      Script: {instanceID: 1640}
     - Class: 114
-      Script: {instanceID: 1670}
+      Script: {instanceID: 1702}
     - Class: 114
-      Script: {instanceID: 2008}
+      Script: {instanceID: 1794}
     - Class: 114
-      Script: {instanceID: 2046}
+      Script: {instanceID: 2044}
     - Class: 114
-      Script: {instanceID: 2204}
+      Script: {instanceID: 2072}
     - Class: 114
-      Script: {instanceID: 2360}
+      Script: {instanceID: 2082}
     - Class: 114
-      Script: {instanceID: 2474}
+      Script: {instanceID: 2240}
     - Class: 114
-      Script: {instanceID: 2644}
+      Script: {instanceID: 2396}
     - Class: 114
-      Script: {instanceID: 2688}
+      Script: {instanceID: 2510}
     - Class: 114
-      Script: {instanceID: 2844}
+      Script: {instanceID: 2680}
     - Class: 114
-      Script: {instanceID: 2856}
+      Script: {instanceID: 2724}
     - Class: 114
-      Script: {instanceID: 2940}
+      Script: {instanceID: 2882}
     - Class: 114
-      Script: {instanceID: 3090}
+      Script: {instanceID: 2894}
     - Class: 114
-      Script: {instanceID: 3212}
+      Script: {instanceID: 2978}
     - Class: 114
-      Script: {instanceID: 3494}
+      Script: {instanceID: 3128}
     - Class: 114
-      Script: {instanceID: 3522}
+      Script: {instanceID: 3252}
     - Class: 114
-      Script: {instanceID: 3524}
+      Script: {instanceID: 3534}
     - Class: 114
-      Script: {instanceID: 3686}
+      Script: {instanceID: 3562}
     - Class: 114
-      Script: {instanceID: 3794}
+      Script: {instanceID: 3564}
     - Class: 114
-      Script: {instanceID: 3816}
+      Script: {instanceID: 3726}
     - Class: 114
-      Script: {instanceID: 3868}
+      Script: {instanceID: 3836}
     - Class: 114
-      Script: {instanceID: 4090}
+      Script: {instanceID: 3858}
     - Class: 114
-      Script: {instanceID: 4530}
+      Script: {instanceID: 3910}
+    - Class: 114
+      Script: {instanceID: 3962}
+    - Class: 114
+      Script: {instanceID: 4132}
+    - Class: 114
+      Script: {instanceID: 4228}
+    - Class: 114
+      Script: {instanceID: 4576}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -502,6 +525,12 @@ ScriptsOnlyBuild:
     className: GroupTrack
   - hash:
       serializedVersion: 2
+      Hash: 669853fafdd959b7abf87c79703f5b3e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: DigitalRuby.PyroParticles
+    className: MeteorSwarmScript
+  - hash:
+      serializedVersion: 2
       Hash: 2e80dc94436954327859a5bea933b5eb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -604,7 +633,7 @@ ScriptsOnlyBuild:
     className: EventSystem
   - hash:
       serializedVersion: 2
-      Hash: f5aea0c04ddcac078100bc22a237b62a
+      Hash: ebd1261a0de9b3183bc368ac8435ea16
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerActions
@@ -646,7 +675,7 @@ ScriptsOnlyBuild:
     className: LeverAxis
   - hash:
       serializedVersion: 2
-      Hash: 619aadab9b2c601a15e83e0e884fb2c6
+      Hash: 9724d114af2127b46fa09afff9f3a3c4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameStarter
@@ -694,6 +723,12 @@ ScriptsOnlyBuild:
     className: TestResultRendererCallback
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: DigitalRuby.PyroParticles
+    className: FireCollisionForwardScript
+  - hash:
+      serializedVersion: 2
       Hash: 748dd2a2a28da4e618912da5ac45684b
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
@@ -718,7 +753,7 @@ ScriptsOnlyBuild:
     className: TMP_SubMesh
   - hash:
       serializedVersion: 2
-      Hash: d69151c91e8ef89168a14257a376d144
+      Hash: d8d55ca759c055004e73bf678c9fb756
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Ammo
@@ -796,7 +831,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 3d592dada9c175da4a26e25f2a32905e
+      Hash: 643a0fb06f6c7da37f2663064448f04e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Heal
@@ -946,6 +981,12 @@ ScriptsOnlyBuild:
     className: Mask
   - hash:
       serializedVersion: 2
+      Hash: 9bc32bf9bef5f4ea94dc3f3d94fa972f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: DigitalRuby.PyroParticles
+    className: FireBaseScript
+  - hash:
+      serializedVersion: 2
       Hash: 58d97bc1ac88012a7f760550714981e7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -1018,7 +1059,7 @@ ScriptsOnlyBuild:
     className: TMP_Settings
   - hash:
       serializedVersion: 2
-      Hash: adb6760b3499cd5fd3a27d7c889c1047
+      Hash: 0c4b8a7e6e14ae94f3e63a27d271f8ae
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PauseMenu
@@ -1046,6 +1087,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Boss
+  - hash:
+      serializedVersion: 2
+      Hash: f2e9964e2184d68450e47cf0989b6210
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: DigitalRuby.PyroParticles
+    className: FireProjectileScript
   - hash:
       serializedVersion: 2
       Hash: fd68d84f33fad85aac38f2739c0ee270
@@ -1082,6 +1129,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: SignalEmitter
+  - hash:
+      serializedVersion: 2
+      Hash: 9bc32bf9bef5f4ea94dc3f3d94fa972f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: DigitalRuby.PyroParticles
+    className: FireConstantBaseScript
   - hash:
       serializedVersion: 2
       Hash: 7d37d09af363b70d55d9408e5fb34050
@@ -1132,34 +1185,10 @@ ScriptsOnlyBuild:
     className: FireLightScript
   - hash:
       serializedVersion: 2
-      Hash: 669853fafdd959b7abf87c79703f5b3e
+      Hash: a9c36a951ce48675a86a45b37edc2c33
     assemblyName: Assembly-CSharp.dll
-    namespaceName: DigitalRuby.PyroParticles
-    className: MeteorSwarmScript
-  - hash:
-      serializedVersion: 2
-      Hash: f2e9964e2184d68450e47cf0989b6210
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: DigitalRuby.PyroParticles
-    className: FireProjectileScript
-  - hash:
-      serializedVersion: 2
-      Hash: 9bc32bf9bef5f4ea94dc3f3d94fa972f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: DigitalRuby.PyroParticles
-    className: FireConstantBaseScript
-  - hash:
-      serializedVersion: 2
-      Hash: 9bc32bf9bef5f4ea94dc3f3d94fa972f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: DigitalRuby.PyroParticles
-    className: FireBaseScript
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: DigitalRuby.PyroParticles
-    className: FireCollisionForwardScript
+    namespaceName: 
+    className: GroundDetector
   platform: 5
   scenePathNames:
   - Assets/Scenes/Menu.unity

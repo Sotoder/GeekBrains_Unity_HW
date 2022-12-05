@@ -40,4 +40,10 @@ public class WinGame : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    private void OnDestroy()
+    {
+        _btnExit.onClick.RemoveListener(QuitGame);
+        _btnRestart.onClick.RemoveListener(Restart);
+    }
 }

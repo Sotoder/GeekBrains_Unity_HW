@@ -18,6 +18,7 @@ namespace DigitalRuby.PyroParticles
         public LoopingAudioSource(MonoBehaviour script, AudioSource audioSource, float startMultiplier, float stopMultiplier)
         {
             AudioSource = audioSource;
+            AudioSource.volume = 0.05f;
             if (audioSource != null)
             {
                 AudioSource.loop = true;
@@ -25,7 +26,7 @@ namespace DigitalRuby.PyroParticles
                 AudioSource.Stop();
             }
 
-            TargetVolume = 0.2f;
+            TargetVolume = 0.1f;
 
             this.startMultiplier = currentMultiplier = startMultiplier;
             this.stopMultiplier = stopMultiplier;
