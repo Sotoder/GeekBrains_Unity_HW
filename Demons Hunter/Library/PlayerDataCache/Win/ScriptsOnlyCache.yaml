@@ -60,10 +60,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -965,7 +963,7 @@ ScriptsOnlyBuild:
     className: ElitZone
   - hash:
       serializedVersion: 2
-      Hash: 7320a6c1f0cc7a4e402c89fa3245b941
+      Hash: f828317f8b4a882a9ac82c2697363980
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DoorButton
