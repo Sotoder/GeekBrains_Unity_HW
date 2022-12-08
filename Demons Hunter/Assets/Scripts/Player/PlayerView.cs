@@ -5,16 +5,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerActions : MonoBehaviour, ITakingDamage
+public class PlayerView : MonoBehaviour, ITakingDamage
 {
     public Action OnGiveRespect;
 
+    [SerializeField] private GameObject _head;
+
+    public GameObject Head => _head;
+
+    private Rigidbody _rigidbody;
+    private Animator _animator;
+
+    public Rigidbody Rigidbody => _rigidbody;
+    public Animator Animator => _animator;
+
+
     //Params
-    [SerializeField] private int _maxHP = 100;
+    [SerializeField] private int _maxHP = 100; //in playerSO
     [SerializeField] private int _maxSGAmmo = 50;
     [SerializeField] private int _maxMGAmmo = 500;
     [SerializeField] private GameObject _hpBar;
-    [SerializeField] private GameObject _head;
     [SerializeField] private GameObject _menuPanel;
     [SerializeField] private GameObject _endGamePanel;
     [SerializeField] private Image _hpBarImage;
@@ -48,7 +58,6 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     private int _curentWeaponMaxAmmo;
     private int _leverCount = 0;
     private int _secretBossDamageModifer = 1;
-    private Animator animator;
     private AudioSource _playerAudioSource;
     private AudioSource _weaponAudioSource;
     private bool _isDead = false;
@@ -66,13 +75,12 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
 
     //Move Player
-    [SerializeField] private float sensetivity;
-    [SerializeField] private float _speed;
-    [SerializeField] private float _speedMult;
+    [SerializeField] private float sensetivity; //PlayerSO
+    [SerializeField] private float _speed; //PlayerSO
+    [SerializeField] private float _speedMult; //PlayerSO
     [SerializeField] private float _jumpForce = 300f;
     [SerializeField] private float _gravity = 9.18f;
     private bool _isGrounded;
-    private Rigidbody _rb;
     private Vector3 _direction;
     private float mouseLookX = 0f;
     private float mouseLookY = 0f;
@@ -110,8 +118,8 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
             [new Color(0f, 1f, 0f, 1f)] = _blueKeyImage
         };
 
-        _rb = gameObject.GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
+        _rigidbody = gameObject.GetComponent<Rigidbody>();
+        _animator = GetComponent<Animator>();
         _playerAudioSource = GetComponent<AudioSource>();
 
 
@@ -123,8 +131,8 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         _weaponAudioSource.Stop();
         _curentWeaponAmmo = _mgAmmo;
         _curentWeaponMaxAmmo = _maxMGAmmo;
-        animator.SetBool("MGun", true);
-        animator.SetBool("SGun", false);
+        _animator.SetBool("MGun", true);
+        _animator.SetBool("SGun", false);
 
         PlayFabClientAPI.AddUserVirtualCurrency(new AddUserVirtualCurrencyRequest()
         {
@@ -157,8 +165,8 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
         if (Input.GetButton("Weapon1"))
         {
-            animator.SetBool("MGun", true);
-            animator.SetBool("SGun", false);
+            _animator.SetBool("MGun", true);
+            _animator.SetBool("SGun", false);
             w.DestroyWeapon();
             _weaponPref = _mgPref;
             _weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, _head.transform.rotation);
@@ -171,8 +179,8 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         }
         else if (Input.GetButton("Weapon2"))
         {
-            animator.SetBool("MGun", false);
-            animator.SetBool("SGun", true);
+            _animator.SetBool("MGun", false);
+            _animator.SetBool("SGun", true);
             w.DestroyWeapon();
             _weaponPref = _sgPref;
             _weapon = Instantiate(_weaponPref, _weaponPositionAxie.position, _head.transform.rotation);
@@ -186,10 +194,10 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
         if (Input.GetAxis("Fire1") == 1f && w.IsReload && _curentWeaponAmmo > 0)
         {
-            animator.SetBool("Fire", true);
+            _animator.SetBool("Fire", true);
             w.Fire(_secretBossDamageModifer);
             _curentWeaponAmmo--;
-            if (animator.GetBool("MGun"))
+            if (_animator.GetBool("MGun"))
             {
                 WeaponSoundStart();
                 _mgAmmo--;
@@ -198,8 +206,8 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
         }  else if (Input.GetButtonUp("Fire1") || _curentWeaponAmmo == 0)
         {
-            if (animator.GetBool("MGun")) WeaponSoundStop();
-            animator.SetBool("Fire", false);
+            if (_animator.GetBool("MGun")) WeaponSoundStop();
+            _animator.SetBool("Fire", false);
         } 
 
 
@@ -272,11 +280,11 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         {
             if (_direction != Vector3.zero)
             {
-                animator.SetBool("Run", true);
+                _animator.SetBool("Run", true);
             }
             else
             {
-                animator.SetBool("Run", false);
+                _animator.SetBool("Run", false);
                 _playerAudioSource.Stop();
             }
         }
@@ -341,9 +349,9 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
     private void MovementLogic(Vector3 speed)
     {
         var v = transform.TransformDirection(speed);
-        v.y = _rb.velocity.y;
+        v.y = _rigidbody.velocity.y;
 
-        _rb.velocity = v;
+        _rigidbody.velocity = v;
     }
 
     private void JumpLogic()
@@ -352,7 +360,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         {
             if (_isGrounded && !_isJumped)
             {
-                _rb.AddForce(Vector3.up * _jumpForce * 50);
+                _rigidbody.AddForce(Vector3.up * _jumpForce * 50);
                 _isJumped = true;
                 _playerAudioSource.clip = _jumpAudio;
                 _playerAudioSource.loop = false;
@@ -366,7 +374,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
         if (!_isGrounded)
         {
-            _rb.AddForce(Vector3.down * _gravity * 100);
+            _rigidbody.AddForce(Vector3.down * _gravity * 100);
         }
     }
 
@@ -429,7 +437,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
 
     private void Death()
     {
-        animator.SetTrigger("Death");
+        _animator.SetTrigger("Death");
         _isDead = true;
         AudioListener.volume = 0;
         Cursor.lockState = CursorLockMode.None;
@@ -453,7 +461,7 @@ public class PlayerActions : MonoBehaviour, ITakingDamage
         if (_mgAmmo > _maxMGAmmo) _mgAmmo = _maxMGAmmo;
         if (_sgAmmo > _maxSGAmmo) _sgAmmo = _maxSGAmmo;
 
-        if (animator.GetBool("MGun"))
+        if (_animator.GetBool("MGun"))
         {
             _curentWeaponAmmo = _mgAmmo;
         }

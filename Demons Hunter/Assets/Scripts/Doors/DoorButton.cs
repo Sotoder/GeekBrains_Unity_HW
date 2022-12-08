@@ -6,7 +6,7 @@ public class DoorButton : MonoBehaviour
     [SerializeField] GameObject _respectTextGameObject;
 
     private bool _isOpen;
-    private PlayerActions _player;
+    private PlayerView _player;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,7 +14,7 @@ public class DoorButton : MonoBehaviour
         {
             if (_player == null)
             {
-                _player = other.GetComponent<PlayerActions>();
+                _player = other.GetComponent<PlayerView>();
             }
 
             if (!_isOpen)

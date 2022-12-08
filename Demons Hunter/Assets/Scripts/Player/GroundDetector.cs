@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GroundDetector : MonoBehaviour
 {
-    [SerializeField] private PlayerActions _player;
+    [SerializeField] private PlayerView _player;
 
     private void OnTriggerEnter(Collider other)
     {

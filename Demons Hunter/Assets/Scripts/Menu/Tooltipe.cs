@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Tooltipe : MonoBehaviour
 {
     [SerializeField] Button _btnOk;
-    [SerializeField] PlayerActions _player;
+    [SerializeField] PlayerView _player;
 
     private void Awake()
     {

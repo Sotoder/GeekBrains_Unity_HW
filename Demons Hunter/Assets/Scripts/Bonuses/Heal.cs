@@ -11,7 +11,7 @@ public class Heal : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<PlayerActions>().GetHeal(_healCount);
+            other.GetComponent<PlayerView>().GetHeal(_healCount);
             _healAudioSource.Play();
             Destroy(gameObject);
         }

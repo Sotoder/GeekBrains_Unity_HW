@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class GameStarter : MonoBehaviour
 {
-    [SerializeField] private PlayerActions _player;
+    [SerializeField] private PlayerView _player;
     [SerializeField] private GameInitalizatorModel _gameInitalizatorModel;
     [SerializeField] private GameLoaderModel _gameLoaderModel;
 

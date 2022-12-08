@@ -88,7 +88,7 @@ public class Boss : MonoBehaviour,ITakingDamage, IEnemy
     private void BitePlayer()
     {
         if (_isDead) return;
-        player.GetComponent<PlayerActions>().TakingDamage(_damage, gameObject.transform);
+        player.GetComponent<PlayerView>().TakingDamage(_damage, gameObject.transform);
     }
 
     public void Attack(GameObject _player)
@@ -155,7 +155,7 @@ public class Boss : MonoBehaviour,ITakingDamage, IEnemy
         _animator.SetTrigger("Death");
         if (_isSecret)
         {
-            player.GetComponent<PlayerActions>().SecretBossDamageModifer = 3;
+            player.GetComponent<PlayerView>().SecretBossDamageModifer = 3;
             Destroy(gameObject, 1.5f);
         }
 

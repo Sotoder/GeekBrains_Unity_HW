@@ -6,7 +6,7 @@ public class LeverAxis : MonoBehaviour
     [SerializeField] private GameObject _respectTextGameObject;
 
     private Animator animator;
-    private PlayerActions _player;
+    private PlayerView _player;
     private bool _isNotRotate = true;
 
     private void Awake()
@@ -20,7 +20,7 @@ public class LeverAxis : MonoBehaviour
         {
             if (_player == null)
             {
-                _player = other.GetComponent<PlayerActions>();
+                _player = other.GetComponent<PlayerView>();
             }
 
             if(_isNotRotate)

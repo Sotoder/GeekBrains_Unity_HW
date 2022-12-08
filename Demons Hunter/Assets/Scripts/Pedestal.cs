@@ -11,7 +11,7 @@ public class Pedestal : MonoBehaviour
 
     private MeshRenderer _mr;
     private Color _color;
-    private PlayerActions _player;
+    private PlayerView _player;
 
     private void Awake()
     {
@@ -24,7 +24,7 @@ public class Pedestal : MonoBehaviour
         {
             if(_player == null)
             {
-                _player = other.GetComponent<PlayerActions>();
+                _player = other.GetComponent<PlayerView>();
             }
 
             if (_player.KeyContainer[_color] == 1)

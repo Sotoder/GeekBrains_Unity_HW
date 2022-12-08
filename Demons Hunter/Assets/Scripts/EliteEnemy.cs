@@ -55,7 +55,7 @@ public class EliteEnemy : MonoBehaviour, ITakingDamage, IEnemy
             _animator.SetBool("Stay", false);
             if (Vector3.Distance(_player.transform.position, transform.position) <= _rangeAttack)
             {
-                if (!_player.GetComponent<PlayerActions>().IsDead)
+                if (!_player.GetComponent<PlayerView>().IsDead)
                 {
                     _animator.SetBool("Attack", true);
                 }
@@ -84,7 +84,7 @@ public class EliteEnemy : MonoBehaviour, ITakingDamage, IEnemy
 
     private void BitePlayer()
     {
-        _player.GetComponent<PlayerActions>().TakingDamage(_damage, gameObject.transform);
+        _player.GetComponent<PlayerView>().TakingDamage(_damage, gameObject.transform);
     }
 
     public void StartAttack()
@@ -153,7 +153,7 @@ public class EliteEnemy : MonoBehaviour, ITakingDamage, IEnemy
     private void Death()
     {
         _isDead = true;
-        _player.GetComponent<PlayerActions>().AddKey(_color);
+        _player.GetComponent<PlayerView>().AddKey(_color);
         _agent.enabled = false;
         _audioSource.enabled = false;
         _animator.SetTrigger("Death");

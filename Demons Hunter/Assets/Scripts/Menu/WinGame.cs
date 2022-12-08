@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class WinGame : MonoBehaviour
 {
-    [SerializeField] PlayerActions _player;
+    [SerializeField] PlayerView _player;
     [SerializeField] Button _btnExit;
     [SerializeField] Button _btnRestart;
     [SerializeField] Text _leadersNameText;

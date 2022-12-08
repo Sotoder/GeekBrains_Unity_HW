@@ -80,7 +80,7 @@
     <Compile Include="Assets\Scripts\Weapons\Bullet.cs" />
     <Compile Include="Assets\Scripts\ITakingDamage.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Spawn System\CFX_SpawnSystem.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerActions.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerView.cs" />
     <Compile Include="Assets\Scripts\EliteEnemy.cs" />
     <Compile Include="Assets\Scripts\LeverAxis.cs" />
     <Compile Include="Assets\Scripts\MVCPart\Core\GameStarter.cs" />
@@ -134,6 +134,23 @@
     <Compile Include="Assets\PyroParticles\Prefab\Script\FireLightScript.cs" />
     <Compile Include="Assets\Scripts\Player\GroundDetector.cs" />
     <Compile Include="Assets\Scripts\MVCPart\Models\GameController.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\PlayerConfiguration.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\PlayerSpawnModel.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\SpawnControllerModel.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\InputControllerModel.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\SpawnController.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\InputController.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\IInputModel.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\PlayerModel.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\ISubscribavleProperty.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\Health.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\RotatePlayerControllerModel.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\MovePlayerControllerModel.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\MovePlayerController.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\RotatePlayerController.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\WeaponController.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\IWeaponModel.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\PlayerAnimationController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class LooseGame : MonoBehaviour
 {
-    [SerializeField] PlayerActions _player;
+    [SerializeField] PlayerView _player;
     [SerializeField] Button _btnExit;
     [SerializeField] Button _btnRestart;
 

@@ -74,7 +74,7 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
             _animator.SetBool("Stay", false);
             if (Vector3.Distance(player.transform.position, transform.position) <= _rangeAttack)
             {
-                if (!player.GetComponent<PlayerActions>().IsDead)
+                if (!player.GetComponent<PlayerView>().IsDead)
                 {
                     _animator.SetBool("Attack", true);
                 } else
@@ -101,7 +101,7 @@ public class RegEnemy : MonoBehaviour, ITakingDamage, IEnemy
 
     private void BitePlayer()
     {
-        player.GetComponent<PlayerActions>().TakingDamage(_damage, gameObject.transform);
+        player.GetComponent<PlayerView>().TakingDamage(_damage, gameObject.transform);
     }
     public void StartAttack(GameObject _player)
     {

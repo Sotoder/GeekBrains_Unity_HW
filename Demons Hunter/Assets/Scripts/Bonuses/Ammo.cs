@@ -12,7 +12,7 @@ public class Ammo : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<PlayerActions>().GetAmmo(_sgAmmoCount, _mgAmmoCount);
+            other.GetComponent<PlayerView>().GetAmmo(_sgAmmoCount, _mgAmmoCount);
             _ammoAudioSource.Play();
             Destroy(gameObject);
         }

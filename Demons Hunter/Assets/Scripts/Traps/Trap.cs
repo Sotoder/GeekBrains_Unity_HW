@@ -25,7 +25,7 @@ public class Trap : MonoBehaviour
             if (_stayTime >= _activationTime)
             {
                 _stayTime = 0f;
-                other.gameObject.GetComponent<PlayerActions>().TakingDamage(_damage, gameObject.transform);
+                other.gameObject.GetComponent<PlayerView>().TakingDamage(_damage, gameObject.transform);
                 _particleObject.SetActive(true);
                 GetComponent<AudioSource>().Play();
                 Destroy(_mineBody);
@@ -60,7 +60,7 @@ public class Trap : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
-            collision.gameObject.GetComponent<PlayerActions>().TakingDamage(_damage, gameObject.transform);
+            collision.gameObject.GetComponent<PlayerView>().TakingDamage(_damage, gameObject.transform);
             _isPressed = true;
         }
     }

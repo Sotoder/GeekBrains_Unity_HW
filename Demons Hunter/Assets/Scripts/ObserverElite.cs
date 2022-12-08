@@ -30,7 +30,7 @@ public class ObserverElite : MonoBehaviour
     void Update()
     {
         var enemy = _body.GetComponent<EliteEnemy>();
-        if (m_IsPlayerInRange && !_player.GetComponent<PlayerActions>().IsDead)
+        if (m_IsPlayerInRange && !_player.GetComponent<PlayerView>().IsDead)
         {
             enemy.StartAttack();
         }
