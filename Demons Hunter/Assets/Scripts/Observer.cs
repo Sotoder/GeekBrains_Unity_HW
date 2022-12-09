@@ -2,17 +2,40 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Observer : MonoBehaviour
 {
-    [SerializeField] private GameObject _body;
+    [SerializeField] private RegEnemy _enemy;
+    [SerializeField] private LayerMask _layerMask;
     bool m_IsPlayerInRange = false;
     private WaitForFixedUpdate _waitForFixedUpdate = new WaitForFixedUpdate();
     private GameObject _player;
+    private Coroutine _coroutine;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
+        {
+            SearchPlayer(other);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            SearchPlayer(other);
+        }
+    }
+
+    private void SearchPlayer(Collider other)
+    {
+        RaycastHit hit;
+        Ray ray = new Ray(transform.position, other.gameObject.transform.position - transform.position);
+        Physics.Raycast(ray, out hit, Mathf.Infinity, _layerMask);
+
+        if (hit.collider.CompareTag("Player"))
         {
             m_IsPlayerInRange = true;
             _player = other.gameObject;
@@ -29,16 +52,21 @@ public class Observer : MonoBehaviour
 
     void Update()
     {
-        var enemy = _body.GetComponent<RegEnemy>();
         if (m_IsPlayerInRange && !_player.GetComponent<PlayerActions>().IsDead)
         {
             
-            enemy.StopPatrol();
-            enemy.StartAttack(_player);
+            _enemy.StopPatrol();
+            _enemy.StartAttack(_player);
 
-        } else
+            if(_coroutine != null)
+            {
+                StopCoroutine(_coroutine);
+                _coroutine = null;
+            }
+        } 
+        else
         {
-            StartCoroutine(GoBackDelay(enemy));
+            _coroutine = StartCoroutine(GoBackDelay(_enemy));
         }
     }
 

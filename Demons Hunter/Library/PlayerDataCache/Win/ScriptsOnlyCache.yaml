@@ -20,6 +20,7 @@ ScriptsOnlyBuild:
     - GameStarter
     - GroundDetector
     - Heal
+    - ImprovedButton
     - Indicator
     - LeverAxis
     - LooseGame
@@ -156,85 +157,87 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2198}
     - Class: 114
-      Script: {instanceID: 2230}
+      Script: {instanceID: 2232}
     - Class: 114
-      Script: {instanceID: 2238}
+      Script: {instanceID: 2240}
     - Class: 114
-      Script: {instanceID: 2394}
+      Script: {instanceID: 2396}
     - Class: 114
-      Script: {instanceID: 2408}
+      Script: {instanceID: 2410}
     - Class: 114
-      Script: {instanceID: 2508}
+      Script: {instanceID: 2456}
     - Class: 114
-      Script: {instanceID: 2516}
+      Script: {instanceID: 2512}
     - Class: 114
-      Script: {instanceID: 2550}
+      Script: {instanceID: 2520}
     - Class: 114
-      Script: {instanceID: 2558}
+      Script: {instanceID: 2554}
     - Class: 114
-      Script: {instanceID: 2566}
+      Script: {instanceID: 2562}
     - Class: 114
-      Script: {instanceID: 2584}
+      Script: {instanceID: 2570}
     - Class: 114
-      Script: {instanceID: 2678}
+      Script: {instanceID: 2588}
     - Class: 114
-      Script: {instanceID: 2880}
+      Script: {instanceID: 2682}
     - Class: 114
-      Script: {instanceID: 2886}
+      Script: {instanceID: 2884}
     - Class: 114
-      Script: {instanceID: 2892}
+      Script: {instanceID: 2890}
     - Class: 114
-      Script: {instanceID: 2902}
+      Script: {instanceID: 2896}
     - Class: 114
-      Script: {instanceID: 2976}
+      Script: {instanceID: 2906}
     - Class: 114
-      Script: {instanceID: 2990}
+      Script: {instanceID: 2980}
     - Class: 114
-      Script: {instanceID: 3260}
+      Script: {instanceID: 2994}
     - Class: 114
-      Script: {instanceID: 3312}
+      Script: {instanceID: 3266}
     - Class: 114
-      Script: {instanceID: 3532}
+      Script: {instanceID: 3318}
     - Class: 114
-      Script: {instanceID: 3552}
+      Script: {instanceID: 3538}
     - Class: 114
-      Script: {instanceID: 3562}
+      Script: {instanceID: 3558}
     - Class: 114
-      Script: {instanceID: 3582}
+      Script: {instanceID: 3568}
     - Class: 114
-      Script: {instanceID: 3602}
+      Script: {instanceID: 3588}
     - Class: 114
-      Script: {instanceID: 3634}
+      Script: {instanceID: 3608}
     - Class: 114
-      Script: {instanceID: 3724}
+      Script: {instanceID: 3640}
     - Class: 114
-      Script: {instanceID: 3814}
+      Script: {instanceID: 3730}
     - Class: 114
-      Script: {instanceID: 3856}
+      Script: {instanceID: 3820}
     - Class: 114
-      Script: {instanceID: 3924}
+      Script: {instanceID: 3862}
     - Class: 114
-      Script: {instanceID: 3972}
+      Script: {instanceID: 3930}
     - Class: 114
-      Script: {instanceID: 4144}
+      Script: {instanceID: 3978}
     - Class: 114
-      Script: {instanceID: 4244}
+      Script: {instanceID: 4150}
     - Class: 114
-      Script: {instanceID: 4412}
+      Script: {instanceID: 4250}
     - Class: 114
-      Script: {instanceID: 4500}
+      Script: {instanceID: 4418}
     - Class: 114
       Script: {instanceID: 4506}
     - Class: 114
-      Script: {instanceID: 4562}
+      Script: {instanceID: 4512}
     - Class: 114
-      Script: {instanceID: 4574}
+      Script: {instanceID: 4568}
     - Class: 114
-      Script: {instanceID: 4626}
+      Script: {instanceID: 4580}
     - Class: 114
-      Script: {instanceID: 4646}
+      Script: {instanceID: 4632}
     - Class: 114
-      Script: {instanceID: 4660}
+      Script: {instanceID: 4652}
+    - Class: 114
+      Script: {instanceID: 4666}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -331,47 +334,47 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2080}
     - Class: 114
-      Script: {instanceID: 2238}
+      Script: {instanceID: 2240}
     - Class: 114
-      Script: {instanceID: 2394}
+      Script: {instanceID: 2396}
     - Class: 114
-      Script: {instanceID: 2508}
+      Script: {instanceID: 2456}
     - Class: 114
-      Script: {instanceID: 2678}
+      Script: {instanceID: 2512}
     - Class: 114
-      Script: {instanceID: 2722}
+      Script: {instanceID: 2682}
     - Class: 114
-      Script: {instanceID: 2880}
+      Script: {instanceID: 2726}
     - Class: 114
-      Script: {instanceID: 2892}
+      Script: {instanceID: 2884}
     - Class: 114
-      Script: {instanceID: 2976}
+      Script: {instanceID: 2896}
     - Class: 114
-      Script: {instanceID: 3126}
+      Script: {instanceID: 3132}
     - Class: 114
-      Script: {instanceID: 3250}
+      Script: {instanceID: 3256}
     - Class: 114
-      Script: {instanceID: 3532}
+      Script: {instanceID: 3538}
     - Class: 114
-      Script: {instanceID: 3560}
+      Script: {instanceID: 3566}
     - Class: 114
-      Script: {instanceID: 3562}
+      Script: {instanceID: 3568}
     - Class: 114
-      Script: {instanceID: 3724}
+      Script: {instanceID: 3730}
     - Class: 114
-      Script: {instanceID: 3834}
+      Script: {instanceID: 3840}
     - Class: 114
-      Script: {instanceID: 3856}
+      Script: {instanceID: 3862}
     - Class: 114
-      Script: {instanceID: 3908}
+      Script: {instanceID: 3914}
     - Class: 114
-      Script: {instanceID: 3960}
+      Script: {instanceID: 3966}
     - Class: 114
-      Script: {instanceID: 4130}
+      Script: {instanceID: 4136}
     - Class: 114
-      Script: {instanceID: 4226}
+      Script: {instanceID: 4232}
     - Class: 114
-      Script: {instanceID: 4574}
+      Script: {instanceID: 4580}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -621,6 +624,12 @@ ScriptsOnlyBuild:
     className: Bullet
   - hash:
       serializedVersion: 2
+      Hash: 69415240821be7986b27e72bf9609a30
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ImprovedButton
+  - hash:
+      serializedVersion: 2
       Hash: cf9f5cf2c3145a37ac07f00e50e460f9
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -681,7 +690,7 @@ ScriptsOnlyBuild:
     className: LeverAxis
   - hash:
       serializedVersion: 2
-      Hash: 9724d114af2127b46fa09afff9f3a3c4
+      Hash: c6fcff284ce1d98109eedfe62b2e591a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameStarter
@@ -1035,7 +1044,7 @@ ScriptsOnlyBuild:
     className: PhysicsRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 334908baffa56abce59f324eabaafbf2
+      Hash: e5eacca7fd2774dbf7b87e2d87629210
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MainMenuController
@@ -1155,7 +1164,7 @@ ScriptsOnlyBuild:
     className: ActivationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: e3c00876eaff22a23d6f6478e6fc0751
+      Hash: 1a431d5a7b00635ee35da053834e03ae
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Observer
