@@ -4472,7 +4472,7 @@ MonoBehaviour:
     - {fileID: 1984865871}
     _menuAudioSource: {fileID: 2082819566}
     _onSelectClip: {fileID: 8300000, guid: 8f6a60243d58f804a978b90fef5a9acf, type: 3}
-    _onClickClip: {fileID: 8300000, guid: 892098ca78da1324f8acfe2193e6aac6, type: 3}
+    _onClickClip: {fileID: 8300000, guid: 41092b7dd328a744e8f08cd961aced5e, type: 3}
 --- !u!1 &1108661090
 GameObject:
   m_ObjectHideFlags: 0
