@@ -1,6 +1,5 @@
 using PlayFab;
 using PlayFab.ClientModels;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,10 +17,16 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Button _btnExit;
     [SerializeField] private GameObject _playFabButtonGroup;
     [SerializeField] private GameObject _menuButtonGroup;
-    [SerializeField] private AudioSource _menuAudioSorce;
+    [SerializeField] private AudioSource _menuMusicAudioSorce;
+    [SerializeField] private UIAudioControllerModel _uiAudioControllerModel;
+
+    private UIAudioController _uIAudioController;
 
     private void Awake()
     {
+        _uIAudioController = new UIAudioController(_uiAudioControllerModel);
+        _uIAudioController.SiginButtons();
+
         _btnCreateAccaunt.onClick.AddListener(OpenCreateWindow);
         _btnLogin.onClick.AddListener(OpenLoginWindow);
         _btnStart.onClick.AddListener(StartGame);
@@ -83,7 +88,7 @@ public class MainMenuController : MonoBehaviour
             var graphic = int.Parse(result.Data[PlayFabConstants.GRAPHIC_SETTINGS].Value);
             _settingsWindow.SetSettings(volume, musicVolume, graphic);
             _menuButtonGroup.SetActive(true);
-            _menuAudioSorce.Play();
+            _menuMusicAudioSorce.Play();
         }
     }
 
@@ -91,7 +96,7 @@ public class MainMenuController : MonoBehaviour
     {
         _menuButtonGroup.SetActive(true);
         _settingsWindow.SetSettings(0.3f,1f, 1);
-        _menuAudioSorce.Play();
+        _menuMusicAudioSorce.Play();
     }
 
     private void OpenCreateWindow()
@@ -112,7 +117,7 @@ public class MainMenuController : MonoBehaviour
     private void Logout()
     {
         PlayFabClientAPI.ForgetAllCredentials();
-        _menuAudioSorce.Stop();
+        _menuMusicAudioSorce.Stop();
         _menuButtonGroup.SetActive(false);
         _playFabButtonGroup.SetActive(true);
     }
@@ -138,8 +143,9 @@ public class MainMenuController : MonoBehaviour
         _btnLogout.onClick.RemoveListener(Logout);
         _btnExit.onClick.RemoveListener(ExitGame);
 
-
         _signInWindow.OnLogin -= ShowMenuButtons;
         _createAccountWindow.OnLogin -= ShowMenuButtons;
+
+        _uIAudioController.Clear();
     }
 }

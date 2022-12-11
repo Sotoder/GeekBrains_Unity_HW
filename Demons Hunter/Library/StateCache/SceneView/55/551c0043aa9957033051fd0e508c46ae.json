@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"m_AlwaysRefresh":false,"showFog":true,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true,"showVisualEffectGraphs":true,"m_FxEnabled":true},"in2DMode":false,"pivot":{"x":0.6222245097160339,"y":1.126945972442627,"z":-16.663673400878908},"rotation":{"x":0.05759098008275032,"y":0.8314676880836487,"z":-0.5457566976547241,"w":0.08829689770936966},"size":1.2635002136230469,"orthographic":false}
+=======
+﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"m_AlwaysRefresh":false,"showFog":true,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true,"showVisualEffectGraphs":true,"m_FxEnabled":true},"in2DMode":false,"pivot":{"x":-17.809999465942384,"y":-0.009999997913837433,"z":-28.420000076293947},"rotation":{"x":-0.28673800826072695,"y":-0.6739126443862915,"z":0.32212886214256289,"w":-0.6001447439193726},"size":0.9570714831352234,"orthographic":false}
+>>>>>>> Diploma_solo_game

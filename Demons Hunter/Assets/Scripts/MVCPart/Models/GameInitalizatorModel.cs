@@ -6,8 +6,8 @@ using UnityEngine;
 public class GameInitalizatorModel
 {
     [SerializeField] private TimerModel _timerModel;
-    [SerializeField] private SpawnControllerModel _spawnControllerModel;
+    [SerializeField] private UIAudioControllerModel _uiAudioControllerModel;
 
     public TimerModel TimerModel => _timerModel;
-    public SpawnControllerModel SpawnControllerModel => _spawnControllerModel;
+    public UIAudioControllerModel UIAudioControllerModel => _uiAudioControllerModel;
 }

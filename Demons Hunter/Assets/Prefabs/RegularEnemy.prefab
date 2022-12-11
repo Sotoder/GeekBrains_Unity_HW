@@ -1569,7 +1569,7 @@ GameObject:
   - component: {fileID: 1600132201380766952}
   - component: {fileID: 225321576058189406}
   - component: {fileID: 911460454169990908}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PointOfView
   m_TagString: Vision
   m_Icon: {fileID: 0}
@@ -1615,7 +1615,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b287ce93f9e7e34187bf6c23d53f04b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _body: {fileID: 2312418704616459596}
+  _enemy: {fileID: 7882193127523093036}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 55
 --- !u!1 &4245471346008549201
 GameObject:
   m_ObjectHideFlags: 0

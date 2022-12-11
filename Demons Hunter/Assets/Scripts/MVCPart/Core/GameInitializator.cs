@@ -21,7 +21,9 @@ public class GameInitializator
         var playerController = new PlayerController(playerModel, inputController.InputModel, playerConfig, weaponController);
 
         var timerController = new GameTimerController(gameInitalizatorModel.TimerModel);
+        var uiAudioController = new UIAudioController(gameInitalizatorModel.UIAudioControllerModel);
 
+        uiAudioController.SiginButtons();
         gameController.Add(timerController);
         gameController.Add(inputController);
         gameController.Add(playerController);

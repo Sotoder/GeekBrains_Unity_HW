@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 18
+  controlID: 144
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -147,7 +147,11 @@ MonoBehaviour:
   m_MinSize: {x: 201, y: 442}
   m_MaxSize: {x: 4001, y: 8042}
   vertical: 1
+<<<<<<< HEAD
   controlID: 119
+=======
+  controlID: 145
+>>>>>>> Diploma_solo_game
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -225,7 +229,7 @@ MonoBehaviour:
   m_MinSize: {x: 478, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 19
+  controlID: 42
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -246,11 +250,11 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 906
-    height: 642
+    height: 650
   m_MinSize: {x: 478, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 20
+  controlID: 43
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -268,8 +272,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 380
-    height: 642
+    width: 368
+    height: 650
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 18}
@@ -293,10 +297,10 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 380
+    x: 368
     y: 0
-    width: 526
-    height: 642
+    width: 538
+    height: 650
   m_MinSize: {x: 276, y: 71}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 19}
@@ -320,9 +324,9 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 642
+    y: 650
     width: 906
-    height: 305
+    height: 297
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
   m_ActualView: {fileID: 20}
@@ -507,7 +511,7 @@ MonoBehaviour:
     m_VAllowExceedBaseRangeMax: 1
     m_ScaleWithWindow: 0
     m_HSlider: 0
-    m_VSlider: 1
+    m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
     m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
@@ -520,18 +524,18 @@ MonoBehaviour:
       y: 21
       width: 1013
       height: 433
-    m_Scale: {x: 0.4253423, y: 0.4253423}
-    m_Translation: {x: 506.5, y: 204.96487}
+    m_Scale: {x: 0.40092596, y: 0.40092593}
+    m_Translation: {x: 506.50003, y: 216.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -1190.8057
-      y: -481.8822
-      width: 2381.6113
-      height: 1018.00366
+      x: -1263.3256
+      y: -540
+      width: 2526.6511
+      height: 1080
     m_MinimalGUI: 1
   m_defaultScale: 0.40092593
   m_LastWindowPixelSize: {x: 1013, y: 454}
@@ -576,9 +580,15 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
+<<<<<<< HEAD
     m_Target: {x: 0.6222245, y: 1.126946, z: -16.663673}
     speed: 2
     m_Value: {x: 0.6222245, y: 1.126946, z: -16.663673}
+=======
+    m_Target: {x: -17.81, y: -0.009999998, z: -28.42}
+    speed: 2
+    m_Value: {x: -17.81, y: -0.009999998, z: -28.42}
+>>>>>>> Diploma_solo_game
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -625,6 +635,7 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
+<<<<<<< HEAD
     m_Target: {x: 0.05759098, y: 0.8314677, z: -0.5457567, w: 0.0882969}
     speed: 2
     m_Value: {x: 0.05758229, y: 0.8313422, z: -0.5456743, w: 0.088283576}
@@ -632,6 +643,15 @@ MonoBehaviour:
     m_Target: 1.2635002
     speed: 2
     m_Value: 1.2635002
+=======
+    m_Target: {x: -0.286738, y: -0.67391264, z: 0.32212886, w: -0.60014474}
+    speed: 2
+    m_Value: {x: -0.2866925, y: -0.67380565, z: 0.32207772, w: -0.60004944}
+  m_Size:
+    m_Target: 0.9570715
+    speed: 2
+    m_Value: 0.9570715
+>>>>>>> Diploma_solo_game
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -678,29 +698,35 @@ MonoBehaviour:
     serializedVersion: 2
     x: 1014
     y: 73
-    width: 378
-    height: 621
+    width: 366
+    height: 629
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
       m_SelectedIDs: 46d8ffff
       m_LastClickedID: 0
       m_ExpandedIDs: 0eddffff0afaffff50fbffff1c4c0000
+=======
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 22c7fdff42c7fdff0ce5fdff14e5fdff201efeff403bfeff687afeff3882feff7084feffc684feff6e89feff3e95feff189efeff9610ffffe610ffff0611ffff1a1effff661effff6a1effff8a1effff0223ffff5223ffff7223ffff3c43fffff243ffff78c3ffff3efaffff4afbffff16480000a2480000064e0000865000007052000080c20000e4c900008eca000080f80000de1c01004a1e010054450100
+>>>>>>> Diploma_solo_game
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: TurretAxis
+        m_OriginalName: TurretAxis
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: -91278
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 11}
       m_SearchString: 
@@ -730,10 +756,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1394
+    x: 1382
     y: 73
-    width: 525
-    height: 621
+    width: 537
+    height: 629
   m_ViewDataDictionary: {fileID: 0}
   m_ObjectsLockedBeforeSerialization: []
   m_InstanceIDsLockedBeforeSerialization: 
@@ -768,9 +794,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 1014
-    y: 715
+    y: 723
     width: 905
-    height: 284
+    height: 276
   m_ViewDataDictionary: {fileID: 0}
   m_SearchFilter:
     m_NameFilter: 
@@ -785,22 +811,37 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
+<<<<<<< HEAD
     - Assets/ScriptableObjects
+=======
+    - Assets/Scenes
+>>>>>>> Diploma_solo_game
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
+<<<<<<< HEAD
   - Assets/ScriptableObjects
+=======
+  - Assets/Scenes
+>>>>>>> Diploma_solo_game
   m_LastFoldersGridSize: -1
   m_LastProjectPath: J:\Education\Programming\GeekBrains_Unity_HW\Demons Hunter
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
+<<<<<<< HEAD
     scrollPos: {x: 0, y: 124}
     m_SelectedIDs: 1c5e0000
     m_LastClickedID: 24092
     m_ExpandedIDs: 00000000b6440000b8440000ba440000bc440000c0440000c2440000c444000000ca9a3b
+=======
+    scrollPos: {x: 0, y: 236}
+    m_SelectedIDs: 00450000
+    m_LastClickedID: 17664
+    m_ExpandedIDs: 00000000d4440000d6440000d8440000da440000dc440000de440000e0440000e24400001045000000ca9a3b
+>>>>>>> Diploma_solo_game
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -828,7 +869,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000b6440000b8440000ba440000bc440000be440000c0440000c2440000c4440000c6440000
+    m_ExpandedIDs: 00000000d4440000d6440000d8440000da440000dc440000de440000e0440000e2440000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -905,9 +946,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 1014
-    y: 715
+    y: 723
     width: 905
-    height: 284
+    height: 276
   m_ViewDataDictionary: {fileID: 0}
 --- !u!114 &22
 MonoBehaviour:

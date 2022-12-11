@@ -134,6 +134,7 @@
     <Compile Include="Assets\PyroParticles\Prefab\Script\FireLightScript.cs" />
     <Compile Include="Assets\Scripts\Player\GroundDetector.cs" />
     <Compile Include="Assets\Scripts\MVCPart\Models\GameController.cs" />
+<<<<<<< HEAD
     <Compile Include="Assets\Scripts\MVCPart\Core\PlayerConfiguration.cs" />
     <Compile Include="Assets\Scripts\MVCPart\Core\PlayerSpawnModel.cs" />
     <Compile Include="Assets\Scripts\MVCPart\Core\SpawnControllerModel.cs" />
@@ -151,6 +152,11 @@
     <Compile Include="Assets\Scripts\MVCPart\Core\WeaponController.cs" />
     <Compile Include="Assets\Scripts\MVCPart\Core\IWeaponModel.cs" />
     <Compile Include="Assets\Scripts\MVCPart\Core\PlayerAnimationController.cs" />
+=======
+    <Compile Include="Assets\Scripts\Menu\ImprovedButton.cs" />
+    <Compile Include="Assets\Scripts\Menu\UIAudioControllerModel.cs" />
+    <Compile Include="Assets\Scripts\Menu\UIAudioController.cs" />
+>>>>>>> Diploma_solo_game
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
