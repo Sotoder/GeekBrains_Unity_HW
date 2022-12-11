@@ -16815,6 +16815,10 @@ MonoBehaviour:
       _menuAudioSource: {fileID: 1362934489}
       _onSelectClip: {fileID: 8300000, guid: 8f6a60243d58f804a978b90fef5a9acf, type: 3}
       _onClickClip: {fileID: 8300000, guid: 41092b7dd328a744e8f08cd961aced5e, type: 3}
+    _spawnControllerModel:
+      _playerSpawnModel:
+        _spawnTransform: {fileID: 0}
+        _playerConfig: {fileID: 11400000, guid: d6afc010f78e8734189907f0db0d527e, type: 2}
   _gameLoaderModel:
     _musicAudioSource: {fileID: 188227200}
     _loadScreen: {fileID: 1163883152}

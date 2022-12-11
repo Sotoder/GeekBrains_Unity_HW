@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class Observer : MonoBehaviour
 {
@@ -52,7 +51,7 @@ public class Observer : MonoBehaviour
 
     void Update()
     {
-        if (m_IsPlayerInRange && !_player.GetComponent<PlayerActions>().IsDead)
+        if (m_IsPlayerInRange && !_player.GetComponent<PlayerView>().IsDead)
         {
             
             _enemy.StopPatrol();

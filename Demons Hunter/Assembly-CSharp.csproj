@@ -57,10 +57,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo_DeleteAfterDelay.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\RotatePlayerControllerModel.cs" />
     <Compile Include="Assets\Scripts\Weapons\Mine.cs" />
     <Compile Include="Assets\Scripts\MVCPart\Interfaces\IClearable.cs" />
     <Compile Include="Assets\Scripts\SpawnRegularEnemy.cs" />
     <Compile Include="Assets\Scripts\Doors\BossDoor.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\Health.cs" />
     <Compile Include="Assets\Scripts\Weapons\Bomb.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\CFX_Demo_RotateCamera.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo_RandomDir.cs" />
@@ -69,21 +71,28 @@
     <Compile Include="Assets\Scripts\ReverbOff.cs" />
     <Compile Include="Assets\Scripts\IEnemy.cs" />
     <Compile Include="Assets\Scripts\MVCPart\GameTimer\GameTimerController.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\WeaponController.cs" />
     <Compile Include="Assets\PyroParticles\Prefab\Script\MeteorSwarmScript.cs" />
     <Compile Include="Assets\Scripts\Pedestal.cs" />
     <Compile Include="Assets\Scripts\Traps\Indicator.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo.cs" />
     <Compile Include="Assets\Scripts\Menu\Tooltipe.cs" />
+    <Compile Include="Assets\Scripts\Menu\UIAudioControllerModel.cs" />
     <Compile Include="Assets\Scripts\Doors\Door.cs" />
     <Compile Include="Assets\Scripts\Weapons\Fractions.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\WFX_LightFlicker.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\IInputModel.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\RotatePlayerController.cs" />
     <Compile Include="Assets\Scripts\Weapons\Bullet.cs" />
     <Compile Include="Assets\Scripts\ITakingDamage.cs" />
+    <Compile Include="Assets\Scripts\Menu\ImprovedButton.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Spawn System\CFX_SpawnSystem.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerView.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\ISubscribavleProperty.cs" />
     <Compile Include="Assets\Scripts\EliteEnemy.cs" />
     <Compile Include="Assets\Scripts\LeverAxis.cs" />
     <Compile Include="Assets\Scripts\MVCPart\Core\GameStarter.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\SpawnController.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
     <Compile Include="Assets\Scripts\MVCPart\Models\GameLoaderModel.cs" />
     <Compile Include="Assets\Scripts\Weapons\IWeapon.cs" />
@@ -92,12 +101,16 @@
     <Compile Include="Assets\Scripts\Bonuses\Ammo.cs" />
     <Compile Include="Assets\Scripts\MVCPart\Interfaces\IFixedUpdateble.cs" />
     <Compile Include="Assets\Scripts\Menu\SettingsInGame.cs" />
+    <Compile Include="Assets\Scripts\Menu\UIAudioController.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\SpawnControllerModel.cs" />
     <Compile Include="Assets\Scripts\Menu\CreateAccountWindow.cs" />
     <Compile Include="Assets\PyroParticles\Prefab\Script\SingleLineAttribute.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\WFX_BulletHoleDecal.cs" />
     <Compile Include="Assets\Scripts\Bonuses\Heal.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\InputControllerModel.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\CFX_Demo_RandomDir.cs" />
     <Compile Include="Assets\Scripts\RegEnemy.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\MovePlayerControllerModel.cs" />
     <Compile Include="Assets\Scripts\MVCPart\Core\GameLoader.cs" />
     <Compile Include="Assets\Scripts\Sphere.cs" />
     <Compile Include="Assets\Scripts\Doors\DownDoor.cs" />
@@ -113,16 +126,22 @@
     <Compile Include="Assets\Scripts\Menu\MainMenuController.cs" />
     <Compile Include="Assets\Scripts\Traps\Trap.cs" />
     <Compile Include="Assets\Scripts\Menu\PauseMenu.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\InputController.cs" />
     <Compile Include="Assets\Scripts\Menu\AccountDataWindowBase.cs" />
     <Compile Include="Assets\Scripts\MVCPart\Interfaces\IController.cs" />
     <Compile Include="Assets\Scripts\MVCPart\Interfaces\IUpdateble.cs" />
     <Compile Include="Assets\Scripts\Menu\SignInWindow.cs" />
     <Compile Include="Assets\Scripts\Boss.cs" />
     <Compile Include="Assets\PyroParticles\Prefab\Script\FireProjectileScript.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\PlayerModel.cs" />
     <Compile Include="Assets\Scripts\MVCPart\Models\TimerModel.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\CFX_AutoDestructShuriken.cs" />
     <Compile Include="Assets\Scripts\MVCPart\Models\GameControllerModel.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\PlayerConfiguration.cs" />
     <Compile Include="Assets\Scripts\ObserverElite.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\PlayerAnimationController.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\IWeaponModel.cs" />
+    <Compile Include="Assets\Scripts\MVCPart\Core\PlayerSpawnModel.cs" />
     <Compile Include="Assets\Scripts\Doors\SlidingDoor.cs" />
     <Compile Include="Assets\PyroParticles\Prefab\Script\FireConstantBaseScript.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo_New.cs" />
@@ -133,30 +152,8 @@
     <Compile Include="Assets\Scripts\Weapons\MachineGun.cs" />
     <Compile Include="Assets\PyroParticles\Prefab\Script\FireLightScript.cs" />
     <Compile Include="Assets\Scripts\Player\GroundDetector.cs" />
-    <Compile Include="Assets\Scripts\MVCPart\Models\GameController.cs" />
-<<<<<<< HEAD
-    <Compile Include="Assets\Scripts\MVCPart\Core\PlayerConfiguration.cs" />
-    <Compile Include="Assets\Scripts\MVCPart\Core\PlayerSpawnModel.cs" />
-    <Compile Include="Assets\Scripts\MVCPart\Core\SpawnControllerModel.cs" />
-    <Compile Include="Assets\Scripts\MVCPart\Core\InputControllerModel.cs" />
-    <Compile Include="Assets\Scripts\MVCPart\Core\SpawnController.cs" />
-    <Compile Include="Assets\Scripts\MVCPart\Core\InputController.cs" />
-    <Compile Include="Assets\Scripts\MVCPart\Core\IInputModel.cs" />
-    <Compile Include="Assets\Scripts\MVCPart\Core\PlayerModel.cs" />
-    <Compile Include="Assets\Scripts\MVCPart\Core\ISubscribavleProperty.cs" />
-    <Compile Include="Assets\Scripts\MVCPart\Core\Health.cs" />
-    <Compile Include="Assets\Scripts\MVCPart\Core\RotatePlayerControllerModel.cs" />
-    <Compile Include="Assets\Scripts\MVCPart\Core\MovePlayerControllerModel.cs" />
     <Compile Include="Assets\Scripts\MVCPart\Core\MovePlayerController.cs" />
-    <Compile Include="Assets\Scripts\MVCPart\Core\RotatePlayerController.cs" />
-    <Compile Include="Assets\Scripts\MVCPart\Core\WeaponController.cs" />
-    <Compile Include="Assets\Scripts\MVCPart\Core\IWeaponModel.cs" />
-    <Compile Include="Assets\Scripts\MVCPart\Core\PlayerAnimationController.cs" />
-=======
-    <Compile Include="Assets\Scripts\Menu\ImprovedButton.cs" />
-    <Compile Include="Assets\Scripts\Menu\UIAudioControllerModel.cs" />
-    <Compile Include="Assets\Scripts\Menu\UIAudioController.cs" />
->>>>>>> Diploma_solo_game
+    <Compile Include="Assets\Scripts\MVCPart\Models\GameController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
